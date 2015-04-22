@@ -1,0 +1,7 @@
+c:\users\jelle\documents\visual studio 2013\Projects\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\bin\Debug\ICT4Events-S24B-Reparatie.exe.config
+c:\users\jelle\documents\visual studio 2013\Projects\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events_S24B_Reparatie.Properties.Resources.resources
+c:\users\jelle\documents\visual studio 2013\Projects\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.csproj.GenerateResource.Cache
+c:\users\jelle\documents\visual studio 2013\Projects\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\bin\Debug\ICT4Events-S24B-Reparatie.exe
+c:\users\jelle\documents\visual studio 2013\Projects\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\bin\Debug\ICT4Events-S24B-Reparatie.pdb
+c:\users\jelle\documents\visual studio 2013\Projects\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.exe
+c:\users\jelle\documents\visual studio 2013\Projects\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.pdb
