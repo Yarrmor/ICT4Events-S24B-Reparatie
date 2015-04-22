@@ -51,7 +51,7 @@
     <Compile Include="Algemeen\Algemeen.cs" />
     <Compile Include="Algemeen\Account.cs" />
     <Compile Include="Algemeen\AccountType.cs" />
-    <Compile Include="MediaSharingSysteem.cs" />
+    <Compile Include="MediaSharing\MediaSharingSysteem.cs" />
     <Compile Include="MediaSharing\Bestand.cs" />
     <Compile Include="MediaSharing\Categorie.cs" />
     <Compile Include="DatabaseManager.cs" />
