@@ -1350,7 +1350,10 @@ namespace ICT4Events_S24B_Reparatie
 
                 OracleDataReader reader = VoerQueryUit(command);
 
-                return Convert.ToInt32(reader["LIKES"]);
+                int likes = Convert.ToInt32(reader["LIKES"]);
+                string likerinos = reader["LIKES"].ToString();
+
+                return likes;
             }
             catch
             {
@@ -1376,7 +1379,9 @@ namespace ICT4Events_S24B_Reparatie
 
                 OracleDataReader reader = VoerQueryUit(command);
 
-                return Convert.ToInt32(reader["DISLIKES"]);
+                int dislikes = Convert.ToInt32(reader["DISLIKES"]);
+
+                return dislikes;
             }
             catch
             {
