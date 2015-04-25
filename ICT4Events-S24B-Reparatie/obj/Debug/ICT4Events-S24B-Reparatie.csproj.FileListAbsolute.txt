@@ -8,3 +8,6 @@ c:\users\jelle\documents\visual studio 2013\Projects\ICT4Events-S24B-Reparatie\I
 C:\Users\Jelle\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\bin\Debug\ICT4Events-S24B-Reparatie.exe.config
 C:\Users\Jelle\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.exe
 C:\Users\Jelle\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.pdb
+F:\PTS2\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\bin\Debug\ICT4Events-S24B-Reparatie.exe.config
+F:\PTS2\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.exe
+F:\PTS2\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.pdb

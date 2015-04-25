@@ -76,6 +76,60 @@
     <Compile Include="MediaSharing\Reactie.cs" />
     <Compile Include="Reserveringen\ReserveringMateriaal.cs" />
     <Compile Include="Reserveringen\ReserveringPlaats.cs" />
+    <Compile Include="MediaFormsMap\Gerapporteerd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MediaFormsMap\Gerapporteerd.Designer.cs">
+      <DependentUpon>Gerapporteerd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MediaFormsMap\CategorieNaam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MediaFormsMap\CategorieNaam.Designer.cs">
+      <DependentUpon>CategorieNaam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MediaFormsMap\AccountLijst.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MediaFormsMap\AccountLijst.Designer.cs">
+      <DependentUpon>AccountLijst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MediaFormsMap\MediaSharingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MediaFormsMap\MediaSharingForm.Designer.cs">
+      <DependentUpon>MediaSharingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MediaFormsMap\MediaSharingMediaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MediaFormsMap\MediaSharingMediaForm.Designer.cs">
+      <DependentUpon>MediaSharingMediaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MediaFormsMap\TaalFiltersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MediaFormsMap\TaalFiltersForm.Designer.cs">
+      <DependentUpon>TaalFiltersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MediaFormsMap\UploadMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MediaFormsMap\UploadMedia.Designer.cs">
+      <DependentUpon>UploadMedia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MediaFormsMap\Profiel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MediaFormsMap\Profiel.Designer.cs">
+      <DependentUpon>Profiel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MediaFormsMap\Rapporteer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MediaFormsMap\Rapporteer.Designer.cs">
+      <DependentUpon>Rapporteer.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
