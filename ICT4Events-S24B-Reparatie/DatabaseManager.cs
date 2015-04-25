@@ -1246,14 +1246,13 @@ namespace ICT4Events_S24B_Reparatie
             {
                 List<Melding> MeldingenEvent = new List<Melding>();
 
-                string sql = "SELECT AccountID, MediaID, Toelichting, Datum FROM MELDING WHERE MediaID = (SELECT MediaID FROM Media WHERE EventID = :EventID)";
+                string sql = "SELECT AccountID, MediaID, Toelichting, Datum FROM MELDING WHERE MediaID IN (SELECT MediaID FROM Media WHERE EventID = :EventID)";
 
                 OracleCommand command = MaakOracleCommand(sql);
 
                 command.Parameters.Add(":EventID", ID);
 
                 OracleDataReader reader = VoerMultiQueryUit(command);
-                throw new NotImplementedException();
 
                 while (reader.Read())
                 {
@@ -1262,7 +1261,7 @@ namespace ICT4Events_S24B_Reparatie
                         int accountID = Convert.ToInt32(reader["AccountID"]);
                         int mediaID = Convert.ToInt32(reader["MediaID"]);
                         string toelichting = reader["Toelichting"].ToString();
-                        DateTime datum = reader.GetDateTime(4);
+                        DateTime datum = Convert.ToDateTime(reader["Datum"]);
 
                         Account acc = VerkrijgAccount(accountID, ID);
 

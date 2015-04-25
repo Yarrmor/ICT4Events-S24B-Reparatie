@@ -41,7 +41,7 @@ namespace ICT4Events_S24B_Reparatie
             {
                 BeheerButtons();
             }
-            else if (alg.Account != m.Uploader)
+            else if (alg.Account != m.Uploader && alg.Account.Type != AccountType.Beheerder)
             {
                 BeheerButtons();
                 gbxBeheer.Enabled = false;
