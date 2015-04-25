@@ -109,5 +109,10 @@ namespace ICT4Events_S24B_Reparatie
         {
             return this.dm.VerwijderAccount(this.Rfid);
         }
+
+        public override string ToString()
+        {
+            return AccountID + ", " + Roepnaam + "| Verbannen:" + Verbannen.ToString();
+        }
     }
 }

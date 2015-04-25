@@ -568,7 +568,13 @@ namespace ICT4Events_S24B_Reparatie
                     geslacht = "Vrouw";
                 string voornaam = reader["Voornaam"].ToString();
                 string achternaam = reader["Achternaam"].ToString();
-                DateTime geboortedatum = reader.GetDateTime(7);
+
+                DateTime geboorteDatum = new DateTime();
+                if (reader["GeboorteDatum"] != DBNull.Value)
+                {
+                    geboorteDatum = Convert.ToDateTime(reader["GeboorteDatum"]);//reader.GetDateTime(7);
+                }
+
                 bool verbannen = Convert.ToBoolean(reader["Verbannen"]);
                 #endregion
 
@@ -586,7 +592,7 @@ namespace ICT4Events_S24B_Reparatie
                 AccountType accountType = AccountTypeStringNaarEnum(type);
                 #endregion
 
-                Account account = new Account(rfid, accountID, mail, roepnaam, accountType, GeslachtStringNaarEnum(geslacht), voornaam, achternaam, geboortedatum, verbannen);
+                Account account = new Account(rfid, accountID, mail, roepnaam, accountType, GeslachtStringNaarEnum(geslacht), voornaam, achternaam, geboorteDatum, verbannen);
                 return account;
                 //return account;
             }
@@ -707,7 +713,13 @@ namespace ICT4Events_S24B_Reparatie
                 geslachtType = GeslachtStringNaarEnum(geslacht);
                 string voornaam = reader["Voornaam"].ToString();
                 string achternaam = reader["Achternaam"].ToString();
-                DateTime geboorteDatum = Convert.ToDateTime(reader["GeboorteDatum"]);//reader.GetDateTime(7);
+
+                DateTime geboorteDatum = new DateTime();
+                if (reader["GeboorteDatum"] != DBNull.Value)
+                {
+                    geboorteDatum = Convert.ToDateTime(reader["GeboorteDatum"]);//reader.GetDateTime(7);
+                }
+
                 bool verbannen = Convert.ToBoolean(reader["Verbannen"]);
 
                 #endregion
@@ -731,6 +743,70 @@ namespace ICT4Events_S24B_Reparatie
             catch
             {
                 return null;
+            }
+        }
+
+        public List<Account> VerkrijgAlleAccounts(int eventID)
+        {
+            try
+            {
+                List<Account> accounts = new List<Account>();
+
+                string sql = "SELECT a.AccountID, a.RFID, a.Email, a.Roepnaam, a.Geslacht, a.Voornaam, a.Achternaam, a.GeboorteDatum, a.Verbannen, r.ROL FROM ACCOUNT a INNER JOIN ROL r ON a.ACCOUNTID = r.ACCOUNTID WHERE r.EVENTID = :EventID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":EventID", eventID);
+
+                OracleDataReader reader = VoerMultiQueryUit(command);
+
+                while (reader.Read())
+                {
+                    try
+                    {
+                        Geslacht geslachtType;
+
+                        int accountID = Convert.ToInt32(reader["AccountID"]);
+                        string rfid = reader["RFID"].ToString();
+                        string email = reader["Email"].ToString();
+                        string roepnaam = reader["Roepnaam"].ToString();
+                        string geslacht = reader["Geslacht"].ToString();
+                        if (geslacht == "M")
+                            geslacht = "Man";
+                        else if (geslacht == "V")
+                            geslacht = "Vrouw";
+                        geslachtType = GeslachtStringNaarEnum(geslacht);
+                        string voornaam = reader["Voornaam"].ToString();
+                        string achternaam = reader["Achternaam"].ToString();
+
+                        DateTime geboorteDatum = new DateTime();
+                        if (reader["GeboorteDatum"] != DBNull.Value)
+                        {
+                            geboorteDatum = Convert.ToDateTime(reader["GeboorteDatum"]);//reader.GetDateTime(7);
+                        }
+
+                        bool verbannen = Convert.ToBoolean(reader["Verbannen"]);
+                        string type = reader["Rol"].ToString();
+                        AccountType accountType = AccountTypeStringNaarEnum(type);
+                        #endregion
+
+                        accounts.Add(new Account(rfid, accountID, email, roepnaam, accountType, geslachtType, voornaam, achternaam, geboorteDatum, verbannen));
+                    }
+                    catch
+                    {
+                        return null;
+                    }
+                }
+
+                return accounts;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                Verbinding.Close();
             }
         }
 
@@ -981,11 +1057,6 @@ namespace ICT4Events_S24B_Reparatie
             {
                 Verbinding.Close();
             }
-        }
-        public List<Account> VerkrijgAlleAccounts()
-        {
-            throw new NotImplementedException();
-            return null;
         }
 
         #endregion
@@ -1351,7 +1422,6 @@ namespace ICT4Events_S24B_Reparatie
                 OracleDataReader reader = VoerQueryUit(command);
 
                 int likes = Convert.ToInt32(reader["LIKES"]);
-                string likerinos = reader["LIKES"].ToString();
 
                 return likes;
             }
@@ -1459,7 +1529,6 @@ namespace ICT4Events_S24B_Reparatie
                 return false;
         }
 
-        #endregion
         #endregion
 
         #region EmailSimulatie

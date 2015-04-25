@@ -25,7 +25,7 @@ namespace ICT4Events_S24B_Reparatie
             dm = new DatabaseManager();
             InitializeComponent();
 
-            WeergeefAlleAccounts(dm.VerkrijgAlleAccounts());
+            WeergeefAlleAccounts(dm.VerkrijgAlleAccounts(alg.Evenement.ID));
         }
 
         private void WeergeefAlleAccounts(List<Account> accountlijst)
