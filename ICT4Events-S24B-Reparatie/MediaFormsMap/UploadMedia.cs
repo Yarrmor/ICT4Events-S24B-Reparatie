@@ -86,7 +86,14 @@ namespace ICT4Events_S24B_Reparatie
                 }
 
                 dest = Path.Combine(Path.Combine(dest, locatie), Path.GetFileName(path));
-                File.Copy(path, dest);
+                if (!File.Exists(dest))
+                {
+                    File.Copy(path, dest);
+                }
+                else
+                {
+                    MessageBox.Show("Bestand bestaat al!");
+                }
             }
             else
             {

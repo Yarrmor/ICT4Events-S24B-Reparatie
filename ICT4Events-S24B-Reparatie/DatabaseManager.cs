@@ -1319,6 +1319,30 @@ namespace ICT4Events_S24B_Reparatie
 
         #region Media
 
+        public int NieuwMediaID()
+        {
+            try
+            {
+                string sql = "SELECT MAX(MediaID) AS MaxID FROM Media";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                string text = command.CommandText;
+
+                OracleDataReader reader = VoerQueryUit(command);
+
+                return Convert.ToInt32(reader["MaxID"].ToString()) + 1;
+            }
+            catch
+            {
+                return -1;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
         public List<Media> VerkrijgMediaEvent(int eventID)
         {
             try
@@ -1389,21 +1413,21 @@ namespace ICT4Events_S24B_Reparatie
         {
             try
             {
-                string sql = "INSERT INTO MEDIA (MediaID, AccountID, EventID, Naam, Pad, Datum, Verborgen) VALUES (:MediaID, :AccountID, :EventID, :Naam, :Pad, :Datum, :Verborgen)";
+                string sql = "INSERT INTO MEDIA (MediaID, AccountID, EventID, CategorieID, Naam, Beschrijving, Pad, Datum, Verborgen) VALUES (:MediaID, :AccountID, :EventID, :CategorieID, :Naam, :Beschrijving, :Pad, :Datum, :Verborgen)";
 
                 OracleCommand command = MaakOracleCommand(sql);
 
                 command.Parameters.Add(":MediaID", media.MediaID);
                 command.Parameters.Add(":AccountID", media.Uploader.AccountID);
                 command.Parameters.Add(":EventID", media.EventID);
+                command.Parameters.Add(":CategorieID", media.CategorieID);
                 command.Parameters.Add(":Naam", media.Naam);
+                command.Parameters.Add(":Beschrijving", media.Beschrijving);
                 command.Parameters.Add(":Pad", media.Bestand.Pad);
                 command.Parameters.Add(":Datum", media.UploadDate);
-                command.Parameters.Add(":Verborgen", media.Verborgen);
+                command.Parameters.Add(":Verborgen", Convert.ToInt32(media.Verborgen));
 
-                int updates = command.ExecuteNonQuery();
-                command.Dispose();
-                return true;
+                return VoerNonQueryUit(command);
             }
             catch
             {

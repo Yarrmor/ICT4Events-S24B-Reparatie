@@ -340,20 +340,19 @@ namespace ICT4Events_S24B_Reparatie
         private void ms_test(object sender, EventArgs e)
         {
             DatabaseManager dm = new DatabaseManager();
-            UploadMedia um = new UploadMedia(md.CategorieLijst, @"D:\ProftaakS2\MediaSharing");
+            UploadMedia um = new UploadMedia(md.CategorieLijst, @"F:\ProftaakS2\MediaSharing");
 
             if (um.ShowDialog() == DialogResult.OK)
             {
                 Categorie cat = md.VerkrijgCatNaam(um.cbxMediaCategorie.Text);
 
-                Media nieuwMedia = new Media(dm.NieuwID("Media"), um.tbxMediaTitel.Text, new Bestand(um.dest.Substring(um.dest.LastIndexOf(".")), um.dest), cat.ID,
+                Media nieuwMedia = new Media(dm.NieuwMediaID(), um.tbxMediaTitel.Text, new Bestand(um.dest.Substring(um.dest.LastIndexOf(".")), um.dest), cat.ID,
                                         "Een beschrijving opgegeven door de gebruiker.", algemeen.Account, DateTime.Now, algemeen.Evenement.ID, false);
                 /*(int mediaID, string naam, Bestand bestand, Categorie categorie, string beschrijving, Account uploader, DateTime uploadDate, Event event_, bool verborgen)*/
 
                 dm.VoegMediaToe(nieuwMedia);
-                md.VerkrijgMediaLijst();
+                md.UpdateCatMedia();
             }
-
             um.Dispose();
         }
 

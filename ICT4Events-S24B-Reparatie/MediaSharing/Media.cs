@@ -65,6 +65,10 @@ namespace ICT4Events_S24B_Reparatie
             return this.dm.Stem(accountID, this.MediaID, score);
         }
 
+        /// <summary>
+        /// Moetr
+        /// </summary>
+        /// <returns></returns>
         public bool Upload()
         {
             return this.dm.VoegMediaToe(this);
