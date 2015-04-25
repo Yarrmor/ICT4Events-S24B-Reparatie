@@ -100,11 +100,6 @@ namespace ICT4Events_S24B_Reparatie
             this.dm.Verban(this.Email, verban);
         }
 
-        public bool VoegToe()
-        {
-            return this.dm.VoegAccountToe(this);
-        }
-
         public bool Verwijder()
         {
             return this.dm.VerwijderAccount(this.Rfid);

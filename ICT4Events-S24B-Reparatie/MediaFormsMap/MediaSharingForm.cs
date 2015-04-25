@@ -37,13 +37,7 @@ namespace ICT4Events_S24B_Reparatie
             {
                 if (lbxCategorie.SelectedItem.ToString() != "_Main")
                 {
-                    foreach (Categorie c in md.CategorieLijst)
-                    {
-                        if (c.ToString() == lbxCategorie.SelectedItem.ToString())
-                        {
-                            MediaListBox(c);
-                        }
-                    }
+                    VerkrijgMediaGeselecteerdeCategorie();
                 }
                 else
                 {
@@ -151,15 +145,6 @@ namespace ICT4Events_S24B_Reparatie
         {
             lbxCategorie.Items.Add(c.ToString());
             AddSubCategories(c);
-            /*if (c.SubCategories != null)
-            {
-                lbxCategorie.Items.Add(c.ToString());
-                AddSubCategories(c);
-            }
-            else
-            {
-                lbxCategorie.Items.Add(c.ToString());
-            }*/
         }
 
         /// <summary>
@@ -198,6 +183,16 @@ namespace ICT4Events_S24B_Reparatie
         }
         #endregion
 
+        private void VerkrijgMediaGeselecteerdeCategorie()
+        {
+            foreach (Categorie c in md.CategorieLijst)
+            {
+                if (c.ToString() == lbxCategorie.SelectedItem.ToString())
+                {
+                    MediaListBox(c);
+                }
+            }
+        }
 
         /// <summary>
         /// Voegt alle media van een categorie toe aan de media listbox!
@@ -328,6 +323,7 @@ namespace ICT4Events_S24B_Reparatie
         /// <param name="e"></param>
         private void ms_Gerapporteerd(object sender, EventArgs e)
         {
+            md.VerkrijgMeldingenLijst();
             Gerapporteerd g = new Gerapporteerd(algemeen, md);
             g.Show();
         }
@@ -347,7 +343,7 @@ namespace ICT4Events_S24B_Reparatie
                 Categorie cat = md.VerkrijgCatNaam(um.cbxMediaCategorie.Text);
 
                 Media nieuwMedia = new Media(dm.NieuwMediaID(), um.tbxMediaTitel.Text, new Bestand(um.dest.Substring(um.dest.LastIndexOf(".")), um.dest), cat.ID,
-                                        "Een beschrijving opgegeven door de gebruiker.", algemeen.Account, DateTime.Now, algemeen.Evenement.ID, false);
+                                        um.tbxMediaBeschrijving.Text, algemeen.Account, DateTime.Now, algemeen.Evenement.ID, false);
                 /*(int mediaID, string naam, Bestand bestand, Categorie categorie, string beschrijving, Account uploader, DateTime uploadDate, Event event_, bool verborgen)*/
 
                 dm.VoegMediaToe(nieuwMedia);
@@ -368,6 +364,54 @@ namespace ICT4Events_S24B_Reparatie
         public void UpdateMenuBalk()
         {
             throw new NotImplementedException();
+        }
+
+        private void btRefresh_Click(object sender, EventArgs e)
+        {
+            WeergeefCategories();
+        }
+
+        private void tbxZoekCategorie_TextChanged(object sender, EventArgs e)
+        {
+            if (tbxZoekCategorie.Text != "")
+            {
+                for (int n = lbxCategorie.Items.Count - 1; n >= 0; --n)
+                {
+                    if (lbxCategorie.Items[n].ToString().IndexOf(tbxZoekCategorie.Text) < 0)
+                    {
+                        lbxCategorie.Items.RemoveAt(n);
+                    }
+                }
+            }
+            else
+            {
+                WeergeefCategories();
+            }
+        }
+
+        private void tbxZoekMedia_TextChanged(object sender, EventArgs e)
+        {
+            if (tbxZoekMedia.Text != "")
+            {
+                for (int n = lbxMedia.Items.Count - 1; n >= 0; --n)
+                {
+                    if (lbxMedia.Items[n].ToString().IndexOf(tbxZoekMedia.Text) < 0)
+                    {
+                        lbxMedia.Items.RemoveAt(n);
+                    }
+                }
+            }
+            else
+            {
+                if (lbxCategorie.SelectedItem == null)
+                {
+                    MediaListBox();
+                }
+                else
+                {
+                    VerkrijgMediaGeselecteerdeCategorie();
+                }
+            }
         }
     }
 }

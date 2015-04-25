@@ -134,6 +134,15 @@
     <EmbeddedResource Include="HoofdForm.resx">
       <DependentUpon>HoofdForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MediaFormsMap\AccountLijst.resx">
+      <DependentUpon>AccountLijst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MediaFormsMap\MediaSharingForm.resx">
+      <DependentUpon>MediaSharingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MediaFormsMap\Profiel.resx">
+      <DependentUpon>Profiel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

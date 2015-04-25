@@ -66,5 +66,44 @@ namespace ICT4Events_S24B_Reparatie
                 }
             }
         }
+
+        private void btVoegToe_Click(object sender, EventArgs e)
+        {
+            Profiel p = new Profiel(alg, md);
+            if (p.DialogResult == DialogResult.OK)
+            {
+                dm.VoegAccountToe(new Account(p.tbxRFID.Text, dm.VerkrijgNieuwAccountID(), p.tbxEmail.Text, p.tbRoepNaam.Text, AccountTypeStringNaarEnum(p.cbxAccountType.Text), GeslachtStringNaarEnum(p.cbxGender.Text), p.tbxVoornaam.Text, p.tbxAchternaam.Text, p.dtpGeboorteDatum.Value, false));
+            }
+        }
+
+        /// <summary>
+        /// Zet string om naar AccountType
+        /// Meegegeven type moet overeen komen met een AccountType
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private AccountType AccountTypeStringNaarEnum(string type)
+        {
+            AccountType accountType;
+            Enum.TryParse(type, out accountType);
+
+            return accountType;
+        }
+
+        /// <summary>
+        /// Zet string om naar Geslacht
+        /// Meegegeven geslacht moet overeen komen met een Geslacht
+        /// "Man" of "Vrouw", niet "M" of "V"
+        /// </summary>
+        /// <param name="geslachtString"></param>
+        /// <returns></returns>
+        private Geslacht GeslachtStringNaarEnum(string geslachtString)
+        {
+            Geslacht geslacht;
+
+            Enum.TryParse(geslachtString, out geslacht);
+
+            return geslacht;
+        }
     }
 }

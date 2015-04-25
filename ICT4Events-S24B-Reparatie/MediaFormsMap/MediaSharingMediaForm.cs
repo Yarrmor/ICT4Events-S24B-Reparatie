@@ -90,16 +90,6 @@ namespace ICT4Events_S24B_Reparatie
         }
 
         /// <summary>
-        /// Zet geselecteerde media naar dit zodat je altijd de juiste media kan downloaden.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tbxMediaBeschrijving_Click(object sender, EventArgs e)
-        {
-            md.GeselecteerdeMedia = m;
-        }
-
-        /// <summary>
         /// Wijzigt informatie van een media.
         /// </summary>
         /// <param name="sender"></param>
@@ -159,26 +149,12 @@ namespace ICT4Events_S24B_Reparatie
             DialogResult dialogResult = MessageBox.Show("Weet je het zeker? Hiermee sluit je dit form.", "Verwijder media", MessageBoxButtons.OKCancel);
             if (dialogResult == DialogResult.OK)
             {
-                RemoveMeldingen(m);
                 md.VerwijderMedia(m);
                 this.Dispose();
             }
         }
 
-        /// <summary>
-        /// Haalt de meldingen van een geselecteerde media weg.
-        /// </summary>
-        /// <param name="m"></param>
-        private void RemoveMeldingen(Media m)
-        {
-            foreach (Melding meld in md.Meldingen.ToList())
-            {
-                if (meld.MediaID == m.MediaID)
-                {
-                    md.VerwijderMelding(meld);
-                }
-            }
-        }
+        //Todo: In mediasharingsysteem zetten.
 
         /// <summary>
         /// De media wordt verborgen
@@ -207,6 +183,8 @@ namespace ICT4Events_S24B_Reparatie
         {
 
         }
+
+        //Todo: in mediasharingsysteem zetten.
 
         /// <summary>
         /// Wanneer de uploader nog niet verbannen is wordt deze verbannen na bevestiging. Als de uploader al verbannen is, is deze niet meer verbannen.
@@ -262,31 +240,12 @@ namespace ICT4Events_S24B_Reparatie
             r.Show();
         }
 
+        //Todo: In mediasharingsysteem download zetten.
         private void ms_Download(object sender, EventArgs e)
         {
-            string location = SaveFile();
-            if (location != "")
-            {
-                File.Copy(md.GeselecteerdeMedia.Bestand.Pad, location);
-            }
+            md.DownloadMedia();
         }
 
-        private string SaveFile()
-        {
-            SaveFileDialog fd = new SaveFileDialog();
-
-            string bestandstype = md.GeselecteerdeMedia.Bestand.Type;
-
-            fd.FileName = md.GeselecteerdeMedia.Naam + bestandstype;
-            fd.Filter = bestandstype + " file|*" + bestandstype;
-            DialogResult d = fd.ShowDialog();
-            string file = "";
-            if (d == DialogResult.OK)
-            {
-                file = fd.FileName;
-            }
-            return file;
-        }
         #endregion
 
         public void MaakMenuBalk()

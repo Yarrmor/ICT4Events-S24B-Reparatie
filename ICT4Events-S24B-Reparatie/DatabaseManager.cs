@@ -537,6 +537,30 @@ namespace ICT4Events_S24B_Reparatie
 
         #region Accounts
 
+        public int VerkrijgNieuwAccountID()
+        {
+            try
+            {
+                string sql = "SELECT MAX(AccountID) AS MaxID FROM Account";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                string text = command.CommandText;
+
+                OracleDataReader reader = VoerQueryUit(command);
+
+                return Convert.ToInt32(reader["MaxID"].ToString()) + 1;
+            }
+            catch
+            {
+                return -1;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
         /// <summary>
         /// Haalt alle weer te geven/gebruikbare account details op van het bijbehorende email.
         /// eventID is noodzakelijk om het juiste accountType op te halen.
@@ -1224,7 +1248,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             try
             {
-                string sql = "INSERT INTO MELDING (AccountID, MediaID, Toelichting, Datum) VALUES (:CategorieID, :AccountID, :EventID, :Naam);";
+                string sql = "INSERT INTO MELDING (AccountID, MediaID, Toelichting, Datum) VALUES (:CategorieID, :AccountID, :EventID, :Naam)";
 
                 OracleCommand command = MaakOracleCommand(sql);
 
@@ -1233,10 +1257,7 @@ namespace ICT4Events_S24B_Reparatie
                 command.Parameters.Add(":Toelichting", melding.Toelichting);
                 command.Parameters.Add(":Datum", melding.Datum);
 
-
-                int updates = command.ExecuteNonQuery();
-                command.Dispose();
-                return true;
+                return VoerNonQueryUit(command);
             }
             catch
             {

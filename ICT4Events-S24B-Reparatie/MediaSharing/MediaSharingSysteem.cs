@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Windows.Forms;
 
 namespace ICT4Events_S24B_Reparatie
 {
@@ -271,8 +273,22 @@ namespace ICT4Events_S24B_Reparatie
         /// <returns></returns>
         public bool VoegMeldingToe(Melding melding)
         {
-            Meldingen.Add(melding);
             return dm.VoegMeldingToe(melding);
+        }
+
+        /// <summary>
+        /// Haalt de meldingen van een geselecteerde media weg.
+        /// </summary>
+        /// <param name="m"></param>
+        public void VerwijderMeldingen(Media m)
+        {
+            foreach (Melding meld in Meldingen.ToList())
+            {
+                if (meld.MediaID == m.MediaID)
+                {
+                    VerwijderMelding(meld);
+                }
+            }
         }
 
         /// <summary>
@@ -282,7 +298,6 @@ namespace ICT4Events_S24B_Reparatie
         /// <returns></returns>
         public bool VerwijderMelding(Melding melding)
         {
-            Meldingen.Remove(melding);
             return dm.VerwijderMelding(melding);
         }
         #endregion
@@ -303,9 +318,36 @@ namespace ICT4Events_S24B_Reparatie
 
         public bool VerwijderMedia(Media media)
         {
+            VerwijderMeldingen(media);
             bool verwijderd = dm.VerwijderMedia(media.MediaID);
             UpdateCatMedia();
             return verwijderd;
+        }
+
+        public void DownloadMedia()
+        {
+            string location = SaveFile();
+            if (location != "")
+            {
+                File.Copy(GeselecteerdeMedia.Bestand.Pad, location);
+            }
+        }
+
+        private string SaveFile()
+        {
+            SaveFileDialog fd = new SaveFileDialog();
+
+            string bestandstype = GeselecteerdeMedia.Bestand.Type;
+
+            fd.FileName = GeselecteerdeMedia.Naam + bestandstype;
+            fd.Filter = bestandstype + " file|*" + bestandstype;
+            DialogResult d = fd.ShowDialog();
+            string file = "";
+            if (d == DialogResult.OK)
+            {
+                file = fd.FileName;
+            }
+            return file;
         }
 
         #endregion Media

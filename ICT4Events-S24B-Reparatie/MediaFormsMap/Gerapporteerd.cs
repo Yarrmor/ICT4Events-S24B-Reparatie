@@ -29,6 +29,7 @@ namespace ICT4Events_S24B_Reparatie
         /// </summary>
         private void WeergeefMeldingen()
         {
+            md.VerkrijgMeldingenLijst();
             lbxGerapporteerd.Items.Clear();
             foreach (Melding m in md.Meldingen)
             {
@@ -68,13 +69,16 @@ namespace ICT4Events_S24B_Reparatie
         /// <param name="e"></param>
         private void btnVerwijderMelding_Click(object sender, EventArgs e)
         {
-            foreach (Melding m in md.Meldingen.ToList())
+            if (lbxGerapporteerd.SelectedItem != null)
             {
-                if (lbxGerapporteerd.SelectedItem.ToString() == m.ToString())
+                foreach (Melding m in md.Meldingen.ToList())
                 {
-                    md.VerwijderMelding(m);
-                    WeergeefMeldingen();
-                    //throw new NotImplementedException();
+                    if (lbxGerapporteerd.SelectedItem.ToString() == m.ToString())
+                    {
+                        md.VerwijderMelding(m);
+                        WeergeefMeldingen();
+                        //throw new NotImplementedException();
+                    }
                 }
             }
         }

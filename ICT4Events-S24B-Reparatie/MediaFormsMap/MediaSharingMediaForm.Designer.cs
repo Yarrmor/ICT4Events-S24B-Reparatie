@@ -120,7 +120,6 @@
             this.tbxMediaBeschrijving.Name = "tbxMediaBeschrijving";
             this.tbxMediaBeschrijving.Size = new System.Drawing.Size(254, 62);
             this.tbxMediaBeschrijving.TabIndex = 11;
-            this.tbxMediaBeschrijving.Click += new System.EventHandler(this.tbxMediaBeschrijving_Click);
             // 
             // lblUBeschrijving
             // 

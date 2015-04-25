@@ -15,6 +15,12 @@ namespace ICT4Events_S24B_Reparatie
         private Account profiel;
         private MediaSharingSysteem md;
 
+        /// <summary>
+        /// Deze constructor is er voor om profielen te bekijken/wijzigen
+        /// </summary>
+        /// <param name="alg"></param>
+        /// <param name="a"></param>
+        /// <param name="md"></param>
         public Profiel(Algemeen alg, Account a, MediaSharingSysteem md)
         {
             this.md = md;
@@ -32,6 +38,18 @@ namespace ICT4Events_S24B_Reparatie
             else if (alg.Account.Type != AccountType.Beheerder)
                 DefaultLock();
         }
+
+        public Profiel(Algemeen alg, MediaSharingSysteem md)
+        {
+            this.md = md;
+            VulTypeBox();
+            VulGenderBox();
+            btnBan.Visible = false;
+            btnBan.Enabled = false;
+            btnWijzig.Visible = false;
+            btnWijzig.Enabled = false;
+        }
+
         /// <summary>
         /// De buttons, textboxes, combobox, datetypepicker worden gedisabled en/of verborgen
         /// </summary>
@@ -42,7 +60,6 @@ namespace ICT4Events_S24B_Reparatie
             btnWijzig.Enabled = false;
             tbxAchternaam.Enabled = false;
             tbRoepNaam.Enabled = false;
-            tbxTelefoonNR.Enabled = false;
             tbxVoornaam.Enabled = false;
             cbxGender.Enabled = false;
             dtpGeboorteDatum.Enabled = false;
@@ -56,6 +73,7 @@ namespace ICT4Events_S24B_Reparatie
             btnBan.Visible = false;
             btnBan.Enabled = false;
             tbxRFID.Enabled = false;
+            tbxEmail.Enabled = false;
             cbxAccountType.Enabled = false;
         }
 
@@ -76,6 +94,7 @@ namespace ICT4Events_S24B_Reparatie
             cbxGender.Text = a.Geslacht.ToString();
             if (a.GeboorteDatum != null && a.GeboorteDatum > minDate) dtpGeboorteDatum.Value = a.GeboorteDatum;
             lblBan.Text = a.Verbannen.ToString();
+            if (a.Email != null) tbxEmail.Text = a.Email;
         }
 
         /// <summary>
@@ -134,6 +153,11 @@ namespace ICT4Events_S24B_Reparatie
                     SetProfiel(p);
                 }
             }
+        }
+
+        private void btVoegToe_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
