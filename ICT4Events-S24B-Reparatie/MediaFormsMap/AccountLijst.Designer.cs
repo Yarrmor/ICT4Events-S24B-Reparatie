@@ -32,6 +32,7 @@
             this.btnVerwijder = new System.Windows.Forms.Button();
             this.btnVoegToe = new System.Windows.Forms.Button();
             this.btnBanUnban = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbxAccounts
@@ -72,11 +73,22 @@
             this.btnBanUnban.Text = "Ban/Unban";
             this.btnBanUnban.UseVisualStyleBackColor = true;
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(255, 322);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 4;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // AccountLijst
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(352, 356);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnBanUnban);
             this.Controls.Add(this.btnVoegToe);
             this.Controls.Add(this.btnVerwijder);
@@ -93,5 +105,6 @@
         private System.Windows.Forms.Button btnVerwijder;
         private System.Windows.Forms.Button btnVoegToe;
         private System.Windows.Forms.Button btnBanUnban;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

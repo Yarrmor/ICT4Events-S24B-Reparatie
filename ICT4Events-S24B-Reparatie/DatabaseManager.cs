@@ -92,7 +92,11 @@ namespace ICT4Events_S24B_Reparatie
         {
             try
             {
-                Verbinding.Open();
+                if (Verbinding.State == ConnectionState.Closed)
+                {
+                    Verbinding.Open();
+                }
+
                 command.ExecuteNonQuery();
                 return true;
             }
@@ -978,17 +982,31 @@ namespace ICT4Events_S24B_Reparatie
         /// </summary>
         /// <param name="rfid"></param>
         /// <returns></returns>
-        public bool VerwijderAccount(string rfid)
+        public bool VerwijderAccount(int AccountID, int EventID)
         {
             try
             {
-                string sql = "DELETE FROM ACCOUNT WHERE RFID = :RFID";
+                string sql = "DELETE FROM ROL WHERE AccountID = :AccountID AND EventID = :EventID";
 
                 OracleCommand command = MaakOracleCommand(sql);
 
-                command.Parameters.Add(":RFID", rfid);
+                command.Parameters.Add(":AccountID", AccountID);
+                command.Parameters.Add(":EventID", EventID);
 
-                return VoerNonQueryUit(command);
+                if (VoerNonQueryUit(command))
+                {
+                    sql = "DELETE FROM ACCOUNT WHERE AccountID = :AccountID";
+
+                    command = MaakOracleCommand(sql);
+
+                    command.Parameters.Add(":AccountID", AccountID);
+
+                    return VoerNonQueryUit(command);
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch
             {

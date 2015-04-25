@@ -162,7 +162,7 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
-        private void btVoegToe_Click(object sender, EventArgs e)
+        private void btnVoegToe_Click(object sender, EventArgs e)
         {
             if (tbxAchternaam.Text != "" && tbxEmail.Text != "" && tbxRFID.Text != "" && tbxRoepNaam.Text != "" && tbxVoornaam.Text != "" && cbxAccountType.Text != "" && cbxGender.Text != "" && dtpGeboorteDatum.Value != null)
             {

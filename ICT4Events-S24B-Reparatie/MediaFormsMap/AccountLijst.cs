@@ -32,6 +32,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             this.accounts = accountlijst;
 
+            lbxAccounts.Items.Clear();
             foreach (Account a in accounts)
             {
                 lbxAccounts.Items.Add(a.ToString());
@@ -93,13 +94,22 @@ namespace ICT4Events_S24B_Reparatie
             {
                 foreach (Account a in accounts)
                 {
-                    if (a.ToString() == lbxAccounts.ToString())
+                    if (a.ToString() == lbxAccounts.SelectedItem.ToString())
                     {
-                        a.Verwijder();
+                        a.Verwijder(alg.Evenement.ID);
+                        WeergeefAlleAccounts(dm.VerkrijgAlleAccounts(alg.Evenement.ID));
                     }
                 }
             }
-            accounts = dm.VerkrijgAlleAccounts(alg.Evenement.ID);
+            else
+            {
+                MessageBox.Show("Er is niets geselcteerd");
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            WeergeefAlleAccounts(dm.VerkrijgAlleAccounts(alg.Evenement.ID));
         }
 
         /// <summary>

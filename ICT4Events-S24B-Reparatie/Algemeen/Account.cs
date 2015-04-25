@@ -100,9 +100,9 @@ namespace ICT4Events_S24B_Reparatie
             this.dm.Verban(this.Email, verban);
         }
 
-        public bool Verwijder()
+        public bool Verwijder(int EventID)
         {
-            return this.dm.VerwijderAccount(this.Rfid);
+            return this.dm.VerwijderAccount(AccountID, EventID);
         }
 
         public override string ToString()

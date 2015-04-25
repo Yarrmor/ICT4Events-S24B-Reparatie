@@ -254,7 +254,7 @@
             this.btnVoegToe.TabIndex = 3;
             this.btnVoegToe.Text = "Voeg Toe";
             this.btnVoegToe.UseVisualStyleBackColor = true;
-            this.btnVoegToe.Click += new System.EventHandler(this.btVoegToe_Click);
+            this.btnVoegToe.Click += new System.EventHandler(this.btnVoegToe_Click);
             // 
             // Profiel
             // 

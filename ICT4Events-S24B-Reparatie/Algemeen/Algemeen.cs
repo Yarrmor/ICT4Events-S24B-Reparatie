@@ -144,14 +144,14 @@ namespace ICT4Events_S24B_Reparatie
         /// <returns></returns>
         public bool VerwijderAccount(Account acc)
         {
-            return VerwijderAccount(acc.Rfid);
+            return VerwijderAccount(acc.AccountID, Evenement.ID);
         }
 
-        public bool VerwijderAccount(string rfid)
+        public bool VerwijderAccount(int AccountID, int EventID)
         {
             DatabaseManager dm = new DatabaseManager();
 
-            return dm.VerwijderAccount(rfid);
+            return dm.VerwijderAccount(AccountID, EventID);
         }
 
         /// <summary>
