@@ -57,6 +57,10 @@ namespace ICT4Events_S24B_Reparatie
         public void VerkrijgCategorieën()
         {
             this.CategorieLijst = this.dm.VerkrijgCategorieënEvent(this.EventID);
+            if (CategorieLijst == null)
+            {
+                CategorieLijst = new List<Categorie>();
+            }
         }
 
         /// <summary>
@@ -65,6 +69,10 @@ namespace ICT4Events_S24B_Reparatie
         public void VerkrijgMediaLijst()
         {
             this.MediaLijst = this.dm.VerkrijgMediaEvent(this.EventID);
+            if (MediaLijst == null)
+            {
+                MediaLijst = new List<Media>();
+            }
         }
 
         /// <summary>
@@ -73,6 +81,10 @@ namespace ICT4Events_S24B_Reparatie
         public void VerkrijgMeldingenLijst()
         {
             this.Meldingen = this.dm.VerkrijgMeldingenEvent(this.EventID);
+            if (Meldingen == null)
+            {
+                Meldingen = new List<Melding>();
+            }
         }
 
         #endregion
