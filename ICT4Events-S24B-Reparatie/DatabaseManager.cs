@@ -1224,14 +1224,13 @@ namespace ICT4Events_S24B_Reparatie
             {
                 List<Media> MediaEvent = new List<Media>();
 
-                string sql = "SELECT MediaID, AccountID, CategorieID, Naam, Pad, Datum, Verborgen FROM MEDIA WHERE EventID = :EventID";
+                string sql = "SELECT MediaID, AccountID, CategorieID, Naam, Beschrijving, Pad, Datum, Verborgen FROM MEDIA WHERE EventID = :EventID";
 
                 OracleCommand command = MaakOracleCommand(sql);
 
                 command.Parameters.Add(":EventID", eventID);
 
                 OracleDataReader reader = VoerMultiQueryUit(command);
-                throw new NotImplementedException();
 
                 while (reader.Read())
                 {
@@ -1241,17 +1240,26 @@ namespace ICT4Events_S24B_Reparatie
                         int categorieID = Convert.ToInt32(reader["CategorieID"]);
                         int accountID = Convert.ToInt32(reader["AccountID"]);
                         string naam = reader["Naam"].ToString();
+                        string beschrijving = reader["Beschrijving"].ToString();
                         string pad = reader["Pad"].ToString();
-                        string beschrijving = reader["Beschijving"].ToString();
-                        DateTime uploadDate = reader.GetDateTime(6);
+                        DateTime uploadDate = Convert.ToDateTime(reader["Datum"]);
                         bool verborgen = Convert.ToBoolean(reader["Verborgen"]);
 
                         Account acc = VerkrijgAccount(accountID, eventID);
 
+                        string type = "";
+                        if (pad.LastIndexOf(".") > 0)
+                        {
+                            type = pad.Substring(pad.LastIndexOf("."));
+                        }
+                        else
+                        {
+                            type = "";
+                        }
 
                         if (pad != null)
-                        {
-                            MediaEvent.Add(new Media(mediaID, naam, new Bestand(pad.Substring(pad.LastIndexOf(".")), pad), categorieID, beschrijving, acc, uploadDate, eventID, verborgen));
+                        { //new Bestand(um.dest.Substring(um.dest.LastIndexOf(".")), um.dest)
+                            MediaEvent.Add(new Media(mediaID, naam, new Bestand(type, pad), categorieID, beschrijving, acc, uploadDate, eventID, verborgen));
                         }
                         else
                         {

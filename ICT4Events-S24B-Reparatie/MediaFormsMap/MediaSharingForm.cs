@@ -270,6 +270,7 @@ namespace ICT4Events_S24B_Reparatie
                     {
                         MediaSharingFormMediaForm msmf = new MediaSharingFormMediaForm(algemeen, m, md);
                         msmf.Show();
+                        break;
                     }
                 }
             }
