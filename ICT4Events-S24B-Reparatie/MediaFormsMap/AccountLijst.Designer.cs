@@ -30,8 +30,8 @@
         {
             this.lbxAccounts = new System.Windows.Forms.ListBox();
             this.btnVerwijder = new System.Windows.Forms.Button();
-            this.btVoegToe = new System.Windows.Forms.Button();
-            this.btBanUnban = new System.Windows.Forms.Button();
+            this.btnVoegToe = new System.Windows.Forms.Button();
+            this.btnBanUnban = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbxAccounts
@@ -51,33 +51,34 @@
             this.btnVerwijder.TabIndex = 1;
             this.btnVerwijder.Text = "Verwijder";
             this.btnVerwijder.UseVisualStyleBackColor = true;
+            this.btnVerwijder.Click += new System.EventHandler(this.btnVerwijder_Click);
             // 
-            // btVoegToe
+            // btnVoegToe
             // 
-            this.btVoegToe.Location = new System.Drawing.Point(93, 322);
-            this.btVoegToe.Name = "btVoegToe";
-            this.btVoegToe.Size = new System.Drawing.Size(75, 23);
-            this.btVoegToe.TabIndex = 2;
-            this.btVoegToe.Text = "VoegToe";
-            this.btVoegToe.UseVisualStyleBackColor = true;
-            this.btVoegToe.Click += new System.EventHandler(this.btVoegToe_Click);
+            this.btnVoegToe.Location = new System.Drawing.Point(93, 322);
+            this.btnVoegToe.Name = "btnVoegToe";
+            this.btnVoegToe.Size = new System.Drawing.Size(75, 23);
+            this.btnVoegToe.TabIndex = 2;
+            this.btnVoegToe.Text = "VoegToe";
+            this.btnVoegToe.UseVisualStyleBackColor = true;
+            this.btnVoegToe.Click += new System.EventHandler(this.btnVoegToe_Click);
             // 
-            // btBanUnban
+            // btnBanUnban
             // 
-            this.btBanUnban.Location = new System.Drawing.Point(174, 322);
-            this.btBanUnban.Name = "btBanUnban";
-            this.btBanUnban.Size = new System.Drawing.Size(75, 23);
-            this.btBanUnban.TabIndex = 3;
-            this.btBanUnban.Text = "Ban/Unban";
-            this.btBanUnban.UseVisualStyleBackColor = true;
+            this.btnBanUnban.Location = new System.Drawing.Point(174, 322);
+            this.btnBanUnban.Name = "btnBanUnban";
+            this.btnBanUnban.Size = new System.Drawing.Size(75, 23);
+            this.btnBanUnban.TabIndex = 3;
+            this.btnBanUnban.Text = "Ban/Unban";
+            this.btnBanUnban.UseVisualStyleBackColor = true;
             // 
             // AccountLijst
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(352, 356);
-            this.Controls.Add(this.btBanUnban);
-            this.Controls.Add(this.btVoegToe);
+            this.Controls.Add(this.btnBanUnban);
+            this.Controls.Add(this.btnVoegToe);
             this.Controls.Add(this.btnVerwijder);
             this.Controls.Add(this.lbxAccounts);
             this.Name = "AccountLijst";
@@ -90,7 +91,7 @@
 
         private System.Windows.Forms.ListBox lbxAccounts;
         private System.Windows.Forms.Button btnVerwijder;
-        private System.Windows.Forms.Button btVoegToe;
-        private System.Windows.Forms.Button btBanUnban;
+        private System.Windows.Forms.Button btnVoegToe;
+        private System.Windows.Forms.Button btnBanUnban;
     }
 }

@@ -27,6 +27,9 @@ namespace ICT4Events_S24B_Reparatie
 
             InitializeComponent();
 
+            btnVoegToe.Enabled = false;
+            btnVoegToe.Visible = false;
+
             this.Text = "Profiel: " + a.Roepnaam;
             VulTypeBox();
             VulGenderBox();
@@ -42,12 +45,16 @@ namespace ICT4Events_S24B_Reparatie
         public Profiel(Algemeen alg, MediaSharingSysteem md)
         {
             this.md = md;
+
+            InitializeComponent();
+
             VulTypeBox();
             VulGenderBox();
             btnBan.Visible = false;
             btnBan.Enabled = false;
             btnWijzig.Visible = false;
             btnWijzig.Enabled = false;
+            lblVerbannen.Visible = false;
         }
 
         /// <summary>
@@ -59,7 +66,7 @@ namespace ICT4Events_S24B_Reparatie
             btnWijzig.Visible = false;
             btnWijzig.Enabled = false;
             tbxAchternaam.Enabled = false;
-            tbRoepNaam.Enabled = false;
+            tbxRoepNaam.Enabled = false;
             tbxVoornaam.Enabled = false;
             cbxGender.Enabled = false;
             dtpGeboorteDatum.Enabled = false;
@@ -87,7 +94,7 @@ namespace ICT4Events_S24B_Reparatie
 
             if(a.Achternaam != null) tbxAchternaam.Text = a.Achternaam;
             tbxRFID.Text = a.Rfid;
-            if (a.Roepnaam != null) tbRoepNaam.Text = a.Roepnaam;
+            if (a.Roepnaam != null) tbxRoepNaam.Text = a.Roepnaam;
             //tbxTelefoonNR.Text = a.TelefoonNR.ToString();  //Verwijder dit maar als dit niet in account hoeft.
             if (a.Voornaam != null) tbxVoornaam.Text = a.Voornaam.ToString();
             cbxAccountType.Text = a.Type.ToString();
@@ -157,7 +164,14 @@ namespace ICT4Events_S24B_Reparatie
 
         private void btVoegToe_Click(object sender, EventArgs e)
         {
-
+            if (tbxAchternaam.Text != "" && tbxEmail.Text != "" && tbxRFID.Text != "" && tbxRoepNaam.Text != "" && tbxVoornaam.Text != "" && cbxAccountType.Text != "" && cbxGender.Text != "" && dtpGeboorteDatum.Value != null)
+            {
+                this.DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                MessageBox.Show("Niet alle gegevens zijn ingevuld!");
+            }
         }
     }
 }

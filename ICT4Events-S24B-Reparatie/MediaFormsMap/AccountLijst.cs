@@ -67,13 +67,39 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
-        private void btVoegToe_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Button event voor het toevoegen van een account aan de database.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnVoegToe_Click(object sender, EventArgs e)
         {
             Profiel p = new Profiel(alg, md);
-            if (p.DialogResult == DialogResult.OK)
+            if (p.ShowDialog() == DialogResult.OK)
             {
-                dm.VoegAccountToe(new Account(p.tbxRFID.Text, dm.VerkrijgNieuwAccountID(), p.tbxEmail.Text, p.tbRoepNaam.Text, AccountTypeStringNaarEnum(p.cbxAccountType.Text), GeslachtStringNaarEnum(p.cbxGender.Text), p.tbxVoornaam.Text, p.tbxAchternaam.Text, p.dtpGeboorteDatum.Value, false));
+                dm.VoegAccountToe(new Account(p.tbxRFID.Text, dm.VerkrijgNieuwAccountID(), p.tbxEmail.Text, p.tbxRoepNaam.Text, AccountTypeStringNaarEnum(p.cbxAccountType.Text), 
+                    GeslachtStringNaarEnum(p.cbxGender.Text), p.tbxVoornaam.Text, p.tbxAchternaam.Text, p.dtpGeboorteDatum.Value, false), alg.Evenement.ID);
             }
+        }
+
+        /// <summary>
+        /// Verwijderd het geselecteerde account uit de database en haalt een nieuwe accounts lijst op.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnVerwijder_Click(object sender, EventArgs e)
+        {
+            if (lbxAccounts.SelectedItem != null)
+            {
+                foreach (Account a in accounts)
+                {
+                    if (a.ToString() == lbxAccounts.ToString())
+                    {
+                        a.Verwijder();
+                    }
+                }
+            }
+            accounts = dm.VerkrijgAlleAccounts(alg.Evenement.ID);
         }
 
         /// <summary>

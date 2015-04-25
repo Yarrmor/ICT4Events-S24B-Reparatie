@@ -38,7 +38,7 @@
             this.tbxAchternaam = new System.Windows.Forms.TextBox();
             this.tbxVoornaam = new System.Windows.Forms.TextBox();
             this.cbxGender = new System.Windows.Forms.ComboBox();
-            this.tbRoepNaam = new System.Windows.Forms.TextBox();
+            this.tbxRoepNaam = new System.Windows.Forms.TextBox();
             this.tbxRFID = new System.Windows.Forms.TextBox();
             this.lblAccountType = new System.Windows.Forms.Label();
             this.lblGeboorteDatum = new System.Windows.Forms.Label();
@@ -64,7 +64,7 @@
             this.gbxProfiel.Controls.Add(this.tbxAchternaam);
             this.gbxProfiel.Controls.Add(this.tbxVoornaam);
             this.gbxProfiel.Controls.Add(this.cbxGender);
-            this.gbxProfiel.Controls.Add(this.tbRoepNaam);
+            this.gbxProfiel.Controls.Add(this.tbxRoepNaam);
             this.gbxProfiel.Controls.Add(this.tbxRFID);
             this.gbxProfiel.Controls.Add(this.lblAccountType);
             this.gbxProfiel.Controls.Add(this.lblGeboorteDatum);
@@ -150,12 +150,12 @@
             this.cbxGender.Size = new System.Drawing.Size(227, 21);
             this.cbxGender.TabIndex = 10;
             // 
-            // tbRoepNaam
+            // tbxRoepNaam
             // 
-            this.tbRoepNaam.Location = new System.Drawing.Point(100, 81);
-            this.tbRoepNaam.Name = "tbRoepNaam";
-            this.tbRoepNaam.Size = new System.Drawing.Size(227, 20);
-            this.tbRoepNaam.TabIndex = 9;
+            this.tbxRoepNaam.Location = new System.Drawing.Point(100, 81);
+            this.tbxRoepNaam.Name = "tbxRoepNaam";
+            this.tbxRoepNaam.Size = new System.Drawing.Size(227, 20);
+            this.tbxRoepNaam.TabIndex = 9;
             // 
             // tbxRFID
             // 
@@ -293,7 +293,7 @@
         public System.Windows.Forms.TextBox tbxAchternaam;
         public System.Windows.Forms.TextBox tbxVoornaam;
         public System.Windows.Forms.ComboBox cbxGender;
-        public System.Windows.Forms.TextBox tbRoepNaam;
+        public System.Windows.Forms.TextBox tbxRoepNaam;
         public System.Windows.Forms.TextBox tbxRFID;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox tbxEmail;

@@ -1001,13 +1001,52 @@ namespace ICT4Events_S24B_Reparatie
         }
 
         //TOD: Fix
-        public bool VoegAccountToe(Account acc)
+        public bool VoegAccountToe(Account acc, int EventID)
         {
             try
             {
-                //string sql = "INSERT INTO ACCOUNT(RFID, Email, Roepnaam, Geslacht, "
+                string geslacht = "";
 
-                return false;
+                if (acc.Geslacht == Geslacht.Man)
+                {
+                    geslacht = "M";
+                }
+                else
+                {
+                    geslacht = "V";
+                }
+
+                string sql = "INSERT INTO ACCOUNT (AccountID, RFID, EMAIL, WACHTWOORD, ROEPNAAM, GESLACHT, VOORNAAM, ACHTERNAAM, GEBOORTEDATUM, VERBANNEN) VALUES (:AccountID, :RFID, :EMAIL, :WACHTWOORD, :ROEPNAAM, :GESLACHT, :VOORNAAM, :ACHTERNAAM, :GEBOORTEDATUM, :VERBANNEN)";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":AccountID", acc.AccountID);
+                command.Parameters.Add(":RFID", acc.Rfid);
+                command.Parameters.Add(":EMAIL", acc.Email);
+                command.Parameters.Add(":WACHTWOORD", acc.Rfid);
+                command.Parameters.Add(":ROEPNAAM", acc.Roepnaam);
+                command.Parameters.Add(":GESLACHT", geslacht);
+                command.Parameters.Add(":VOORNAAM", acc.Voornaam);
+                command.Parameters.Add(":ACHTERNAAM", acc.Achternaam);
+                command.Parameters.Add(":GEBOORTEDATUM", acc.GeboorteDatum);
+                command.Parameters.Add(":VERBANNEN", Convert.ToInt32(acc.Verbannen));
+
+                if (VoerNonQueryUit(command))
+                {
+                    sql = "INSERT INTO ROL (AccountID, EventID, ROL) VALUES (:AccountID, :EventID, :ROL)";
+
+                    command = MaakOracleCommand(sql);
+
+                    command.Parameters.Add(":AccountID", acc.AccountID);
+                    command.Parameters.Add(":EventID", EventID);
+                    command.Parameters.Add(":ROL", acc.Type.ToString());
+
+                    return VoerNonQueryUit(command);
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch
             {
