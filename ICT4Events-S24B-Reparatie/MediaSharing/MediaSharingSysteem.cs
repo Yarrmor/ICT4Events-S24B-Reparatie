@@ -99,8 +99,8 @@ namespace ICT4Events_S24B_Reparatie
         {
             if (BestaatCategorieNiet(naam) && naam != "_Main" && naam != "_main")
             {
-                CategorieLijst.Add(new Categorie(VerkrijgCategorieID(), naam, "lalaalalalalal", acc));
                 dm.VoegCategorieToe(new Categorie(VerkrijgCategorieID(), naam, "lalaalalalalal", acc), this.EventID);
+                UpdateCatMedia();
                 return true;
             }
             else
@@ -119,14 +119,24 @@ namespace ICT4Events_S24B_Reparatie
         {
             if (BestaatCategorieNiet(naam) && naam != "_Main" && naam != "_main")
             {
-                CategorieLijst.Add(new Categorie(VerkrijgCategorieID(), categorie, naam, "lalalaalalal", acc));
                 dm.VoegCategorieToe(new Categorie(VerkrijgCategorieID(), categorie, naam, "lalalaalalal", acc), this.EventID);
+                UpdateCatMedia();
                 return true;
             }
             else
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Verwijderd een categorie met de bijbehorende subcategories.
+        /// </summary>
+        /// <param name="cat"></param>
+        public void VerwijderCategorie(Categorie cat)
+        {
+            VerwijderSubCategories(cat);
+            dm.VerwijderCategorie(cat.ID);
         }
 
         /// <summary>
@@ -203,7 +213,7 @@ namespace ICT4Events_S24B_Reparatie
         /// <returns></returns>
         private int VerkrijgCategorieID()
         {
-            int nieuweCategorie = dm.NieuwID("CATEGORIE");
+            int nieuweCategorie = dm.NieuwCategorieID();
             if (nieuweCategorie < 1)
             {
                 CategorieLijst.OrderBy(x => x.ID).ToList();
@@ -234,11 +244,10 @@ namespace ICT4Events_S24B_Reparatie
                 if (c.Parent == cat)
                 {
                     VerwijderSubCategories(c);
-                    CategorieLijst.Remove(c);
+                    dm.VerwijderCategorie(c.ID);
                     //***Database connectie voor het verwijderen van categoriën in de database.
                 }
             }
-            dm.VerwijderCategorie(cat.ID);
         }
 
 

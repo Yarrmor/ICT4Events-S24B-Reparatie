@@ -150,8 +150,8 @@ namespace ICT4Events_S24B_Reparatie
 
                 OracleCommand command = MaakOracleCommand(sql);
 
-                command.Parameters.Add(":TabelID", (tabel + "ID"));
                 command.Parameters.Add(":Tabel", tabel);
+                command.Parameters.Add(":TabelID", (tabel + "ID"));
 
                 string text = command.CommandText;
 
@@ -1063,6 +1063,30 @@ namespace ICT4Events_S24B_Reparatie
 
         #region Categorie
 
+        public int NieuwCategorieID()
+        {
+            try
+            {
+                string sql = "SELECT MAX(CategorieID) AS MaxID FROM Categorie";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                string text = command.CommandText;
+
+                OracleDataReader reader = VoerQueryUit(command);
+
+                return Convert.ToInt32(reader["MaxID"].ToString()) + 1;
+            }
+            catch
+            {
+                return -1;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
         /// <summary>
         /// Verkrijgt alle categoriën van een bepaald evenement || Is nog niet helemaal juist geïmplementeerd met accounts gebeurd nog niks.
         /// </summary>
@@ -1074,7 +1098,7 @@ namespace ICT4Events_S24B_Reparatie
             {
                 List<Categorie> categories = new List<Categorie>();
 
-                string sql = "SELECT CategorieID, AccountID, Naam, Beschrijving, SubCatVan FROM CATEGORIE WHERE EventID = :EventID";
+                string sql = "SELECT CategorieID, AccountID, Naam, Beschrijving, SubCatVan FROM CATEGORIE WHERE EventID = :EventID ORDER BY CATEGORIEID ASC";
 
                 OracleCommand command = MaakOracleCommand(sql);
 
@@ -1138,7 +1162,12 @@ namespace ICT4Events_S24B_Reparatie
         {
             try
             {
-                string sql = "INSERT INTO CATEGORIE (CategorieID, AccountID, EventID, Naam, Beschrijving, SubCatVan) VALUES (:CategorieID, :AccountID, :EventID, :Naam, :Beschrijving, :SubCatVan)";
+                string sql = "INSERT INTO CATEGORIE (CategorieID, AccountID, EventID, Naam, Beschrijving) VALUES (:CategorieID, :AccountID, :EventID, :Naam, :Beschrijving)";
+
+                if (categorie.Parent != null)
+                {
+                    sql = "INSERT INTO CATEGORIE (CategorieID, AccountID, EventID, Naam, Beschrijving, SubCatVan) VALUES (:CategorieID, :AccountID, :EventID, :Naam, :Beschrijving, :SubCatVan)";
+                }
 
                 OracleCommand command = MaakOracleCommand(sql);
 
@@ -1147,11 +1176,13 @@ namespace ICT4Events_S24B_Reparatie
                 command.Parameters.Add(":EventID", eventID);
                 command.Parameters.Add(":Naam", categorie.Naam);
                 command.Parameters.Add(":Beschrijving", categorie.Beschrijving);
-                command.Parameters.Add(":SubCatVan", categorie.Parent.ID);
 
-                int updates = command.ExecuteNonQuery();
-                command.Dispose();
-                return true;
+                if (categorie.Parent != null)
+                {
+                    command.Parameters.Add(":SubCatVan", categorie.Parent.ID);
+                }
+
+                return VoerNonQueryUit(command);
             }
             catch
             {

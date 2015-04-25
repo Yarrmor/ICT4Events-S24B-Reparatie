@@ -247,10 +247,9 @@ namespace ICT4Events_S24B_Reparatie
             if (lbxCategorie.SelectedItem != null) //&& alg.Account.Type == AccountType.Beheerder
             {
                 Categorie cat = md.VerkrijgCategorie(lbxCategorie.SelectedItem.ToString());
-                md.VerwijderSubCategories(cat);
-                md.CategorieLijst.Remove(cat);
+                md.VerwijderCategorie(cat);
+                md.UpdateCatMedia();
                 WeergeefCategories();
-
                 //***DatabaseManager gedoe.
             }
         }
