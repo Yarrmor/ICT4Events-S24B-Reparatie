@@ -8,15 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ICT4Event_S24GroepB
+namespace ICT4Events_S24B_Reparatie
 {
     public partial class MediaSharingForm : Form, ILoginSysteem
     {
         private Algemeen algemeen;
-        private MediaSharing md;
+        private MediaSharingSysteem md;
         private MenuStrip ms;
 
-        public MediaSharingForm(Algemeen alg, MediaSharing md)
+        public MediaSharingForm(Algemeen alg, MediaSharingSysteem md)
         {
             this.algemeen = alg;
             this.md = md;
@@ -37,7 +37,7 @@ namespace ICT4Event_S24GroepB
             {
                 if (lbxCategorie.SelectedItem.ToString() != "_Main")
                 {
-                    foreach (Categorie c in md.Categories)
+                    foreach (Categorie c in md.CategorieLijst)
                     {
                         if (c.ToString() == lbxCategorie.SelectedItem.ToString())
                         {
@@ -116,7 +116,7 @@ namespace ICT4Event_S24GroepB
         {
             lbxCategorie.Items.Clear();
             lbxCategorie.Items.Add("_Main");
-            foreach (Categorie c in md.Categories)
+            foreach (Categorie c in md.CategorieLijst)
             {
                 if (!InListBox(c.ToString()))
                 {
@@ -168,7 +168,7 @@ namespace ICT4Event_S24GroepB
         /// <param name="cat"></param>
         private void AddSubCategories(Categorie cat)
         {
-            foreach (Categorie c in md.Categories)
+            foreach (Categorie c in md.CategorieLijst)
             {
                 if (c.Parent == cat)
                 {
@@ -206,7 +206,7 @@ namespace ICT4Event_S24GroepB
         private void MediaListBox(Categorie c)
         {
             lbxMedia.Items.Clear();
-            foreach (Media m in md.Media)
+            foreach (Media m in md.MediaLijst)
             {
                 if (m != null)
                 {
@@ -228,7 +228,7 @@ namespace ICT4Event_S24GroepB
         private void MediaListBox()
         {
             lbxMedia.Items.Clear();
-            foreach (Media m in md.Media)
+            foreach (Media m in md.MediaLijst)
             {
                 if (m != null)
                 {
@@ -248,7 +248,7 @@ namespace ICT4Event_S24GroepB
             {
                 Categorie cat = md.VerkrijgCategorie(lbxCategorie.SelectedItem.ToString());
                 md.VerwijderSubCategories(cat);
-                md.Categories.Remove(cat);
+                md.CategorieLijst.Remove(cat);
                 WeergeefCategories();
 
                 //***DatabaseManager gedoe.
@@ -262,7 +262,7 @@ namespace ICT4Event_S24GroepB
         /// <param name="e"></param>
         private void lbxMedia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach (Media m in md.Media)
+            foreach (Media m in md.MediaLijst)
             {
                 if (lbxMedia.SelectedItem != null)
                 {
@@ -340,7 +340,7 @@ namespace ICT4Event_S24GroepB
         private void ms_test(object sender, EventArgs e)
         {
             DatabaseManager dm = new DatabaseManager();
-            UploadMedia um = new UploadMedia(md.Categories, @"D:\ProftaakS2\MediaSharing");
+            UploadMedia um = new UploadMedia(md.CategorieLijst, @"D:\ProftaakS2\MediaSharing");
 
             if (um.ShowDialog() == DialogResult.OK)
             {
@@ -351,7 +351,7 @@ namespace ICT4Event_S24GroepB
                 /*(int mediaID, string naam, Bestand bestand, Categorie categorie, string beschrijving, Account uploader, DateTime uploadDate, Event event_, bool verborgen)*/
 
                 dm.VoegMediaToe(nieuwMedia);
-                md.Media.Add(nieuwMedia);
+                md.VerkrijgMediaLijst();
             }
 
             um.Dispose();

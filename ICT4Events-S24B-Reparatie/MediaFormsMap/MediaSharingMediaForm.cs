@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace ICT4Event_S24GroepB
+namespace ICT4Events_S24B_Reparatie
 {
     public partial class MediaSharingFormMediaForm : Form, ILoginSysteem
     {
         private Algemeen alg;
         private Media m;
-        private MediaSharing md;
+        private MediaSharingSysteem md;
         private DatabaseManager dm;
 
-        public MediaSharingFormMediaForm(Algemeen alg, Media m, MediaSharing md)
+        public MediaSharingFormMediaForm(Algemeen alg, Media m, MediaSharingSysteem md)
         {
             InitializeComponent();
 
@@ -106,7 +106,7 @@ namespace ICT4Event_S24GroepB
         /// <param name="e"></param>
         private void btnWijzig_Click(object sender, EventArgs e)
         {
-            foreach (Media m in md.Media)
+            foreach (Media m in md.MediaLijst)
             {
                 if (m == this.m)
                 {
@@ -131,7 +131,7 @@ namespace ICT4Event_S24GroepB
         private void VulComboBox()
         {
             bool first = true;
-            foreach (Categorie c in md.Categories)
+            foreach (Categorie c in md.CategorieLijst)
             {
                 if (c != null)
                 {
@@ -160,7 +160,7 @@ namespace ICT4Event_S24GroepB
             if (dialogResult == DialogResult.OK)
             {
                 RemoveMeldingen(m);
-                md.Media.Remove(m);
+                md.VerwijderMedia(m);
                 this.Dispose();
             }
         }
@@ -175,7 +175,7 @@ namespace ICT4Event_S24GroepB
             {
                 if (meld.MediaID == m.MediaID)
                 {
-                    md.Meldingen.Remove(meld);
+                    md.VerwijderMelding(meld);
                 }
             }
         }
@@ -187,7 +187,7 @@ namespace ICT4Event_S24GroepB
         /// <param name="e"></param>
         private void btnMediaVerberg_Click(object sender, EventArgs e)
         {
-            foreach (Media m in md.Media)
+            foreach (Media m in md.MediaLijst)
             {
                 if (m == this.m)
                 {

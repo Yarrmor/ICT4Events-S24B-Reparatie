@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace ICT4Event_S24GroepB
+namespace ICT4Events_S24B_Reparatie
 {
     public partial class UploadMedia : Form
     {

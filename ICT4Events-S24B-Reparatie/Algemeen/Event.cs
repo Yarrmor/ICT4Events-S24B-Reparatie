@@ -30,7 +30,7 @@ namespace ICT4Events_S24B_Reparatie
 
         public List<Categorie> Categories()
         {
-            return this.dm.VerkrijgCategoriënEvent(this.ID);
+            return this.dm.VerkrijgCategorieënEvent(this.ID);
         }
 
         /// <summary>

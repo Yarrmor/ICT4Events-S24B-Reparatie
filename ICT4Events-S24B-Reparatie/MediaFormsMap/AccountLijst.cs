@@ -8,17 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ICT4Event_S24GroepB
+namespace ICT4Events_S24B_Reparatie
 {
     public partial class AccountLijst : Form
     {
         public List<Account> accounts { get; set; }
 
         private Algemeen alg;
-        private MediaSharing md;
+        private MediaSharingSysteem md;
         private DatabaseManager dm;
 
-        public AccountLijst(Algemeen alg, MediaSharing md)
+        public AccountLijst(Algemeen alg, MediaSharingSysteem md)
         {
             this.alg = alg;
             this.md = md;

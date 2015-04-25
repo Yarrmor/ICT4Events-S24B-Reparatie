@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ICT4Event_S24GroepB.MediaFormsMap
+namespace ICT4Events_S24B_Reparatie
 {
     public partial class TaalFiltersForm : Form
     {

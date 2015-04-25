@@ -8,15 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ICT4Event_S24GroepB
+namespace ICT4Events_S24B_Reparatie
 {
     public partial class Rapporteer : Form
     {
         private Algemeen alg;
         private Media m;
-        private MediaSharing md;
+        private MediaSharingSysteem md;
 
-        public Rapporteer(Algemeen alg, Media m, MediaSharing md)
+        public Rapporteer(Algemeen alg, Media m, MediaSharingSysteem md)
         {
             this.alg = alg;
             this.m = m;

@@ -1,4 +1,4 @@
-﻿namespace ICT4Event_S24GroepB
+﻿namespace ICT4Events_S24B_Reparatie
 {
     partial class MediaSharingFormMediaForm
     {
