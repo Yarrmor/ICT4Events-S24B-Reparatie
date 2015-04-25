@@ -42,6 +42,14 @@ namespace ICT4Events_S24B_Reparatie
             GeboorteDatum = geboorteDatum;
         }
 
+        // Voor aanwezigen:
+        public Account(string rfid, string voornaam, string achternaam)
+        {
+            this.Rfid = rfid;
+            this.Voornaam = voornaam;
+            this.Achternaam = achternaam;
+        }
+
         // Alleen om groepshoofd te bewaren:
         public Account(string rfid)
         {

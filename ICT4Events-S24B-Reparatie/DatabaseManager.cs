@@ -394,6 +394,38 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
+        public List<Account> VerkrijgAanwezigen(int eventID)
+        {
+            try
+            {
+                string sql = "SELECT ACCOUNT.RFID, Voornaam, Achternaam FROM ACCOUNT, ROL WHERE EventID = :EventID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":EventID", eventID);
+
+                OracleDataReader reader = VoerMultiQueryUit(command);
+
+                List<Account> aanwezigen = new List<Account>();
+
+                while(reader.Read())
+                {
+                    Account account = new Account(reader["RFID"].ToString(),
+                                                  reader["Voornaam"].ToString(),
+                                                  reader["Achternaam"].ToString());
+
+                    aanwezigen.Add(account);
+                }
+
+                return aanwezigen;
+            }
+
+            catch
+            {
+                return null;
+            }
+        }
+
         #endregion ReserveringPlaatsen
 
         #region Materiaal
@@ -1225,7 +1257,7 @@ namespace ICT4Events_S24B_Reparatie
 
                 OracleCommand command = MaakOracleCommand(sql);
 
-                command.Parameters.Add(":EventID", ID);
+                command.Parameters.Add(":EventID", eventID);
 
                 OracleDataReader reader = VoerMultiQueryUit(command);
                 throw new NotImplementedException();
@@ -1243,16 +1275,16 @@ namespace ICT4Events_S24B_Reparatie
                         DateTime uploadDate = reader.GetDateTime(6);
                         bool verborgen = Convert.ToBoolean(reader["Verborgen"]);
 
-                        Account acc = VerkrijgAccount(accountID, ID);
+                        Account acc = VerkrijgAccount(accountID, eventID);
 
 
                         if (pad != null)
                         {
-                            MediaEvent.Add(new Media(mediaID, naam, new Bestand(pad.Substring(pad.LastIndexOf(".")), pad), categorieID, beschrijving, acc, uploadDate, ID, verborgen));
+                            MediaEvent.Add(new Media(mediaID, naam, new Bestand(pad.Substring(pad.LastIndexOf(".")), pad), categorieID, beschrijving, acc, uploadDate, eventID, verborgen));
                         }
                         else
                         {
-                            MediaEvent.Add(new Media(mediaID, naam, categorieID, beschrijving, acc, uploadDate, ID, verborgen));
+                            MediaEvent.Add(new Media(mediaID, naam, categorieID, beschrijving, acc, uploadDate, eventID, verborgen));
                         }
 
                     }
@@ -1434,7 +1466,7 @@ namespace ICT4Events_S24B_Reparatie
 
             OracleCommand command = MaakOracleCommand(sql);
 
-            command.Parameters.Add(":ReactieID", NieuwID("REACTIE");
+            command.Parameters.Add(":ReactieID", NieuwID("REACTIE"));
             command.Parameters.Add(":AccountID", reactie.Account.AccountID);
             command.Parameters.Add(":MediaID", reactie.Media.MediaID);
             if(reactie.ReactieOp != null)
