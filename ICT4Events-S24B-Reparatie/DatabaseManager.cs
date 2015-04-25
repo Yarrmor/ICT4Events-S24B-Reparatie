@@ -1342,15 +1342,13 @@ namespace ICT4Events_S24B_Reparatie
             {
                 string sql = "SELECT Count(AccountID) AS LIKES FROM STEM WHERE MediaID = :MediaID AND Score = 1";
 
+                //string sql = "SELECT Count(AccountID) FROM STEM WHERE MediaID = :MediaID AND Score = 1";
+
                 OracleCommand command = MaakOracleCommand(sql);
 
                 command.Parameters.Add(":MediaID", mediaID);
 
                 OracleDataReader reader = VoerQueryUit(command);
-
-                command = MaakOracleCommand(sql);
-
-                reader = VoerQueryUit(command);
 
                 return Convert.ToInt32(reader["LIKES"]);
             }
@@ -1370,15 +1368,13 @@ namespace ICT4Events_S24B_Reparatie
             {
                 string sql = "SELECT Count(AccountID) AS DISLIKES FROM STEM WHERE MediaID = :MediaID AND Score = -1";
 
+                //string sql = "SELECT Count(AccountID) FROM STEM WHERE MediaID = :MediaID AND Score = -1";
+
                 OracleCommand command = MaakOracleCommand(sql);
 
                 command.Parameters.Add(":MediaID", mediaID);
 
                 OracleDataReader reader = VoerQueryUit(command);
-
-                command = MaakOracleCommand(sql);
-
-                reader = VoerQueryUit(command);
 
                 return Convert.ToInt32(reader["DISLIKES"]);
             }
