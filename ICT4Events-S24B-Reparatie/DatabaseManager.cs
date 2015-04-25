@@ -686,7 +686,7 @@ namespace ICT4Events_S24B_Reparatie
             try
             {
                 #region Query1
-                string sql = "SELECT RFID, Email, Roepnaam, Geslacht, Voornaam, Achternaam, GeboorteDatum, Verbannen WHERE AccountID = :AccountID";
+                string sql = "SELECT RFID, Email, Roepnaam, Geslacht, Voornaam, Achternaam, GeboorteDatum, Verbannen FROM ACCOUNT WHERE AccountID = :AccountID";
 
                 OracleCommand command = MaakOracleCommand(sql);
 
@@ -707,16 +707,16 @@ namespace ICT4Events_S24B_Reparatie
                 geslachtType = GeslachtStringNaarEnum(geslacht);
                 string voornaam = reader["Voornaam"].ToString();
                 string achternaam = reader["Achternaam"].ToString();
-                DateTime geboorteDatum = reader.GetDateTime(7); ;
+                DateTime geboorteDatum = Convert.ToDateTime(reader["GeboorteDatum"]);//reader.GetDateTime(7);
                 bool verbannen = Convert.ToBoolean(reader["Verbannen"]);
 
                 #endregion
 
                 #region query2: account type & rfid
-                sql = "SELECT Rol, RFID FROM ROL WHERE AccountID = ( SELECT AccountID FROM ACCOUNT WHERE Email = :Email ) AND EventID = :EventID";
+                sql = "SELECT Rol FROM ROL WHERE AccountID = ( SELECT AccountID FROM ACCOUNT WHERE Email = :Email ) AND EventID = :EventID";
                 command = MaakOracleCommand(sql);
                 command.Parameters.Add(":Email", email);
-                command.Parameters.Add(":EventID", eventID.ToString());
+                command.Parameters.Add(":EventID", eventID);
 
                 reader = VoerQueryUit(command);
 
@@ -731,10 +731,6 @@ namespace ICT4Events_S24B_Reparatie
             catch
             {
                 return null;
-            }
-            finally
-            {
-                Verbinding.Close();
             }
         }
 
@@ -1023,13 +1019,20 @@ namespace ICT4Events_S24B_Reparatie
                         int accountID = Convert.ToInt32(reader["AccountID"]);
                         string naam = reader["Naam"].ToString();
                         string beschrijving = reader["Beschrijving"].ToString();
-                        int subCatVan = Convert.ToInt32(reader["SubCatVan"]);
+
+                        int subCatVan = -1;
+                        if (reader["SubCatVan"] != DBNull.Value) 
+                        {
+                            subCatVan = Convert.ToInt32(reader["SubCatVan"]);
+                        }
 
                         Account acc = VerkrijgAccount(accountID, ID);
 
+
+                        //Enig probleem van de code hieronder is wanneer we een andere categorie opeens een subcatvan maken van een categorie die daarna is gemaakt. (gelukkig hoeven we daar nu niks mee te doen)
                         if (subCatVan > 0)
                         {
-                            foreach (Categorie c in categories)
+                            foreach (Categorie c in categories.ToList())
                             {
                                 if (c.ID == subCatVan)
                                 {
