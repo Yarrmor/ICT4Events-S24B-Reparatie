@@ -267,6 +267,7 @@
             this.Controls.Add(this.gbxProfiel);
             this.Name = "Profiel";
             this.Text = "Profiel";
+            this.Activated += new System.EventHandler(this.Profiel_Activated);
             this.gbxProfiel.ResumeLayout(false);
             this.gbxProfiel.PerformLayout();
             this.ResumeLayout(false);

@@ -14,6 +14,8 @@ namespace ICT4Events_S24B_Reparatie
     {
         private Account profiel;
         private MediaSharingSysteem md;
+        private DatabaseManager dm;
+        private Algemeen alg;
 
         /// <summary>
         /// Deze constructor is er voor om profielen te bekijken/wijzigen
@@ -24,6 +26,8 @@ namespace ICT4Events_S24B_Reparatie
         public Profiel(Algemeen alg, Account a, MediaSharingSysteem md)
         {
             this.md = md;
+            this.dm = new DatabaseManager();
+            this.alg = alg;
 
             InitializeComponent();
 
@@ -171,6 +175,23 @@ namespace ICT4Events_S24B_Reparatie
             else
             {
                 MessageBox.Show("Niet alle gegevens zijn ingevuld!");
+            }
+        }
+
+        private void Profiel_Activated(object sender, EventArgs e)
+        {
+            bool inAccountLijst = false;
+            foreach (Account a in dm.VerkrijgAlleAccounts(alg.Evenement.ID))
+            {
+                if (a.AccountID == profiel.AccountID)
+                {
+                    inAccountLijst = true;
+                }
+            }
+
+            if (!inAccountLijst)
+            {
+                this.Dispose();
             }
         }
     }
