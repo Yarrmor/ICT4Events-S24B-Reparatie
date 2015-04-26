@@ -15,6 +15,7 @@ namespace ICT4Events_S24B_Reparatie
         private Algemeen algemeen;
         private MediaSharingSysteem md;
         private MenuStrip ms;
+        private DatabaseManager dm;
 
         public MediaSharingForm(Algemeen alg, MediaSharingSysteem md)
         {
@@ -24,6 +25,7 @@ namespace ICT4Events_S24B_Reparatie
             MaakMenuBalk();
             WeergeefCategories();
             MediaListBox();
+            VulCategorieComboBox();
         }
 
         /// <summary>
@@ -350,6 +352,73 @@ namespace ICT4Events_S24B_Reparatie
                 md.UpdateCatMedia();
             }
             um.Dispose();
+        }
+
+        #endregion
+
+        #region Filter
+
+        private void VulLbxMediaFiltered()
+        {
+            lbxMedia.Items.Clear();
+            foreach (Media m in md.MediaLijstFiltered)
+            {
+                lbxMedia.Items.Add(m.ToString());
+            }
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            DatabaseManager dm = new DatabaseManager();
+
+            bool ascending = CheckAscendingRBN();
+
+            if (rbnFilterNaam.Checked)
+            {
+                md.MediaLijstFiltered = dm.FilterMedia(ascending, algemeen.Evenement.ID, "Naam");
+            }
+            else if (rbnFilterDatum.Checked)
+            {
+                md.MediaLijstFiltered = dm.FilterMedia(ascending, algemeen.Evenement.ID, "Datum");
+            }
+
+            if (rbnFilterCategorie.Checked) md.FilterCategorie(md.VerkrijgCategorie(cbxFilterCategorie.Text).ID);
+            if (tbxFilterZoekWoord.Text != "") md.FilterMedia(tbxFilterZoekWoord.Text, rbnFilterNaam.Checked);
+
+            VulLbxMediaFiltered();
+        }
+
+        private bool CheckAscendingRBN()
+        {
+            if (rbnSortAsc.Checked)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void VulCategorieComboBox()
+        {
+            bool first = true;
+            foreach (Categorie c in md.CategorieLijst)
+            {
+                if (c != null)
+                {
+                    if (first == true)
+                    {
+                        first = false;
+                        cbxFilterCategorie.Text = c.Naam;
+                        cbxFilterCategorie.Items.Add(c.Naam);
+                    }
+                    else
+                    {
+                        cbxFilterCategorie.Items.Add(c.Naam);
+                    }
+                }
+            }
         }
 
         #endregion

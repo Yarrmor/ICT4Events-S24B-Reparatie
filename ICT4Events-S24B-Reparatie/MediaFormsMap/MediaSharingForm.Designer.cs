@@ -38,27 +38,29 @@
             this.tbxZoekMedia = new System.Windows.Forms.TextBox();
             this.lbxMedia = new System.Windows.Forms.ListBox();
             this.gbxFilters = new System.Windows.Forms.GroupBox();
+            this.gbxFilterCategorie = new System.Windows.Forms.GroupBox();
+            this.cbxFilterCategorie = new System.Windows.Forms.ComboBox();
+            this.rbnFilterCategorie = new System.Windows.Forms.RadioButton();
             this.gbxFilter = new System.Windows.Forms.GroupBox();
+            this.rbnFilterDatum = new System.Windows.Forms.RadioButton();
+            this.rbnFilterDislikes = new System.Windows.Forms.RadioButton();
+            this.rbnFilterLikes = new System.Windows.Forms.RadioButton();
+            this.rbnFilterNaam = new System.Windows.Forms.RadioButton();
             this.gbxSoort = new System.Windows.Forms.GroupBox();
             this.rbnSortDesc = new System.Windows.Forms.RadioButton();
             this.rbnSortAsc = new System.Windows.Forms.RadioButton();
             this.gbxZoekWoord = new System.Windows.Forms.GroupBox();
             this.tbxFilterZoekWoord = new System.Windows.Forms.TextBox();
-            this.rbnFilterNaam = new System.Windows.Forms.RadioButton();
-            this.rbnFilterLikes = new System.Windows.Forms.RadioButton();
-            this.rbnFilterDislikes = new System.Windows.Forms.RadioButton();
-            this.rbnFilterDatum = new System.Windows.Forms.RadioButton();
-            this.gbxFilterCategorie = new System.Windows.Forms.GroupBox();
-            this.rbnFilterCategorie = new System.Windows.Forms.RadioButton();
-            this.cbxFilterCategorie = new System.Windows.Forms.ComboBox();
             this.btnFilter = new System.Windows.Forms.Button();
+            this.rbnFilterZoekNaam = new System.Windows.Forms.RadioButton();
+            this.rbnFilterZoekBeschrijving = new System.Windows.Forms.RadioButton();
             this.gbxCategorie.SuspendLayout();
             this.gbxMedia.SuspendLayout();
             this.gbxFilters.SuspendLayout();
+            this.gbxFilterCategorie.SuspendLayout();
             this.gbxFilter.SuspendLayout();
             this.gbxSoort.SuspendLayout();
             this.gbxZoekWoord.SuspendLayout();
-            this.gbxFilterCategorie.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbxCategorie
@@ -157,10 +159,40 @@
             this.gbxFilters.Controls.Add(this.gbxZoekWoord);
             this.gbxFilters.Location = new System.Drawing.Point(641, 30);
             this.gbxFilters.Name = "gbxFilters";
-            this.gbxFilters.Size = new System.Drawing.Size(197, 290);
+            this.gbxFilters.Size = new System.Drawing.Size(197, 323);
             this.gbxFilters.TabIndex = 2;
             this.gbxFilters.TabStop = false;
             this.gbxFilters.Text = "Filters";
+            // 
+            // gbxFilterCategorie
+            // 
+            this.gbxFilterCategorie.Controls.Add(this.cbxFilterCategorie);
+            this.gbxFilterCategorie.Controls.Add(this.rbnFilterCategorie);
+            this.gbxFilterCategorie.Location = new System.Drawing.Point(7, 239);
+            this.gbxFilterCategorie.Name = "gbxFilterCategorie";
+            this.gbxFilterCategorie.Size = new System.Drawing.Size(184, 78);
+            this.gbxFilterCategorie.TabIndex = 3;
+            this.gbxFilterCategorie.TabStop = false;
+            this.gbxFilterCategorie.Text = "Categorie";
+            // 
+            // cbxFilterCategorie
+            // 
+            this.cbxFilterCategorie.FormattingEnabled = true;
+            this.cbxFilterCategorie.Location = new System.Drawing.Point(7, 44);
+            this.cbxFilterCategorie.Name = "cbxFilterCategorie";
+            this.cbxFilterCategorie.Size = new System.Drawing.Size(171, 21);
+            this.cbxFilterCategorie.TabIndex = 1;
+            // 
+            // rbnFilterCategorie
+            // 
+            this.rbnFilterCategorie.AutoSize = true;
+            this.rbnFilterCategorie.Location = new System.Drawing.Point(7, 20);
+            this.rbnFilterCategorie.Name = "rbnFilterCategorie";
+            this.rbnFilterCategorie.Size = new System.Drawing.Size(109, 17);
+            this.rbnFilterCategorie.TabIndex = 0;
+            this.rbnFilterCategorie.TabStop = true;
+            this.rbnFilterCategorie.Text = "Filter op categorie";
+            this.rbnFilterCategorie.UseVisualStyleBackColor = true;
             // 
             // gbxFilter
             // 
@@ -169,12 +201,56 @@
             this.gbxFilter.Controls.Add(this.rbnFilterLikes);
             this.gbxFilter.Controls.Add(this.rbnFilterNaam);
             this.gbxFilter.Controls.Add(this.gbxSoort);
-            this.gbxFilter.Location = new System.Drawing.Point(6, 81);
+            this.gbxFilter.Location = new System.Drawing.Point(6, 119);
             this.gbxFilter.Name = "gbxFilter";
             this.gbxFilter.Size = new System.Drawing.Size(185, 114);
             this.gbxFilter.TabIndex = 2;
             this.gbxFilter.TabStop = false;
             this.gbxFilter.Text = "Filter";
+            // 
+            // rbnFilterDatum
+            // 
+            this.rbnFilterDatum.AutoSize = true;
+            this.rbnFilterDatum.Location = new System.Drawing.Point(6, 89);
+            this.rbnFilterDatum.Name = "rbnFilterDatum";
+            this.rbnFilterDatum.Size = new System.Drawing.Size(76, 17);
+            this.rbnFilterDatum.TabIndex = 4;
+            this.rbnFilterDatum.Text = "Datum (ID)";
+            this.rbnFilterDatum.UseVisualStyleBackColor = true;
+            // 
+            // rbnFilterDislikes
+            // 
+            this.rbnFilterDislikes.AutoSize = true;
+            this.rbnFilterDislikes.Location = new System.Drawing.Point(6, 66);
+            this.rbnFilterDislikes.Name = "rbnFilterDislikes";
+            this.rbnFilterDislikes.Size = new System.Drawing.Size(61, 17);
+            this.rbnFilterDislikes.TabIndex = 3;
+            this.rbnFilterDislikes.TabStop = true;
+            this.rbnFilterDislikes.Text = "Dislikes";
+            this.rbnFilterDislikes.UseVisualStyleBackColor = true;
+            // 
+            // rbnFilterLikes
+            // 
+            this.rbnFilterLikes.AutoSize = true;
+            this.rbnFilterLikes.Location = new System.Drawing.Point(6, 43);
+            this.rbnFilterLikes.Name = "rbnFilterLikes";
+            this.rbnFilterLikes.Size = new System.Drawing.Size(50, 17);
+            this.rbnFilterLikes.TabIndex = 2;
+            this.rbnFilterLikes.TabStop = true;
+            this.rbnFilterLikes.Text = "Likes";
+            this.rbnFilterLikes.UseVisualStyleBackColor = true;
+            // 
+            // rbnFilterNaam
+            // 
+            this.rbnFilterNaam.AutoSize = true;
+            this.rbnFilterNaam.Checked = true;
+            this.rbnFilterNaam.Location = new System.Drawing.Point(6, 19);
+            this.rbnFilterNaam.Name = "rbnFilterNaam";
+            this.rbnFilterNaam.Size = new System.Drawing.Size(53, 17);
+            this.rbnFilterNaam.TabIndex = 1;
+            this.rbnFilterNaam.TabStop = true;
+            this.rbnFilterNaam.Text = "Naam";
+            this.rbnFilterNaam.UseVisualStyleBackColor = true;
             // 
             // gbxSoort
             // 
@@ -201,6 +277,7 @@
             // rbnSortAsc
             // 
             this.rbnSortAsc.AutoSize = true;
+            this.rbnSortAsc.Checked = true;
             this.rbnSortAsc.Location = new System.Drawing.Point(7, 20);
             this.rbnSortAsc.Name = "rbnSortAsc";
             this.rbnSortAsc.Size = new System.Drawing.Size(46, 17);
@@ -211,103 +288,55 @@
             // 
             // gbxZoekWoord
             // 
+            this.gbxZoekWoord.Controls.Add(this.rbnFilterZoekBeschrijving);
+            this.gbxZoekWoord.Controls.Add(this.rbnFilterZoekNaam);
             this.gbxZoekWoord.Controls.Add(this.tbxFilterZoekWoord);
             this.gbxZoekWoord.Location = new System.Drawing.Point(6, 20);
             this.gbxZoekWoord.Name = "gbxZoekWoord";
-            this.gbxZoekWoord.Size = new System.Drawing.Size(185, 54);
+            this.gbxZoekWoord.Size = new System.Drawing.Size(185, 93);
             this.gbxZoekWoord.TabIndex = 1;
             this.gbxZoekWoord.TabStop = false;
             this.gbxZoekWoord.Text = "ZoekWoord";
             // 
             // tbxFilterZoekWoord
             // 
-            this.tbxFilterZoekWoord.Location = new System.Drawing.Point(6, 19);
+            this.tbxFilterZoekWoord.Location = new System.Drawing.Point(6, 67);
             this.tbxFilterZoekWoord.Name = "tbxFilterZoekWoord";
-            this.tbxFilterZoekWoord.Size = new System.Drawing.Size(173, 20);
+            this.tbxFilterZoekWoord.Size = new System.Drawing.Size(175, 20);
             this.tbxFilterZoekWoord.TabIndex = 0;
-            // 
-            // rbnFilterNaam
-            // 
-            this.rbnFilterNaam.AutoSize = true;
-            this.rbnFilterNaam.Location = new System.Drawing.Point(6, 19);
-            this.rbnFilterNaam.Name = "rbnFilterNaam";
-            this.rbnFilterNaam.Size = new System.Drawing.Size(53, 17);
-            this.rbnFilterNaam.TabIndex = 1;
-            this.rbnFilterNaam.TabStop = true;
-            this.rbnFilterNaam.Text = "Naam";
-            this.rbnFilterNaam.UseVisualStyleBackColor = true;
-            // 
-            // rbnFilterLikes
-            // 
-            this.rbnFilterLikes.AutoSize = true;
-            this.rbnFilterLikes.Location = new System.Drawing.Point(6, 43);
-            this.rbnFilterLikes.Name = "rbnFilterLikes";
-            this.rbnFilterLikes.Size = new System.Drawing.Size(50, 17);
-            this.rbnFilterLikes.TabIndex = 2;
-            this.rbnFilterLikes.TabStop = true;
-            this.rbnFilterLikes.Text = "Likes";
-            this.rbnFilterLikes.UseVisualStyleBackColor = true;
-            // 
-            // rbnFilterDislikes
-            // 
-            this.rbnFilterDislikes.AutoSize = true;
-            this.rbnFilterDislikes.Location = new System.Drawing.Point(6, 66);
-            this.rbnFilterDislikes.Name = "rbnFilterDislikes";
-            this.rbnFilterDislikes.Size = new System.Drawing.Size(61, 17);
-            this.rbnFilterDislikes.TabIndex = 3;
-            this.rbnFilterDislikes.TabStop = true;
-            this.rbnFilterDislikes.Text = "Dislikes";
-            this.rbnFilterDislikes.UseVisualStyleBackColor = true;
-            // 
-            // rbnFilterDatum
-            // 
-            this.rbnFilterDatum.AutoSize = true;
-            this.rbnFilterDatum.Location = new System.Drawing.Point(6, 89);
-            this.rbnFilterDatum.Name = "rbnFilterDatum";
-            this.rbnFilterDatum.Size = new System.Drawing.Size(56, 17);
-            this.rbnFilterDatum.TabIndex = 4;
-            this.rbnFilterDatum.TabStop = true;
-            this.rbnFilterDatum.Text = "Datum";
-            this.rbnFilterDatum.UseVisualStyleBackColor = true;
-            // 
-            // gbxFilterCategorie
-            // 
-            this.gbxFilterCategorie.Controls.Add(this.cbxFilterCategorie);
-            this.gbxFilterCategorie.Controls.Add(this.rbnFilterCategorie);
-            this.gbxFilterCategorie.Location = new System.Drawing.Point(7, 202);
-            this.gbxFilterCategorie.Name = "gbxFilterCategorie";
-            this.gbxFilterCategorie.Size = new System.Drawing.Size(184, 78);
-            this.gbxFilterCategorie.TabIndex = 3;
-            this.gbxFilterCategorie.TabStop = false;
-            this.gbxFilterCategorie.Text = "Categorie";
-            // 
-            // rbnFilterCategorie
-            // 
-            this.rbnFilterCategorie.AutoSize = true;
-            this.rbnFilterCategorie.Location = new System.Drawing.Point(7, 20);
-            this.rbnFilterCategorie.Name = "rbnFilterCategorie";
-            this.rbnFilterCategorie.Size = new System.Drawing.Size(109, 17);
-            this.rbnFilterCategorie.TabIndex = 0;
-            this.rbnFilterCategorie.TabStop = true;
-            this.rbnFilterCategorie.Text = "Filter op categorie";
-            this.rbnFilterCategorie.UseVisualStyleBackColor = true;
-            // 
-            // cbxFilterCategorie
-            // 
-            this.cbxFilterCategorie.FormattingEnabled = true;
-            this.cbxFilterCategorie.Location = new System.Drawing.Point(7, 44);
-            this.cbxFilterCategorie.Name = "cbxFilterCategorie";
-            this.cbxFilterCategorie.Size = new System.Drawing.Size(171, 21);
-            this.cbxFilterCategorie.TabIndex = 1;
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(641, 327);
+            this.btnFilter.Location = new System.Drawing.Point(641, 359);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(197, 39);
             this.btnFilter.TabIndex = 3;
             this.btnFilter.Text = "Filter";
             this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // rbnFilterZoekNaam
+            // 
+            this.rbnFilterZoekNaam.AutoSize = true;
+            this.rbnFilterZoekNaam.Checked = true;
+            this.rbnFilterZoekNaam.Location = new System.Drawing.Point(7, 20);
+            this.rbnFilterZoekNaam.Name = "rbnFilterZoekNaam";
+            this.rbnFilterZoekNaam.Size = new System.Drawing.Size(53, 17);
+            this.rbnFilterZoekNaam.TabIndex = 1;
+            this.rbnFilterZoekNaam.TabStop = true;
+            this.rbnFilterZoekNaam.Text = "Naam";
+            this.rbnFilterZoekNaam.UseVisualStyleBackColor = true;
+            // 
+            // rbnFilterZoekBeschrijving
+            // 
+            this.rbnFilterZoekBeschrijving.AutoSize = true;
+            this.rbnFilterZoekBeschrijving.Location = new System.Drawing.Point(7, 43);
+            this.rbnFilterZoekBeschrijving.Name = "rbnFilterZoekBeschrijving";
+            this.rbnFilterZoekBeschrijving.Size = new System.Drawing.Size(82, 17);
+            this.rbnFilterZoekBeschrijving.TabIndex = 2;
+            this.rbnFilterZoekBeschrijving.TabStop = true;
+            this.rbnFilterZoekBeschrijving.Text = "Beschrijving";
+            this.rbnFilterZoekBeschrijving.UseVisualStyleBackColor = true;
             // 
             // MediaSharingForm
             // 
@@ -325,14 +354,14 @@
             this.gbxMedia.ResumeLayout(false);
             this.gbxMedia.PerformLayout();
             this.gbxFilters.ResumeLayout(false);
+            this.gbxFilterCategorie.ResumeLayout(false);
+            this.gbxFilterCategorie.PerformLayout();
             this.gbxFilter.ResumeLayout(false);
             this.gbxFilter.PerformLayout();
             this.gbxSoort.ResumeLayout(false);
             this.gbxSoort.PerformLayout();
             this.gbxZoekWoord.ResumeLayout(false);
             this.gbxZoekWoord.PerformLayout();
-            this.gbxFilterCategorie.ResumeLayout(false);
-            this.gbxFilterCategorie.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -363,6 +392,8 @@
         private System.Windows.Forms.RadioButton rbnFilterNaam;
         private System.Windows.Forms.ComboBox cbxFilterCategorie;
         private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.RadioButton rbnFilterZoekBeschrijving;
+        private System.Windows.Forms.RadioButton rbnFilterZoekNaam;
 
 
     }

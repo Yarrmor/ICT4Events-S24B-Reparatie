@@ -357,15 +357,32 @@ namespace ICT4Events_S24B_Reparatie
         /// Filtert de huidige lijst met media op een filter string
         /// </summary>
         /// <param name="filter"></param>
-        public void Filter(string filter)
+        public void FilterMedia(string filter, bool naam)
         {
-            this.MediaLijstFiltered.Clear();
+            if (naam)
+                FilterMediaNaam(filter);
+            else
+                FilterMediaBeschrijving(filter);
+        }
 
-            foreach (Media media in this.MediaLijst)
+        private void FilterMediaNaam(string filter)
+        {
+            foreach (Media m in MediaLijstFiltered.ToList())
             {
-                if (media.Beschrijving.Contains(filter))
+                if (m.Naam.IndexOf(filter) < 0)
                 {
-                    this.MediaLijstFiltered.Add(media);
+                    MediaLijstFiltered.Remove(m);
+                }
+            }
+        }
+
+        private void FilterMediaBeschrijving(string filter)
+        {
+            foreach (Media m in MediaLijstFiltered.ToList())
+            {
+                if (m.Beschrijving.IndexOf(filter) < 0)
+                {
+                    MediaLijstFiltered.Remove(m);
                 }
             }
         }
@@ -374,15 +391,13 @@ namespace ICT4Events_S24B_Reparatie
         /// Filtert de huidige lijst met media op een categorieID
         /// </summary>
         /// <param name="categorieID"></param>
-        public void Filter(int categorieID)
+        public void FilterCategorie(int categorieID)
         {
-            this.MediaLijstFiltered.Clear();
-
-            foreach (Media media in this.MediaLijst)
+            foreach (Media m in MediaLijst.ToList())
             {
-                if (media.CategorieID == categorieID)
+                if (m.CategorieID != categorieID)
                 {
-                    this.MediaLijstFiltered.Add(media);
+                    MediaLijstFiltered.Remove(m);
                 }
             }
         }

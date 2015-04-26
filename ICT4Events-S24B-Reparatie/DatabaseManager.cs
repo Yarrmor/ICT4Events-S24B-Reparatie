@@ -1830,6 +1830,121 @@ namespace ICT4Events_S24B_Reparatie
                 Verbinding.Close();
             }
         }
+        #endregion
+
+        #region Filter
+
+        /// <summary>
+        /// Geeft ascending of descending terug afhankelijk van de boolean ascending.
+        /// </summary>
+        /// <param name="ascending"></param>
+        /// <returns></returns>
+        public string SQLASCDESC(bool ascending)
+        {
+            if (ascending)
+            {
+                return " ASC";
+            }
+            else
+            {
+                return " DESC";
+            }
+        }
+
+        /// <summary>
+        /// Verkrijgt de sql string op basis van de filter settings.
+        /// </summary>
+        /// <param name="ascending"></param>
+        /// <param name="orderKolom"></param>
+        /// <returns></returns>
+        public string GetSQLString(bool ascending, string orderKolom)
+        {
+            if (orderKolom == "Naam")
+            {
+                return "SELECT MediaID, AccountID, CategorieID, Naam, Beschrijving, Pad, Datum, Verborgen FROM MEDIA WHERE EventID = :EventID ORDER BY Naam" + SQLASCDESC(ascending);
+            }
+            else if (orderKolom == "Datum") //Doe ik met mediaID aangezien dat preciezer de datum bij houd dan datum zelf doordat datum niet de uren, minuten en seconden etc meegeeft.
+            {
+                return "SELECT MediaID, AccountID, CategorieID, Naam, Beschrijving, Pad, Datum, Verborgen FROM MEDIA WHERE EventID = :EventID ORDER BY MediaID" + SQLASCDESC(ascending);
+            }
+            else
+            {
+                return "SELECT MediaID, AccountID, CategorieID, Naam, Beschrijving, Pad, Datum, Verborgen FROM MEDIA WHERE EventID = :EventID";
+            }
+        }
+
+        /// <summary>
+        /// Filtert media op basis van de gevraagde eisen in de filter settings in het mediasharingform.
+        /// </summary>
+        /// <param name="ascending"></param>
+        /// <param name="eventID"></param>
+        /// <param name="orderKolom"></param>
+        /// <returns></returns>
+        public List<Media> FilterMedia(bool ascending, int eventID, string orderKolom)
+        {
+            try
+            {
+                List<Media> MediaEvent = new List<Media>();
+
+                string sql = GetSQLString(ascending, orderKolom);
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":EventID", eventID); //bij likes en dislikes orderkolom moet ik nog iets hierop verzinnen.
+
+                OracleDataReader reader = VoerMultiQueryUit(command);
+
+                while (reader.Read())
+                {
+                    try
+                    {
+                        int mediaID = Convert.ToInt32(reader["MediaID"]);
+                        int categorieID = Convert.ToInt32(reader["CategorieID"]);
+                        int accountID = Convert.ToInt32(reader["AccountID"]);
+                        string naam = reader["Naam"].ToString();
+                        string beschrijving = reader["Beschrijving"].ToString();
+                        string pad = reader["Pad"].ToString();
+                        DateTime uploadDate = Convert.ToDateTime(reader["Datum"]);
+                        bool verborgen = Convert.ToBoolean(reader["Verborgen"]);
+
+                        Account acc = VerkrijgAccount(accountID, eventID);
+
+                        string type = "";
+                        if (pad.LastIndexOf(".") > 0)
+                        {
+                            type = pad.Substring(pad.LastIndexOf("."));
+                        }
+                        else
+                        {
+                            type = "";
+                        }
+
+                        if (pad != null)
+                        { //new Bestand(um.dest.Substring(um.dest.LastIndexOf(".")), um.dest)
+                            MediaEvent.Add(new Media(mediaID, naam, new Bestand(type, pad), categorieID, beschrijving, acc, uploadDate, eventID, verborgen));
+                        }
+                        else
+                        {
+                            MediaEvent.Add(new Media(mediaID, naam, categorieID, beschrijving, acc, uploadDate, eventID, verborgen));
+                        }
+
+                    }
+                    catch
+                    {
+                        return null;
+                    }
+                }
+                return MediaEvent;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
 
         #endregion
 
