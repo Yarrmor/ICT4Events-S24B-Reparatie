@@ -112,7 +112,7 @@ namespace ICT4Events_S24B_Reparatie
                     if (tbxNaam.Text != null) Wijzig.Naam = tbxNaam.Text;
                     if (cbxCategorie.Text != null) Wijzig.CategorieID = md.VerkrijgCatNaam(cbxCategorie.Text).ID;
                     if (tbxBeschrijving.Text != null) Wijzig.Beschrijving = tbxBeschrijving.Text;
-                    if (!dm.WijzigMedia(Wijzig)) MessageBox.Show("Wijziging heeft niet plaatsgevonden door een onbekend probleem!");
+                    WijzigMedia(Wijzig, m);
                     VerversInformatie();
 
                     /* Todo: (EXTRA)
@@ -121,6 +121,32 @@ namespace ICT4Events_S24B_Reparatie
                      */
                 }
             }
+        }
+
+        private void WijzigMedia(Media Nieuw, Media Oud)
+        {
+            DatabaseManager dm = new DatabaseManager();
+            if (dm.DisableFKReactie() && dm.DisableFKMelding())
+            {
+                if (dm.VerwijderMedia(Oud.MediaID))
+                {
+                    dm.VoegMediaToe(m);
+                }
+                else
+                {
+                    MessageBox.Show("Oude media kon niet worden verwijderd hierdoor vond deze wijziging niet plaats!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("FK_REACTIE_ID kon niet worden disabled, hierdoor vond de wijziging niet plaats!");
+            }
+
+
+            if (!dm.EnableFKReactie())
+                MessageBox.Show("FK_REACTIE_MEDIAID kon niet worden enabled!");
+            if (!dm.EnableFKMelding())
+                MessageBox.Show("FK_MELDING_MEDIAID kon niet worden enabled!");
         }
 
         /// <summary>
