@@ -141,5 +141,26 @@ namespace ICT4Events_S24B_Reparatie
 
             return geslacht;
         }
+
+        private void btnBanUnban_Click(object sender, EventArgs e)
+        {
+            if (lbxAccounts.SelectedItem != null)
+            {
+                foreach (Account a in accounts)
+                {
+                    if (a.ToString() == lbxAccounts.ToString())
+                    {
+                        if (a.Verbannen)
+                        {
+                            a.UnBan();
+                        }
+                        else
+                        {
+                            a.Ban();
+                        }
+                    }
+                }
+            }
+        }
     }
 }

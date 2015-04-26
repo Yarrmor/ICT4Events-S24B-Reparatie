@@ -1524,6 +1524,31 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
+        public bool WijzigMedia(Media media)
+        {
+            try
+            {
+                string sql = "UPDATE MEDIA SET CategorieID = :CategorieID, Naam = :Naam, Beschrijving = :Beschrijving WHERE MediaID = :MediaID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":CategorieID", media.MediaID);
+                command.Parameters.Add(":Naam", media.Naam);
+                command.Parameters.Add(":Beschrijving", media.Beschrijving);
+                command.Parameters.Add(":MediaID", media.CategorieID);
+
+                return VoerNonQueryUit(command);
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
         public bool VerwijderMedia(int mediaID)
         {
             try

@@ -72,6 +72,7 @@
             this.btnBanUnban.TabIndex = 3;
             this.btnBanUnban.Text = "Ban/Unban";
             this.btnBanUnban.UseVisualStyleBackColor = true;
+            this.btnBanUnban.Click += new System.EventHandler(this.btnBanUnban_Click);
             // 
             // btnRefresh
             // 

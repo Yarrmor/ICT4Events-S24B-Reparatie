@@ -102,20 +102,22 @@ namespace ICT4Events_S24B_Reparatie
         /// <param name="e"></param>
         private void btnWijzig_Click(object sender, EventArgs e)
         {
+            DatabaseManager dm = new DatabaseManager();
+            Media Wijzig;
             foreach (Media m in md.MediaLijst)
             {
                 if (m == this.m)
                 {
-                    if (tbxNaam.Text != null) m.Naam = tbxNaam.Text;
-                    if (cbxCategorie.Text != null) m.CategorieID = md.VerkrijgCatNaam(cbxCategorie.Text).ID;
-                    if (tbxBeschrijving.Text != null) m.Beschrijving = tbxBeschrijving.Text;
-                    this.m = m;
+                    Wijzig = m;
+                    if (tbxNaam.Text != null) Wijzig.Naam = tbxNaam.Text;
+                    if (cbxCategorie.Text != null) Wijzig.CategorieID = md.VerkrijgCatNaam(cbxCategorie.Text).ID;
+                    if (tbxBeschrijving.Text != null) Wijzig.Beschrijving = tbxBeschrijving.Text;
+                    if (!dm.WijzigMedia(Wijzig)) MessageBox.Show("Wijziging heeft niet plaatsgevonden door een onbekend probleem!");
                     VerversInformatie();
 
-                    /* Todo:
+                    /* Todo: (EXTRA)
                      * -Verplaatsen van oude bestand naar nieuwe locatie.
                      * -Bestand path veranderen daarna.
-                     * -bug teststen :(.
                      */
                 }
             }
