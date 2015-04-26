@@ -76,11 +76,11 @@ namespace ICT4Events_S24B_Reparatie
                     if (lbxGerapporteerd.SelectedItem.ToString() == m.ToString())
                     {
                         md.VerwijderMelding(m);
-                        WeergeefMeldingen();
                         //throw new NotImplementedException();
                     }
                 }
             }
+            WeergeefMeldingen();
         }
 
         /// <summary>

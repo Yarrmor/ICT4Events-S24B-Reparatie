@@ -148,7 +148,7 @@ namespace ICT4Events_S24B_Reparatie
             {
                 foreach (Account a in accounts)
                 {
-                    if (a.ToString() == lbxAccounts.ToString())
+                    if (a.ToString() == lbxAccounts.SelectedItem.ToString())
                     {
                         if (a.Verbannen)
                         {
