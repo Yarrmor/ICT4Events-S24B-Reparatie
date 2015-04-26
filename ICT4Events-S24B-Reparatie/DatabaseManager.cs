@@ -1117,16 +1117,23 @@ namespace ICT4Events_S24B_Reparatie
             return false;
         }
 
-        public bool Verban(string email, bool ban)
+        public bool Verban(int AccountID, bool ban)
         {
             try
             {
-                string sql = "UPDATE ACCOUNT SET Verbannen = :Verbannen WHERE Email = :Email";
+                string sql = "";
+                if (!ban)
+                {
+                    sql = "UPDATE ACCOUNT SET Verbannen = 0 WHERE AccountID = :AccountID";
+                }
+                else
+                {
+                    sql = "UPDATE ACCOUNT SET Verbannen = 1 WHERE AccountID = :AccountID";
+                }
 
                 OracleCommand command = MaakOracleCommand(sql);
 
-                command.Parameters.Add(":Email", email);
-                command.Parameters.Add(":Verbannen", ban);
+                command.Parameters.Add(":AccountID", AccountID);
 
                 return VoerNonQueryUit(command);
             }

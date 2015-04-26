@@ -72,6 +72,8 @@ namespace ICT4Events_S24B_Reparatie
             lblMediaDisliked.Text = dm.VerkrijgDisLikes(this.m.MediaID).ToString(); //Query voor verkrijgen dislikes media.
             lblMediaLiked.Text = dm.VerkrijgLikes(this.m.MediaID).ToString(); //Query voor verkrijgen likes media.
 
+            m.Uploader = dm.VerkrijgAccount(m.Uploader.AccountID, alg.Evenement.ID);
+
             if (m.Uploader.Verbannen)
             {
                 lblMediaUploader.Text = m.Uploader.Roepnaam;

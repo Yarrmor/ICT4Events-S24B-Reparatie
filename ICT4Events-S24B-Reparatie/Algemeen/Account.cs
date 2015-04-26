@@ -97,7 +97,7 @@ namespace ICT4Events_S24B_Reparatie
 
         private void BanUnBan(bool verban)
         {
-            this.dm.Verban(this.Email, verban);
+            this.dm.Verban(this.AccountID, verban);
         }
 
         public bool Verwijder(int EventID)
