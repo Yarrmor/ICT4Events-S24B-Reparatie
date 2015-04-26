@@ -393,7 +393,7 @@ namespace ICT4Events_S24B_Reparatie
         /// <param name="categorieID"></param>
         public void FilterCategorie(int categorieID)
         {
-            foreach (Media m in MediaLijst.ToList())
+            foreach (Media m in MediaLijstFiltered.ToList())
             {
                 if (m.CategorieID != categorieID)
                 {

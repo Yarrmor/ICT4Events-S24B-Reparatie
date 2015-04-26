@@ -54,6 +54,7 @@
             this.btnFilter = new System.Windows.Forms.Button();
             this.rbnFilterZoekNaam = new System.Windows.Forms.RadioButton();
             this.rbnFilterZoekBeschrijving = new System.Windows.Forms.RadioButton();
+            this.rbnFilterAlleMedia = new System.Windows.Forms.RadioButton();
             this.gbxCategorie.SuspendLayout();
             this.gbxMedia.SuspendLayout();
             this.gbxFilters.SuspendLayout();
@@ -159,18 +160,19 @@
             this.gbxFilters.Controls.Add(this.gbxZoekWoord);
             this.gbxFilters.Location = new System.Drawing.Point(641, 30);
             this.gbxFilters.Name = "gbxFilters";
-            this.gbxFilters.Size = new System.Drawing.Size(197, 323);
+            this.gbxFilters.Size = new System.Drawing.Size(197, 338);
             this.gbxFilters.TabIndex = 2;
             this.gbxFilters.TabStop = false;
             this.gbxFilters.Text = "Filters";
             // 
             // gbxFilterCategorie
             // 
+            this.gbxFilterCategorie.Controls.Add(this.rbnFilterAlleMedia);
             this.gbxFilterCategorie.Controls.Add(this.cbxFilterCategorie);
             this.gbxFilterCategorie.Controls.Add(this.rbnFilterCategorie);
             this.gbxFilterCategorie.Location = new System.Drawing.Point(7, 239);
             this.gbxFilterCategorie.Name = "gbxFilterCategorie";
-            this.gbxFilterCategorie.Size = new System.Drawing.Size(184, 78);
+            this.gbxFilterCategorie.Size = new System.Drawing.Size(184, 93);
             this.gbxFilterCategorie.TabIndex = 3;
             this.gbxFilterCategorie.TabStop = false;
             this.gbxFilterCategorie.Text = "Categorie";
@@ -178,7 +180,7 @@
             // cbxFilterCategorie
             // 
             this.cbxFilterCategorie.FormattingEnabled = true;
-            this.cbxFilterCategorie.Location = new System.Drawing.Point(7, 44);
+            this.cbxFilterCategorie.Location = new System.Drawing.Point(6, 66);
             this.cbxFilterCategorie.Name = "cbxFilterCategorie";
             this.cbxFilterCategorie.Size = new System.Drawing.Size(171, 21);
             this.cbxFilterCategorie.TabIndex = 1;
@@ -190,7 +192,6 @@
             this.rbnFilterCategorie.Name = "rbnFilterCategorie";
             this.rbnFilterCategorie.Size = new System.Drawing.Size(109, 17);
             this.rbnFilterCategorie.TabIndex = 0;
-            this.rbnFilterCategorie.TabStop = true;
             this.rbnFilterCategorie.Text = "Filter op categorie";
             this.rbnFilterCategorie.UseVisualStyleBackColor = true;
             // 
@@ -307,7 +308,7 @@
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(641, 359);
+            this.btnFilter.Location = new System.Drawing.Point(641, 374);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(197, 39);
             this.btnFilter.TabIndex = 3;
@@ -337,6 +338,18 @@
             this.rbnFilterZoekBeschrijving.TabStop = true;
             this.rbnFilterZoekBeschrijving.Text = "Beschrijving";
             this.rbnFilterZoekBeschrijving.UseVisualStyleBackColor = true;
+            // 
+            // rbnFilterAlleMedia
+            // 
+            this.rbnFilterAlleMedia.AutoSize = true;
+            this.rbnFilterAlleMedia.Checked = true;
+            this.rbnFilterAlleMedia.Location = new System.Drawing.Point(7, 43);
+            this.rbnFilterAlleMedia.Name = "rbnFilterAlleMedia";
+            this.rbnFilterAlleMedia.Size = new System.Drawing.Size(113, 17);
+            this.rbnFilterAlleMedia.TabIndex = 2;
+            this.rbnFilterAlleMedia.TabStop = true;
+            this.rbnFilterAlleMedia.Text = "Filter op alle Media";
+            this.rbnFilterAlleMedia.UseVisualStyleBackColor = true;
             // 
             // MediaSharingForm
             // 
@@ -394,6 +407,7 @@
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.RadioButton rbnFilterZoekBeschrijving;
         private System.Windows.Forms.RadioButton rbnFilterZoekNaam;
+        private System.Windows.Forms.RadioButton rbnFilterAlleMedia;
 
 
     }

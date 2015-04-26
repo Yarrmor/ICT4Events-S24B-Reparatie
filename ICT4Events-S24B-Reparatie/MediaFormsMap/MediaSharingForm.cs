@@ -381,11 +381,31 @@ namespace ICT4Events_S24B_Reparatie
             {
                 md.MediaLijstFiltered = dm.FilterMedia(ascending, algemeen.Evenement.ID, "Datum");
             }
+            else if (rbnFilterLikes.Checked)
+            {
+                md.MediaLijstFiltered = dm.FilterMedia(ascending, algemeen.Evenement.ID, "Likes");
+            }
+            else if (rbnFilterDislikes.Checked)
+            {
+                md.MediaLijstFiltered = dm.FilterMedia(ascending, algemeen.Evenement.ID, "DisLikes");
+            }
 
-            if (rbnFilterCategorie.Checked) md.FilterCategorie(md.VerkrijgCategorie(cbxFilterCategorie.Text).ID);
+            if (rbnFilterCategorie.Checked) md.FilterCategorie(md.VerkrijgCategorie(VerkrijgComboBoxText()).ID);
             if (tbxFilterZoekWoord.Text != "") md.FilterMedia(tbxFilterZoekWoord.Text, rbnFilterNaam.Checked);
 
             VulLbxMediaFiltered();
+        }
+
+        private string VerkrijgComboBoxText()
+        {
+            if (cbxFilterCategorie.SelectedItem != null)
+            {
+                return cbxFilterCategorie.SelectedItem.ToString();
+            }
+            else
+            {
+                return cbxFilterCategorie.Text;
+            }
         }
 
         private bool CheckAscendingRBN()

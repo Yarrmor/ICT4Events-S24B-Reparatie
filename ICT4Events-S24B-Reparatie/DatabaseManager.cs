@@ -1867,6 +1867,14 @@ namespace ICT4Events_S24B_Reparatie
             {
                 return "SELECT MediaID, AccountID, CategorieID, Naam, Beschrijving, Pad, Datum, Verborgen FROM MEDIA WHERE EventID = :EventID ORDER BY MediaID" + SQLASCDESC(ascending);
             }
+            else if (orderKolom == "Likes")
+            {
+                return "SELECT MediaID, AccountID, CategorieID, Naam, Beschrijving, Pad, Datum, Verborgen, (SELECT COUNT(AccountID) FROM STEM s WHERE s.MediaID = m.MediaID AND s.SCORE = 1) AS LIKES FROM MEDIA m WHERE EventID = :EventID ORDER BY LIKES" + SQLASCDESC(ascending);
+            }
+            else if (orderKolom == "DisLikes")
+            {
+                return "SELECT MediaID, AccountID, CategorieID, Naam, Beschrijving, Pad, Datum, Verborgen, (SELECT COUNT(AccountID) FROM STEM s WHERE s.MediaID = m.MediaID AND s.SCORE = 0) AS LIKES FROM MEDIA m WHERE EventID = :EventID ORDER BY LIKES" + SQLASCDESC(ascending);
+            }
             else
             {
                 return "SELECT MediaID, AccountID, CategorieID, Naam, Beschrijving, Pad, Datum, Verborgen FROM MEDIA WHERE EventID = :EventID";
