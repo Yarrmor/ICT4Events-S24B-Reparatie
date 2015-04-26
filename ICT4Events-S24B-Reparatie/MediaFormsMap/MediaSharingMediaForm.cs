@@ -224,6 +224,44 @@ namespace ICT4Events_S24B_Reparatie
             p.Show();
         }
 
+        /// <summary>
+        /// Geeft de media een like er bij.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnMediaLike_Click(object sender, EventArgs e)
+        {
+            DatabaseManager dm = new DatabaseManager();
+
+            if (m.Stem(alg.Account.AccountID, 1))
+            {
+                VerversInformatie();
+            }
+            else
+            {
+                MessageBox.Show("U heeft deze media al geliked!");
+            }
+        }
+
+        /// <summary>
+        /// Geeft de media een dislike der bij.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnMediaDislike_Click(object sender, EventArgs e)
+        {
+            DatabaseManager dm = new DatabaseManager();
+
+            if (m.Stem(alg.Account.AccountID, 0))
+            {
+                VerversInformatie();
+            }
+            else
+            {
+                MessageBox.Show("U heeft deze media al geliked!");
+            }
+        }
+
         #region menustrip
         public void MenuBalk_MediaSharingFormMediaForm(MenuStrip ms)
         {
@@ -258,6 +296,11 @@ namespace ICT4Events_S24B_Reparatie
         public void UpdateMenuBalk()
         {
             throw new NotImplementedException();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            VerversInformatie();
         }
     }
 }

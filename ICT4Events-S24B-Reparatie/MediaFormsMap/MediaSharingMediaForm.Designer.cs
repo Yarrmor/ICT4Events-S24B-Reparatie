@@ -71,6 +71,7 @@
             this.lblReactieLikes = new System.Windows.Forms.Label();
             this.lblUReactieDislikes = new System.Windows.Forms.Label();
             this.lblReactieDislikes = new System.Windows.Forms.Label();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.gbxMediaInformatie.SuspendLayout();
             this.gbxBeheer.SuspendLayout();
             this.gbxReacties.SuspendLayout();
@@ -79,6 +80,7 @@
             // 
             // gbxMediaInformatie
             // 
+            this.gbxMediaInformatie.Controls.Add(this.btnRefresh);
             this.gbxMediaInformatie.Controls.Add(this.btnMediaDislike);
             this.gbxMediaInformatie.Controls.Add(this.btnMediaLike);
             this.gbxMediaInformatie.Controls.Add(this.btnBan);
@@ -450,6 +452,7 @@
             this.btnMediaLike.TabIndex = 15;
             this.btnMediaLike.Text = "L";
             this.btnMediaLike.UseVisualStyleBackColor = true;
+            this.btnMediaLike.Click += new System.EventHandler(this.btnMediaLike_Click);
             // 
             // btnMediaDislike
             // 
@@ -459,6 +462,7 @@
             this.btnMediaDislike.TabIndex = 16;
             this.btnMediaDislike.Text = "D";
             this.btnMediaDislike.UseVisualStyleBackColor = true;
+            this.btnMediaDislike.Click += new System.EventHandler(this.btnMediaDislike_Click);
             // 
             // lblUReactieLikes
             // 
@@ -493,6 +497,16 @@
             this.lblReactieDislikes.Name = "lblReactieDislikes";
             this.lblReactieDislikes.Size = new System.Drawing.Size(0, 13);
             this.lblReactieDislikes.TabIndex = 7;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(259, 15);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 17;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // MediaSharingFormMediaForm
             // 
@@ -560,5 +574,6 @@
         private System.Windows.Forms.Label lblUReactieDislikes;
         private System.Windows.Forms.Label lblReactieLikes;
         private System.Windows.Forms.Label lblUReactieLikes;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

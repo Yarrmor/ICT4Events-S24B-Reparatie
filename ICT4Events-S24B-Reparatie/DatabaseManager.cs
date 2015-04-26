@@ -1305,7 +1305,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             try
             {
-                string sql = "INSERT INTO MELDING (AccountID, MediaID, Toelichting, Datum) VALUES (:CategorieID, :AccountID, :EventID, :Naam)";
+                string sql = "INSERT INTO MELDING (AccountID, MediaID, Toelichting, Datum) VALUES (:AccountID, :MediaID, :Toelichting, :Datum)";
 
                 OracleCommand command = MaakOracleCommand(sql);
 
@@ -1539,6 +1539,125 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
+        public bool AccountAlGestemd(int accountID, int mediaID)
+        {
+            try
+            {    
+                string sql = "SELECT Count(AccountID) AS LIKES FROM STEM WHERE MediaID = :MediaID AND AccountID = :AccountID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":MediaID", mediaID);
+                command.Parameters.Add(":AccountID", accountID);
+
+                OracleDataReader reader = VoerQueryUit(command);
+
+                int likes = Convert.ToInt32(reader["LIKES"]);
+
+                if (likes > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
+        public bool AccountAlGeliked(int accountID, int mediaID, int score)
+        {
+            try
+            {
+                string sql = "SELECT Count(AccountID) AS LIKES FROM STEM WHERE MediaID = :MediaID AND AccountID = :AccountID AND Score = :Score";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":MediaID", mediaID);
+                command.Parameters.Add(":AccountID", accountID);
+                command.Parameters.Add(":Score", score);
+
+                OracleDataReader reader = VoerQueryUit(command);
+
+                int likes = Convert.ToInt32(reader["LIKES"]);
+
+                if (likes > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
+        public bool RateMedia(int accountID, int mediaID, int score)
+        {
+            try
+            {
+                string sql = "INSERT INTO STEM (AccountID, MediaID, Score, Datum) VALUES (:AccountID, :MediaID, :Score, :Datum)";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":AccountID", accountID);
+                command.Parameters.Add(":MediaID", mediaID);
+                command.Parameters.Add(":Score", score);
+                command.Parameters.Add(":Datum", DateTime.Now);
+
+                return VoerNonQueryUit(command);
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
+        public bool UpdateRateMedia(int accountID, int mediaID, int score)
+        {
+            try
+            {
+                string sql = "UPDATE STEM SET AccountID = :AccountID, MediaID = :MediaID, Score = :Score, Datum = :Datum WHERE AccountID = AccountID AND MediaID = :MediaID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":AccountID", accountID);
+                command.Parameters.Add(":MediaID", mediaID);
+                command.Parameters.Add(":Score", score);
+                command.Parameters.Add(":Datum", DateTime.Now);
+
+                return VoerNonQueryUit(command);
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
         public int VerkrijgLikes(int mediaID)
         {
             try
@@ -1571,7 +1690,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             try
             {
-                string sql = "SELECT Count(AccountID) AS DISLIKES FROM STEM WHERE MediaID = :MediaID AND Score = -1";
+                string sql = "SELECT Count(AccountID) AS DISLIKES FROM STEM WHERE MediaID = :MediaID AND Score = 0";
 
                 //string sql = "SELECT Count(AccountID) FROM STEM WHERE MediaID = :MediaID AND Score = -1";
 
@@ -1595,45 +1714,6 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
-        public bool Stem(int accountID, int mediaID, int score)
-        {
-            string sql = "";
-
-            if(HeeftGestemd(accountID, mediaID))
-                sql = "UPDATE SCORE SET Score = :Score, Datum = :Datum WHERE AccountID = :AccountID AND MediaID = :MediaID";
-            else
-                sql = "INSERT INTO SCORE(AccountID, MediaID, Score, Datum) VALUES (:AccountID, :MediaID, :Score, :Datum)";
-
-            OracleCommand command = MaakOracleCommand(sql);
-
-            command.Parameters.Add(":AccountID", accountID);
-            command.Parameters.Add(":MediaID", mediaID);
-            command.Parameters.Add(":Score", score);
-            command.Parameters.Add(":Datum", DateTime.Now);
-
-            if (VoerNonQueryUit(command))
-                return true;
-            else
-                return false;
-        }
-
-        public bool HeeftGestemd(int accountID, int mediaID)
-        {
-            string sql = "SELECT * FROM SCORE WHERE AccountID = :AccountID AND MediaID = :MediaID";
-
-            OracleCommand command = MaakOracleCommand(sql);
-
-            command.Parameters.Add(":AccountID", accountID);
-            command.Parameters.Add(":MediaID", mediaID);
-
-            OracleDataReader reader = VoerQueryUit(command);
-
-            if (reader.HasRows)
-                return true;
-            else
-                return false;
-        }
-
         #endregion
 
         #region Reactie
@@ -1650,7 +1730,7 @@ namespace ICT4Events_S24B_Reparatie
 
             command.Parameters.Add(":ReactieID", NieuwID("REACTIE"));
             command.Parameters.Add(":AccountID", reactie.Account.AccountID);
-            command.Parameters.Add(":MediaID", reactie.Media.MediaID);
+            command.Parameters.Add(":MediaID", reactie.MediaID);
             if(reactie.ReactieOp != null)
                 command.Parameters.Add(":ReactieOp", reactie.ReactieOp.ReactieID);
             command.Parameters.Add(":Datum", DateTime.Now);
@@ -1659,6 +1739,71 @@ namespace ICT4Events_S24B_Reparatie
                 return true;
             else
                 return false;
+        }
+
+        public List<Reactie> VerkrijgReacties(int mediaID, int eventID)
+        {
+            try
+            {
+                List<Reactie> reacties = new List<Reactie>();
+
+                string sql = "SELECT ReactieID, AccountID, Bericht, Datum, ReactieOP FROM REACTIE WHERE MediaID = :MediaID ORDER BY MediaID ASC";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":MediaID", mediaID);
+
+                OracleDataReader reader = VoerMultiQueryUit(command);
+
+                while (reader.Read())
+                {
+                    try
+                    {
+                        int reactieID = Convert.ToInt32(reader["ReactieID"]);
+                        int accountID = Convert.ToInt32(reader["AccountID"]);
+                        string bericht = reader["Bericht"].ToString();
+                        DateTime datum = Convert.ToDateTime(reader["Datum"]);
+
+                        int reactieOP = -1;
+                        if (reader["ReactieOP"] != DBNull.Value)
+                        {
+                            reactieOP = Convert.ToInt32(reader["ReactieOP"]);
+                        }
+
+                        Account acc = VerkrijgAccount(accountID, eventID);
+
+
+                        //Enig probleem van de code hieronder is wanneer we een andere categorie opeens een subcatvan maken van een categorie die daarna is gemaakt. (gelukkig hoeven we daar nu niks mee te doen)
+                        if (reactieOP > 0)
+                        {
+                            foreach (Reactie r in reacties.ToList())
+                            {
+                                if (r.ReactieID == reactieOP)
+                                {
+                                    reacties.Add(new Reactie(reactieID, mediaID, acc, bericht, r, datum));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            reacties.Add(new Reactie(reactieID, mediaID, acc, bericht, datum));
+                        }
+                    }
+                    catch
+                    {
+                        return null;
+                    }
+                }
+                return reacties;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
         }
 
         #endregion
