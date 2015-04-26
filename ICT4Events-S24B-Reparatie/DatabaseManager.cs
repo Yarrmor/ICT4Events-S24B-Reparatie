@@ -1718,6 +1718,30 @@ namespace ICT4Events_S24B_Reparatie
 
         #region Reactie
 
+        public int NieuwReactieID()
+        {
+            try
+            {
+                string sql = "SELECT MAX(ReactieID) AS MaxID FROM REACTIE";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                string text = command.CommandText;
+
+                OracleDataReader reader = VoerQueryUit(command);
+
+                return Convert.ToInt32(reader["MaxID"].ToString()) + 1;
+            }
+            catch
+            {
+                return -1;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
         public bool VoegReactieToe(Reactie reactie)
         {
             string sql = "";
@@ -1728,11 +1752,12 @@ namespace ICT4Events_S24B_Reparatie
 
             OracleCommand command = MaakOracleCommand(sql);
 
-            command.Parameters.Add(":ReactieID", NieuwID("REACTIE"));
+            command.Parameters.Add(":ReactieID", reactie.ReactieID);
             command.Parameters.Add(":AccountID", reactie.Account.AccountID);
             command.Parameters.Add(":MediaID", reactie.MediaID);
             if(reactie.ReactieOp != null)
                 command.Parameters.Add(":ReactieOp", reactie.ReactieOp.ReactieID);
+            command.Parameters.Add(":Bericht", reactie.Bericht);
             command.Parameters.Add(":Datum", DateTime.Now);
 
             if(VoerNonQueryUit(command))
@@ -1747,7 +1772,7 @@ namespace ICT4Events_S24B_Reparatie
             {
                 List<Reactie> reacties = new List<Reactie>();
 
-                string sql = "SELECT ReactieID, AccountID, Bericht, Datum, ReactieOP FROM REACTIE WHERE MediaID = :MediaID ORDER BY MediaID ASC";
+                string sql = "SELECT ReactieID, AccountID, Bericht, Datum, ReactieOP FROM REACTIE WHERE MediaID = :MediaID ORDER BY ReactieID ASC";
 
                 OracleCommand command = MaakOracleCommand(sql);
 

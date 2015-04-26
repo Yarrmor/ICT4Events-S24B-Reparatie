@@ -83,5 +83,15 @@ namespace ICT4Events_S24B_Reparatie
         {
             return this.dm.VoegMediaToe(this);
         }
+
+        public List<Reactie> VerkrijgReacties()
+        {
+            return dm.VerkrijgReacties(MediaID, EventID);
+        }
+
+        public bool VoegReactieToe(Reactie r)
+        {
+            return dm.VoegReactieToe(r);
+        }
     }
 }

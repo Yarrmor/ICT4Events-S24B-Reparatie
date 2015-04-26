@@ -52,6 +52,12 @@
     <Compile Include="Algemeen\Account.cs" />
     <Compile Include="Algemeen\AccountType.cs" />
     <Compile Include="Algemeen\ILoginSysteem.cs" />
+    <Compile Include="MediaFormsMap\ReactieDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MediaFormsMap\ReactieDialog.Designer.cs">
+      <DependentUpon>ReactieDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="MediaSharing\MediaSharingSysteem.cs" />
     <Compile Include="MediaSharing\Bestand.cs" />
     <Compile Include="MediaSharing\Categorie.cs" />
@@ -145,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MediaFormsMap\Profiel.resx">
       <DependentUpon>Profiel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MediaFormsMap\ReactieDialog.resx">
+      <DependentUpon>ReactieDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

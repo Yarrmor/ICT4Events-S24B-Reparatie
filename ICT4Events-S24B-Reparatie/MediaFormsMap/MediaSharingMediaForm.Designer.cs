@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.gbxMediaInformatie = new System.Windows.Forms.GroupBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnMediaDislike = new System.Windows.Forms.Button();
+            this.btnMediaLike = new System.Windows.Forms.Button();
             this.btnBan = new System.Windows.Forms.Button();
             this.lblMediaVerborgen = new System.Windows.Forms.Label();
             this.lblUVerborgen = new System.Windows.Forms.Label();
@@ -55,23 +58,21 @@
             this.btnWijzig = new System.Windows.Forms.Button();
             this.btnMediaVerwijder = new System.Windows.Forms.Button();
             this.gbxReacties = new System.Windows.Forms.GroupBox();
+            this.btnRefreshReacties = new System.Windows.Forms.Button();
+            this.btnReactieDislike = new System.Windows.Forms.Button();
+            this.btnReactieLike = new System.Windows.Forms.Button();
             this.btnVerwijder = new System.Windows.Forms.Button();
             this.lbxReacties = new System.Windows.Forms.ListBox();
             this.gbxReactie = new System.Windows.Forms.GroupBox();
-            this.lblDatum = new System.Windows.Forms.Label();
-            this.lblUDatum = new System.Windows.Forms.Label();
+            this.lblReactieDislikes = new System.Windows.Forms.Label();
+            this.lblUReactieDislikes = new System.Windows.Forms.Label();
+            this.lblReactieLikes = new System.Windows.Forms.Label();
+            this.lblUReactieLikes = new System.Windows.Forms.Label();
+            this.lblReactieDatum = new System.Windows.Forms.Label();
+            this.lblUReactieDatum = new System.Windows.Forms.Label();
             this.tbxReactie = new System.Windows.Forms.TextBox();
             this.lblReactie = new System.Windows.Forms.Label();
             this.btnPlaatsReactie = new System.Windows.Forms.Button();
-            this.btnReactieLike = new System.Windows.Forms.Button();
-            this.btnReactieDislike = new System.Windows.Forms.Button();
-            this.btnMediaLike = new System.Windows.Forms.Button();
-            this.btnMediaDislike = new System.Windows.Forms.Button();
-            this.lblUReactieLikes = new System.Windows.Forms.Label();
-            this.lblReactieLikes = new System.Windows.Forms.Label();
-            this.lblUReactieDislikes = new System.Windows.Forms.Label();
-            this.lblReactieDislikes = new System.Windows.Forms.Label();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.gbxMediaInformatie.SuspendLayout();
             this.gbxBeheer.SuspendLayout();
             this.gbxReacties.SuspendLayout();
@@ -104,6 +105,36 @@
             this.gbxMediaInformatie.TabIndex = 0;
             this.gbxMediaInformatie.TabStop = false;
             this.gbxMediaInformatie.Text = "Informatie";
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(259, 15);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 17;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnMediaDislike
+            // 
+            this.btnMediaDislike.Location = new System.Drawing.Point(303, 158);
+            this.btnMediaDislike.Name = "btnMediaDislike";
+            this.btnMediaDislike.Size = new System.Drawing.Size(31, 23);
+            this.btnMediaDislike.TabIndex = 16;
+            this.btnMediaDislike.Text = "D";
+            this.btnMediaDislike.UseVisualStyleBackColor = true;
+            this.btnMediaDislike.Click += new System.EventHandler(this.btnMediaDislike_Click);
+            // 
+            // btnMediaLike
+            // 
+            this.btnMediaLike.Location = new System.Drawing.Point(119, 159);
+            this.btnMediaLike.Name = "btnMediaLike";
+            this.btnMediaLike.Size = new System.Drawing.Size(30, 23);
+            this.btnMediaLike.TabIndex = 15;
+            this.btnMediaLike.Text = "L";
+            this.btnMediaLike.UseVisualStyleBackColor = true;
+            this.btnMediaLike.Click += new System.EventHandler(this.btnMediaLike_Click);
             // 
             // btnBan
             // 
@@ -336,6 +367,7 @@
             // 
             // gbxReacties
             // 
+            this.gbxReacties.Controls.Add(this.btnRefreshReacties);
             this.gbxReacties.Controls.Add(this.btnReactieDislike);
             this.gbxReacties.Controls.Add(this.btnReactieLike);
             this.gbxReacties.Controls.Add(this.btnVerwijder);
@@ -349,9 +381,37 @@
             this.gbxReacties.TabStop = false;
             this.gbxReacties.Text = "Reacties";
             // 
+            // btnRefreshReacties
+            // 
+            this.btnRefreshReacties.Location = new System.Drawing.Point(160, 152);
+            this.btnRefreshReacties.Name = "btnRefreshReacties";
+            this.btnRefreshReacties.Size = new System.Drawing.Size(101, 23);
+            this.btnRefreshReacties.TabIndex = 7;
+            this.btnRefreshReacties.Text = "Refresh reacties";
+            this.btnRefreshReacties.UseVisualStyleBackColor = true;
+            this.btnRefreshReacties.Click += new System.EventHandler(this.btnRefreshReacties_Click);
+            // 
+            // btnReactieDislike
+            // 
+            this.btnReactieDislike.Location = new System.Drawing.Point(123, 152);
+            this.btnReactieDislike.Name = "btnReactieDislike";
+            this.btnReactieDislike.Size = new System.Drawing.Size(31, 23);
+            this.btnReactieDislike.TabIndex = 6;
+            this.btnReactieDislike.Text = "D";
+            this.btnReactieDislike.UseVisualStyleBackColor = true;
+            // 
+            // btnReactieLike
+            // 
+            this.btnReactieLike.Location = new System.Drawing.Point(87, 152);
+            this.btnReactieLike.Name = "btnReactieLike";
+            this.btnReactieLike.Size = new System.Drawing.Size(30, 23);
+            this.btnReactieLike.TabIndex = 5;
+            this.btnReactieLike.Text = "L";
+            this.btnReactieLike.UseVisualStyleBackColor = true;
+            // 
             // btnVerwijder
             // 
-            this.btnVerwijder.Location = new System.Drawing.Point(87, 152);
+            this.btnVerwijder.Location = new System.Drawing.Point(267, 152);
             this.btnVerwijder.Name = "btnVerwijder";
             this.btnVerwijder.Size = new System.Drawing.Size(75, 23);
             this.btnVerwijder.TabIndex = 4;
@@ -365,6 +425,7 @@
             this.lbxReacties.Name = "lbxReacties";
             this.lbxReacties.Size = new System.Drawing.Size(354, 212);
             this.lbxReacties.TabIndex = 3;
+            this.lbxReacties.SelectedIndexChanged += new System.EventHandler(this.lbxReacties_SelectedIndexChanged);
             // 
             // gbxReactie
             // 
@@ -372,8 +433,8 @@
             this.gbxReactie.Controls.Add(this.lblUReactieDislikes);
             this.gbxReactie.Controls.Add(this.lblReactieLikes);
             this.gbxReactie.Controls.Add(this.lblUReactieLikes);
-            this.gbxReactie.Controls.Add(this.lblDatum);
-            this.gbxReactie.Controls.Add(this.lblUDatum);
+            this.gbxReactie.Controls.Add(this.lblReactieDatum);
+            this.gbxReactie.Controls.Add(this.lblUReactieDatum);
             this.gbxReactie.Controls.Add(this.tbxReactie);
             this.gbxReactie.Controls.Add(this.lblReactie);
             this.gbxReactie.Location = new System.Drawing.Point(6, 20);
@@ -383,25 +444,60 @@
             this.gbxReactie.TabStop = false;
             this.gbxReactie.Text = "UploaderNaam";
             // 
-            // lblDatum
+            // lblReactieDislikes
             // 
-            this.lblDatum.AutoSize = true;
-            this.lblDatum.Location = new System.Drawing.Point(56, 20);
-            this.lblDatum.Name = "lblDatum";
-            this.lblDatum.Size = new System.Drawing.Size(0, 13);
-            this.lblDatum.TabIndex = 3;
+            this.lblReactieDislikes.AutoSize = true;
+            this.lblReactieDislikes.Location = new System.Drawing.Point(229, 101);
+            this.lblReactieDislikes.Name = "lblReactieDislikes";
+            this.lblReactieDislikes.Size = new System.Drawing.Size(0, 13);
+            this.lblReactieDislikes.TabIndex = 7;
             // 
-            // lblUDatum
+            // lblUReactieDislikes
             // 
-            this.lblUDatum.AutoSize = true;
-            this.lblUDatum.Location = new System.Drawing.Point(6, 20);
-            this.lblUDatum.Name = "lblUDatum";
-            this.lblUDatum.Size = new System.Drawing.Size(41, 13);
-            this.lblUDatum.TabIndex = 2;
-            this.lblUDatum.Text = "Datum:";
+            this.lblUReactieDislikes.AutoSize = true;
+            this.lblUReactieDislikes.Location = new System.Drawing.Point(176, 101);
+            this.lblUReactieDislikes.Name = "lblUReactieDislikes";
+            this.lblUReactieDislikes.Size = new System.Drawing.Size(46, 13);
+            this.lblUReactieDislikes.TabIndex = 6;
+            this.lblUReactieDislikes.Text = "Dislikes:";
+            // 
+            // lblReactieLikes
+            // 
+            this.lblReactieLikes.AutoSize = true;
+            this.lblReactieLikes.Location = new System.Drawing.Point(47, 101);
+            this.lblReactieLikes.Name = "lblReactieLikes";
+            this.lblReactieLikes.Size = new System.Drawing.Size(0, 13);
+            this.lblReactieLikes.TabIndex = 5;
+            // 
+            // lblUReactieLikes
+            // 
+            this.lblUReactieLikes.AutoSize = true;
+            this.lblUReactieLikes.Location = new System.Drawing.Point(6, 101);
+            this.lblUReactieLikes.Name = "lblUReactieLikes";
+            this.lblUReactieLikes.Size = new System.Drawing.Size(35, 13);
+            this.lblUReactieLikes.TabIndex = 4;
+            this.lblUReactieLikes.Text = "Likes:";
+            // 
+            // lblReactieDatum
+            // 
+            this.lblReactieDatum.AutoSize = true;
+            this.lblReactieDatum.Location = new System.Drawing.Point(56, 20);
+            this.lblReactieDatum.Name = "lblReactieDatum";
+            this.lblReactieDatum.Size = new System.Drawing.Size(0, 13);
+            this.lblReactieDatum.TabIndex = 3;
+            // 
+            // lblUReactieDatum
+            // 
+            this.lblUReactieDatum.AutoSize = true;
+            this.lblUReactieDatum.Location = new System.Drawing.Point(6, 20);
+            this.lblUReactieDatum.Name = "lblUReactieDatum";
+            this.lblUReactieDatum.Size = new System.Drawing.Size(41, 13);
+            this.lblUReactieDatum.TabIndex = 2;
+            this.lblUReactieDatum.Text = "Datum:";
             // 
             // tbxReactie
             // 
+            this.tbxReactie.Enabled = false;
             this.tbxReactie.Location = new System.Drawing.Point(59, 42);
             this.tbxReactie.Multiline = true;
             this.tbxReactie.Name = "tbxReactie";
@@ -425,88 +521,7 @@
             this.btnPlaatsReactie.TabIndex = 0;
             this.btnPlaatsReactie.Text = "Plaats";
             this.btnPlaatsReactie.UseVisualStyleBackColor = true;
-            // 
-            // btnReactieLike
-            // 
-            this.btnReactieLike.Location = new System.Drawing.Point(169, 152);
-            this.btnReactieLike.Name = "btnReactieLike";
-            this.btnReactieLike.Size = new System.Drawing.Size(30, 23);
-            this.btnReactieLike.TabIndex = 5;
-            this.btnReactieLike.Text = "L";
-            this.btnReactieLike.UseVisualStyleBackColor = true;
-            // 
-            // btnReactieDislike
-            // 
-            this.btnReactieDislike.Location = new System.Drawing.Point(205, 152);
-            this.btnReactieDislike.Name = "btnReactieDislike";
-            this.btnReactieDislike.Size = new System.Drawing.Size(31, 23);
-            this.btnReactieDislike.TabIndex = 6;
-            this.btnReactieDislike.Text = "D";
-            this.btnReactieDislike.UseVisualStyleBackColor = true;
-            // 
-            // btnMediaLike
-            // 
-            this.btnMediaLike.Location = new System.Drawing.Point(119, 159);
-            this.btnMediaLike.Name = "btnMediaLike";
-            this.btnMediaLike.Size = new System.Drawing.Size(30, 23);
-            this.btnMediaLike.TabIndex = 15;
-            this.btnMediaLike.Text = "L";
-            this.btnMediaLike.UseVisualStyleBackColor = true;
-            this.btnMediaLike.Click += new System.EventHandler(this.btnMediaLike_Click);
-            // 
-            // btnMediaDislike
-            // 
-            this.btnMediaDislike.Location = new System.Drawing.Point(303, 158);
-            this.btnMediaDislike.Name = "btnMediaDislike";
-            this.btnMediaDislike.Size = new System.Drawing.Size(31, 23);
-            this.btnMediaDislike.TabIndex = 16;
-            this.btnMediaDislike.Text = "D";
-            this.btnMediaDislike.UseVisualStyleBackColor = true;
-            this.btnMediaDislike.Click += new System.EventHandler(this.btnMediaDislike_Click);
-            // 
-            // lblUReactieLikes
-            // 
-            this.lblUReactieLikes.AutoSize = true;
-            this.lblUReactieLikes.Location = new System.Drawing.Point(6, 101);
-            this.lblUReactieLikes.Name = "lblUReactieLikes";
-            this.lblUReactieLikes.Size = new System.Drawing.Size(35, 13);
-            this.lblUReactieLikes.TabIndex = 4;
-            this.lblUReactieLikes.Text = "Likes:";
-            // 
-            // lblReactieLikes
-            // 
-            this.lblReactieLikes.AutoSize = true;
-            this.lblReactieLikes.Location = new System.Drawing.Point(47, 101);
-            this.lblReactieLikes.Name = "lblReactieLikes";
-            this.lblReactieLikes.Size = new System.Drawing.Size(0, 13);
-            this.lblReactieLikes.TabIndex = 5;
-            // 
-            // lblUReactieDislikes
-            // 
-            this.lblUReactieDislikes.AutoSize = true;
-            this.lblUReactieDislikes.Location = new System.Drawing.Point(176, 101);
-            this.lblUReactieDislikes.Name = "lblUReactieDislikes";
-            this.lblUReactieDislikes.Size = new System.Drawing.Size(46, 13);
-            this.lblUReactieDislikes.TabIndex = 6;
-            this.lblUReactieDislikes.Text = "Dislikes:";
-            // 
-            // lblReactieDislikes
-            // 
-            this.lblReactieDislikes.AutoSize = true;
-            this.lblReactieDislikes.Location = new System.Drawing.Point(229, 101);
-            this.lblReactieDislikes.Name = "lblReactieDislikes";
-            this.lblReactieDislikes.Size = new System.Drawing.Size(0, 13);
-            this.lblReactieDislikes.TabIndex = 7;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Location = new System.Drawing.Point(259, 15);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnRefresh.TabIndex = 17;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.btnPlaatsReactie.Click += new System.EventHandler(this.btnPlaatsReactie_Click);
             // 
             // MediaSharingFormMediaForm
             // 
@@ -565,8 +580,8 @@
         private System.Windows.Forms.Button btnVerwijder;
         private System.Windows.Forms.ListBox lbxReacties;
         private System.Windows.Forms.GroupBox gbxReactie;
-        private System.Windows.Forms.Label lblDatum;
-        private System.Windows.Forms.Label lblUDatum;
+        private System.Windows.Forms.Label lblReactieDatum;
+        private System.Windows.Forms.Label lblUReactieDatum;
         private System.Windows.Forms.TextBox tbxReactie;
         private System.Windows.Forms.Label lblReactie;
         private System.Windows.Forms.Button btnPlaatsReactie;
@@ -575,5 +590,6 @@
         private System.Windows.Forms.Label lblReactieLikes;
         private System.Windows.Forms.Label lblUReactieLikes;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnRefreshReacties;
     }
 }

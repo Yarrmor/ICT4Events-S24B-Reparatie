@@ -18,12 +18,13 @@ namespace ICT4Events_S24B_Reparatie
         private MediaSharingSysteem md;
         private DatabaseManager dm;
 
+        private List<Reactie> reacties;
+
         public MediaSharingFormMediaForm(Algemeen alg, Media m, MediaSharingSysteem md)
         {
             InitializeComponent();
 
             this.md = md;
-
             this.alg = alg;
             this.m = m;
 
@@ -55,6 +56,8 @@ namespace ICT4Events_S24B_Reparatie
             btnBan.Visible = false;
             btnMediaVerberg.Enabled = false;
             btnMediaVerberg.Visible = false;
+            btnVerwijder.Enabled = false;
+            btnVerwijder.Visible = false;
         }
 
         /// <summary>
@@ -86,6 +89,7 @@ namespace ICT4Events_S24B_Reparatie
             if (m.Verborgen == true) lblMediaVerborgen.ForeColor = Color.Red;
             else lblMediaVerborgen.ForeColor = Color.Green;
 
+            WeergeefAlleReacties();
             VulComboBox();
         }
 
@@ -174,16 +178,6 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
-        /// <summary>
-        /// Er wordt een reactie geplaatst
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnPlaatsReactie_Click(object sender, EventArgs e)
-        {
-
-        }
-
         //Todo: in mediasharingsysteem zetten.
 
         /// <summary>
@@ -262,6 +256,175 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
+        #region Reacties
+
+        /// <summary>
+        /// Voegt een Reactie toe.
+        /// </summary>
+        private void VoegReactieToe()
+        {
+            DatabaseManager dm = new DatabaseManager();
+            if (m.VoegReactieToe(new Reactie(dm.NieuwReactieID(), m.MediaID, alg.Account, VerkrijgBericht(), DateTime.Now)))
+            {
+                VerversInformatie();
+            }
+            else
+            {
+                MessageBox.Show("Reactie kon niet worden toegevoegd, dit probleem kan voorkomen wanneer de reactie al bestaat");
+            }
+        }
+
+        /// <summary>
+        /// Voegt een Reactie toe aan een Reactie
+        /// </summary>
+        /// <param name="c"></param>
+        private void VoegReactieToe(Reactie r)
+        {
+            DatabaseManager dm = new DatabaseManager();
+            if (m.VoegReactieToe(new Reactie(dm.NieuwReactieID(), m.MediaID, alg.Account, VerkrijgBericht(), r, DateTime.Now)))
+            {
+                VerversInformatie();
+            }
+            else
+            {
+                MessageBox.Show("Reactie kon niet worden toegevoegd, dit probleem kan voorkomen wanneer de reactie al bestaat");
+            }
+        }
+
+        /// <summary>
+        /// Laat een dialoog zien waarin je een categorienaam in kan vullen.
+        /// </summary>
+        /// <returns>De naam van de categorie die is ingevuld in het dialoog.</returns>
+        private string VerkrijgBericht()
+        {
+            ReactieDialog rd = new ReactieDialog();
+
+            string naam = "";
+
+            if (rd.ShowDialog(this) == DialogResult.OK)
+            {
+                if (rd.tbxReactieBericht.Text != "")
+                {
+                    naam = rd.tbxReactieBericht.Text;
+                }
+                else
+                {
+                    MessageBox.Show("U heeft niets ingevuld");
+                }
+            }
+
+            rd.Dispose();
+
+            return naam;
+        }
+
+        /// <summary>
+        /// Er wordt een reactie geplaatst
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPlaatsReactie_Click(object sender, EventArgs e)
+        {
+            if (lbxReacties.SelectedItem != null)
+            {
+                if (lbxReacties.SelectedItem.ToString() != "_Reacties")
+                {
+                    VoegReactieToe(VerkrijgReactie(lbxReacties.SelectedItem.ToString()));
+                }
+                else
+                {
+                    VoegReactieToe();
+                }
+            }
+            else
+            {
+                VoegReactieToe();
+            }
+        }
+
+        public Reactie VerkrijgReactie(string ReactieString)
+        {
+            foreach (Reactie r in reacties)
+            {
+                if (r.ToString() == ReactieString)
+                {
+                    return r;
+                }
+            }
+            return null;
+        }
+
+        private void WeergeefAlleReacties()
+        {
+            if (m.VerkrijgReacties() != null)
+            {
+                reacties = m.VerkrijgReacties();
+            }
+            lbxReacties.Items.Clear();
+            lbxReacties.Items.Add("_Reactie");
+            foreach (Reactie r in reacties)
+            {
+                if (r.MediaID == m.MediaID && !InListBox(r.ToString()))
+                {
+                    VoegReactiesToe(r);
+                }
+            }
+        }
+
+        private bool InListBox(string item)
+        {
+            foreach (var i in lbxReacties.Items)
+            {
+                if (i.ToString() == item)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void VoegReactiesToe(Reactie r)
+        {
+            lbxReacties.Items.Add(r.ToString());
+            VoegSubReactiesToe(r);
+        }
+
+        private void VoegSubReactiesToe(Reactie reactie)
+        {
+            foreach (Reactie r in reacties)
+            {
+                if (r.ReactieOp == reactie)
+                {
+                    VoegReactiesToe(r);
+                }
+            }
+        }
+
+        private void lbxReacties_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbxReacties.SelectedItem != null)
+            {
+                foreach (Reactie r in reacties)
+                {
+                    if (r.ToString() == lbxReacties.SelectedItem.ToString())
+                    {
+                        ShowReactie(r);
+                    }
+                }
+            }
+        }
+
+        public void ShowReactie(Reactie r)
+        {
+            gbxReactie.Text = r.Account.Roepnaam;
+            lblReactieDatum.Text = r.Datum.ToString();
+            tbxReactie.Text = r.Bericht;
+            lblReactieDislikes.Text = "Not Implemented";
+            lblReactieLikes.Text = "Not Implemented";
+        }
+
+        #endregion
+
         #region menustrip
         public void MenuBalk_MediaSharingFormMediaForm(MenuStrip ms)
         {
@@ -301,6 +464,11 @@ namespace ICT4Events_S24B_Reparatie
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             VerversInformatie();
+        }
+
+        private void btnRefreshReacties_Click(object sender, EventArgs e)
+        {
+            WeergeefAlleReacties();
         }
     }
 }
