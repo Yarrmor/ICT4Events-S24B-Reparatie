@@ -180,18 +180,21 @@ namespace ICT4Events_S24B_Reparatie
 
         private void Profiel_Activated(object sender, EventArgs e)
         {
-            bool inAccountLijst = false;
-            foreach (Account a in dm.VerkrijgAlleAccounts(alg.Evenement.ID))
+            if (profiel != null)
             {
-                if (a.AccountID == profiel.AccountID)
+                bool inAccountLijst = false;
+                foreach (Account a in dm.VerkrijgAlleAccounts(alg.Evenement.ID))
                 {
-                    inAccountLijst = true;
+                    if (a.AccountID == profiel.AccountID)
+                    {
+                        inAccountLijst = true;
+                    }
                 }
-            }
 
-            if (!inAccountLijst)
-            {
-                this.Dispose();
+                if (!inAccountLijst)
+                {
+                    this.Dispose();
+                }
             }
         }
     }
