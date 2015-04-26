@@ -472,5 +472,50 @@ namespace ICT4Events_S24B_Reparatie
         {
             WeergeefAlleReacties();
         }
+
+        private void btnVerwijder_Click(object sender, EventArgs e)
+        {
+            DatabaseManager dm = new DatabaseManager();
+            if (lbxReacties.SelectedItem != null)
+            {
+                foreach (Reactie r in reacties)
+                {
+                    if (lbxReacties.SelectedItem.ToString() == r.ToString())
+                    {
+                        VerwijderReactie(r);
+                    }
+                }
+            }
+            VerversInformatie();
+        }
+
+        /// <summary>
+        /// Verwijderd een Reactie met de bijbehorende SubReacties.
+        /// </summary>
+        /// <param name="cat"></param>
+        public void VerwijderReactie(Reactie Reactie)
+        {
+            DatabaseManager dm = new DatabaseManager();
+            VerwijderSubReacties(Reactie);
+            dm.VerwijderReactie(Reactie.ReactieID);
+        }
+
+        /// <summary>
+        /// Verwijdert alle subReacties van deze Reactie.
+        /// </summary>
+        /// <param name="cat"></param>
+        public void VerwijderSubReacties(Reactie reactie)
+        {
+            DatabaseManager dm = new DatabaseManager();
+            foreach (Reactie r in reacties.ToList())
+            {
+                if (r.ReactieOp == reactie)
+                {
+                    VerwijderSubReacties(r);
+                    dm.VerwijderReactie(r.ReactieID);
+                    //***Database connectie voor het verwijderen van categoriën in de database.
+                }
+            }
+        }
     }
 }

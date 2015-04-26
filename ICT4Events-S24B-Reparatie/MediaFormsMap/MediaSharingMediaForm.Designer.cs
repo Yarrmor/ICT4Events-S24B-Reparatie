@@ -417,6 +417,7 @@
             this.btnVerwijder.TabIndex = 4;
             this.btnVerwijder.Text = "Verwijder";
             this.btnVerwijder.UseVisualStyleBackColor = true;
+            this.btnVerwijder.Click += new System.EventHandler(this.btnVerwijder_Click);
             // 
             // lbxReacties
             // 

@@ -1837,6 +1837,29 @@ namespace ICT4Events_S24B_Reparatie
                 Verbinding.Close();
             }
         }
+
+        public bool VerwijderReactie(int ReactieID)
+        {
+            try
+            {
+                string sql = "DELETE FROM Reactie WHERE ReactieID = :ReactieID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":ReactieID", ReactieID);
+
+                return VoerNonQueryUit(command);
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
         #endregion
 
         #region Filter
