@@ -140,6 +140,9 @@
     <EmbeddedResource Include="MediaFormsMap\MediaSharingForm.resx">
       <DependentUpon>MediaSharingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MediaFormsMap\MediaSharingMediaForm.resx">
+      <DependentUpon>MediaSharingMediaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MediaFormsMap\Profiel.resx">
       <DependentUpon>Profiel.cs</DependentUpon>
     </EmbeddedResource>

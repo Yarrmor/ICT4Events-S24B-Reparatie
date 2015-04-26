@@ -44,8 +44,6 @@
             this.lblMediaNaam = new System.Windows.Forms.Label();
             this.lblUMediaUploader = new System.Windows.Forms.Label();
             this.lblUMediaNaam = new System.Windows.Forms.Label();
-            this.gbxReacties = new System.Windows.Forms.GroupBox();
-            this.btnPlaatsReactie = new System.Windows.Forms.Button();
             this.gbxBeheer = new System.Windows.Forms.GroupBox();
             this.btnMediaVerberg = new System.Windows.Forms.Button();
             this.cbxCategorie = new System.Windows.Forms.ComboBox();
@@ -56,13 +54,29 @@
             this.lblWijzigNaam = new System.Windows.Forms.Label();
             this.btnWijzig = new System.Windows.Forms.Button();
             this.btnMediaVerwijder = new System.Windows.Forms.Button();
+            this.gbxReacties = new System.Windows.Forms.GroupBox();
+            this.btnVerwijder = new System.Windows.Forms.Button();
+            this.lbxReacties = new System.Windows.Forms.ListBox();
+            this.gbxReactie = new System.Windows.Forms.GroupBox();
+            this.lblDatum = new System.Windows.Forms.Label();
+            this.lblUDatum = new System.Windows.Forms.Label();
+            this.tbxReactie = new System.Windows.Forms.TextBox();
+            this.lblReactie = new System.Windows.Forms.Label();
+            this.btnPlaatsReactie = new System.Windows.Forms.Button();
+            this.btnReactieLike = new System.Windows.Forms.Button();
+            this.btnReactieDislike = new System.Windows.Forms.Button();
+            this.btnMediaLike = new System.Windows.Forms.Button();
+            this.btnMediaDislike = new System.Windows.Forms.Button();
             this.gbxMediaInformatie.SuspendLayout();
-            this.gbxReacties.SuspendLayout();
             this.gbxBeheer.SuspendLayout();
+            this.gbxReacties.SuspendLayout();
+            this.gbxReactie.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbxMediaInformatie
             // 
+            this.gbxMediaInformatie.Controls.Add(this.btnMediaDislike);
+            this.gbxMediaInformatie.Controls.Add(this.btnMediaLike);
             this.gbxMediaInformatie.Controls.Add(this.btnBan);
             this.gbxMediaInformatie.Controls.Add(this.lblMediaVerborgen);
             this.gbxMediaInformatie.Controls.Add(this.lblUVerborgen);
@@ -118,7 +132,7 @@
             this.tbxMediaBeschrijving.Location = new System.Drawing.Point(80, 99);
             this.tbxMediaBeschrijving.Multiline = true;
             this.tbxMediaBeschrijving.Name = "tbxMediaBeschrijving";
-            this.tbxMediaBeschrijving.Size = new System.Drawing.Size(254, 62);
+            this.tbxMediaBeschrijving.Size = new System.Drawing.Size(254, 54);
             this.tbxMediaBeschrijving.TabIndex = 11;
             // 
             // lblUBeschrijving
@@ -133,7 +147,7 @@
             // lblMediaDisliked
             // 
             this.lblMediaDisliked.AutoSize = true;
-            this.lblMediaDisliked.Location = new System.Drawing.Point(217, 164);
+            this.lblMediaDisliked.Location = new System.Drawing.Point(236, 164);
             this.lblMediaDisliked.Name = "lblMediaDisliked";
             this.lblMediaDisliked.Size = new System.Drawing.Size(0, 13);
             this.lblMediaDisliked.TabIndex = 9;
@@ -149,7 +163,7 @@
             // lblUMediaDisliked
             // 
             this.lblUMediaDisliked.AutoSize = true;
-            this.lblUMediaDisliked.Location = new System.Drawing.Point(136, 164);
+            this.lblUMediaDisliked.Location = new System.Drawing.Point(155, 164);
             this.lblUMediaDisliked.Name = "lblUMediaDisliked";
             this.lblUMediaDisliked.Size = new System.Drawing.Size(47, 13);
             this.lblUMediaDisliked.TabIndex = 7;
@@ -215,26 +229,6 @@
             this.lblUMediaNaam.Size = new System.Drawing.Size(38, 13);
             this.lblUMediaNaam.TabIndex = 0;
             this.lblUMediaNaam.Text = "Naam:";
-            // 
-            // gbxReacties
-            // 
-            this.gbxReacties.Controls.Add(this.btnPlaatsReactie);
-            this.gbxReacties.Location = new System.Drawing.Point(359, 30);
-            this.gbxReacties.Name = "gbxReacties";
-            this.gbxReacties.Size = new System.Drawing.Size(366, 400);
-            this.gbxReacties.TabIndex = 1;
-            this.gbxReacties.TabStop = false;
-            this.gbxReacties.Text = "Reacties";
-            // 
-            // btnPlaatsReactie
-            // 
-            this.btnPlaatsReactie.Location = new System.Drawing.Point(7, 20);
-            this.btnPlaatsReactie.Name = "btnPlaatsReactie";
-            this.btnPlaatsReactie.Size = new System.Drawing.Size(75, 23);
-            this.btnPlaatsReactie.TabIndex = 0;
-            this.btnPlaatsReactie.Text = "Plaats";
-            this.btnPlaatsReactie.UseVisualStyleBackColor = true;
-            this.btnPlaatsReactie.Click += new System.EventHandler(this.btnPlaatsReactie_Click);
             // 
             // gbxBeheer
             // 
@@ -334,21 +328,147 @@
             this.btnMediaVerwijder.UseVisualStyleBackColor = true;
             this.btnMediaVerwijder.Click += new System.EventHandler(this.btnMediaVerwijder_Click);
             // 
+            // gbxReacties
+            // 
+            this.gbxReacties.Controls.Add(this.btnReactieDislike);
+            this.gbxReacties.Controls.Add(this.btnReactieLike);
+            this.gbxReacties.Controls.Add(this.btnVerwijder);
+            this.gbxReacties.Controls.Add(this.lbxReacties);
+            this.gbxReacties.Controls.Add(this.gbxReactie);
+            this.gbxReacties.Controls.Add(this.btnPlaatsReactie);
+            this.gbxReacties.Location = new System.Drawing.Point(360, 30);
+            this.gbxReacties.Name = "gbxReacties";
+            this.gbxReacties.Size = new System.Drawing.Size(366, 400);
+            this.gbxReacties.TabIndex = 3;
+            this.gbxReacties.TabStop = false;
+            this.gbxReacties.Text = "Reacties";
+            // 
+            // btnVerwijder
+            // 
+            this.btnVerwijder.Location = new System.Drawing.Point(87, 126);
+            this.btnVerwijder.Name = "btnVerwijder";
+            this.btnVerwijder.Size = new System.Drawing.Size(75, 23);
+            this.btnVerwijder.TabIndex = 4;
+            this.btnVerwijder.Text = "Verwijder";
+            this.btnVerwijder.UseVisualStyleBackColor = true;
+            // 
+            // lbxReacties
+            // 
+            this.lbxReacties.FormattingEnabled = true;
+            this.lbxReacties.Location = new System.Drawing.Point(6, 155);
+            this.lbxReacties.Name = "lbxReacties";
+            this.lbxReacties.Size = new System.Drawing.Size(354, 238);
+            this.lbxReacties.TabIndex = 3;
+            // 
+            // gbxReactie
+            // 
+            this.gbxReactie.Controls.Add(this.lblDatum);
+            this.gbxReactie.Controls.Add(this.lblUDatum);
+            this.gbxReactie.Controls.Add(this.tbxReactie);
+            this.gbxReactie.Controls.Add(this.lblReactie);
+            this.gbxReactie.Location = new System.Drawing.Point(6, 20);
+            this.gbxReactie.Name = "gbxReactie";
+            this.gbxReactie.Size = new System.Drawing.Size(354, 100);
+            this.gbxReactie.TabIndex = 1;
+            this.gbxReactie.TabStop = false;
+            this.gbxReactie.Text = "UploaderNaam";
+            // 
+            // lblDatum
+            // 
+            this.lblDatum.AutoSize = true;
+            this.lblDatum.Location = new System.Drawing.Point(56, 20);
+            this.lblDatum.Name = "lblDatum";
+            this.lblDatum.Size = new System.Drawing.Size(0, 13);
+            this.lblDatum.TabIndex = 3;
+            // 
+            // lblUDatum
+            // 
+            this.lblUDatum.AutoSize = true;
+            this.lblUDatum.Location = new System.Drawing.Point(6, 20);
+            this.lblUDatum.Name = "lblUDatum";
+            this.lblUDatum.Size = new System.Drawing.Size(41, 13);
+            this.lblUDatum.TabIndex = 2;
+            this.lblUDatum.Text = "Datum:";
+            // 
+            // tbxReactie
+            // 
+            this.tbxReactie.Location = new System.Drawing.Point(59, 42);
+            this.tbxReactie.Multiline = true;
+            this.tbxReactie.Name = "tbxReactie";
+            this.tbxReactie.Size = new System.Drawing.Size(288, 51);
+            this.tbxReactie.TabIndex = 1;
+            // 
+            // lblReactie
+            // 
+            this.lblReactie.AutoSize = true;
+            this.lblReactie.Location = new System.Drawing.Point(6, 45);
+            this.lblReactie.Name = "lblReactie";
+            this.lblReactie.Size = new System.Drawing.Size(47, 13);
+            this.lblReactie.TabIndex = 0;
+            this.lblReactie.Text = "Reactie:";
+            // 
+            // btnPlaatsReactie
+            // 
+            this.btnPlaatsReactie.Location = new System.Drawing.Point(6, 126);
+            this.btnPlaatsReactie.Name = "btnPlaatsReactie";
+            this.btnPlaatsReactie.Size = new System.Drawing.Size(75, 23);
+            this.btnPlaatsReactie.TabIndex = 0;
+            this.btnPlaatsReactie.Text = "Plaats";
+            this.btnPlaatsReactie.UseVisualStyleBackColor = true;
+            // 
+            // btnReactieLike
+            // 
+            this.btnReactieLike.Location = new System.Drawing.Point(169, 126);
+            this.btnReactieLike.Name = "btnReactieLike";
+            this.btnReactieLike.Size = new System.Drawing.Size(30, 23);
+            this.btnReactieLike.TabIndex = 5;
+            this.btnReactieLike.Text = "L";
+            this.btnReactieLike.UseVisualStyleBackColor = true;
+            // 
+            // btnReactieDislike
+            // 
+            this.btnReactieDislike.Location = new System.Drawing.Point(205, 126);
+            this.btnReactieDislike.Name = "btnReactieDislike";
+            this.btnReactieDislike.Size = new System.Drawing.Size(31, 23);
+            this.btnReactieDislike.TabIndex = 6;
+            this.btnReactieDislike.Text = "D";
+            this.btnReactieDislike.UseVisualStyleBackColor = true;
+            // 
+            // btnMediaLike
+            // 
+            this.btnMediaLike.Location = new System.Drawing.Point(119, 159);
+            this.btnMediaLike.Name = "btnMediaLike";
+            this.btnMediaLike.Size = new System.Drawing.Size(30, 23);
+            this.btnMediaLike.TabIndex = 15;
+            this.btnMediaLike.Text = "L";
+            this.btnMediaLike.UseVisualStyleBackColor = true;
+            // 
+            // btnMediaDislike
+            // 
+            this.btnMediaDislike.Location = new System.Drawing.Point(303, 158);
+            this.btnMediaDislike.Name = "btnMediaDislike";
+            this.btnMediaDislike.Size = new System.Drawing.Size(31, 23);
+            this.btnMediaDislike.TabIndex = 16;
+            this.btnMediaDislike.Text = "D";
+            this.btnMediaDislike.UseVisualStyleBackColor = true;
+            // 
             // MediaSharingFormMediaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(738, 442);
-            this.Controls.Add(this.gbxBeheer);
             this.Controls.Add(this.gbxReacties);
+            this.Controls.Add(this.gbxBeheer);
             this.Controls.Add(this.gbxMediaInformatie);
             this.Name = "MediaSharingFormMediaForm";
             this.Text = "Media";
             this.gbxMediaInformatie.ResumeLayout(false);
             this.gbxMediaInformatie.PerformLayout();
-            this.gbxReacties.ResumeLayout(false);
             this.gbxBeheer.ResumeLayout(false);
             this.gbxBeheer.PerformLayout();
+            this.gbxReacties.ResumeLayout(false);
+            this.gbxReactie.ResumeLayout(false);
+            this.gbxReactie.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -366,7 +486,6 @@
         private System.Windows.Forms.Label lblMediaNaam;
         private System.Windows.Forms.Label lblUMediaUploader;
         private System.Windows.Forms.Label lblUMediaNaam;
-        private System.Windows.Forms.GroupBox gbxReacties;
         private System.Windows.Forms.GroupBox gbxBeheer;
         private System.Windows.Forms.TextBox tbxBeschrijving;
         private System.Windows.Forms.TextBox tbxNaam;
@@ -381,7 +500,19 @@
         private System.Windows.Forms.Button btnMediaVerberg;
         private System.Windows.Forms.Label lblMediaVerborgen;
         private System.Windows.Forms.Label lblUVerborgen;
-        private System.Windows.Forms.Button btnPlaatsReactie;
         private System.Windows.Forms.Button btnBan;
+        private System.Windows.Forms.Button btnMediaDislike;
+        private System.Windows.Forms.Button btnMediaLike;
+        private System.Windows.Forms.GroupBox gbxReacties;
+        private System.Windows.Forms.Button btnReactieDislike;
+        private System.Windows.Forms.Button btnReactieLike;
+        private System.Windows.Forms.Button btnVerwijder;
+        private System.Windows.Forms.ListBox lbxReacties;
+        private System.Windows.Forms.GroupBox gbxReactie;
+        private System.Windows.Forms.Label lblDatum;
+        private System.Windows.Forms.Label lblUDatum;
+        private System.Windows.Forms.TextBox tbxReactie;
+        private System.Windows.Forms.Label lblReactie;
+        private System.Windows.Forms.Button btnPlaatsReactie;
     }
 }
