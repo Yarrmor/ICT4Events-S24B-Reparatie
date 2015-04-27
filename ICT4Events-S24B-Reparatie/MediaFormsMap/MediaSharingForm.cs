@@ -26,6 +26,9 @@ namespace ICT4Events_S24B_Reparatie
             WeergeefCategories();
             MediaListBox();
             VulCategorieComboBox();
+
+            if (alg.Account.Type != AccountType.Beheerder)
+                btnVerwijderCategorie.Visible = false;
         }
 
         /// <summary>

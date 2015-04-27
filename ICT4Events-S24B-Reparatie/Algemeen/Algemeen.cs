@@ -45,7 +45,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             this.hoofdForm = hoofdForm;
 
-            Account = new Account("RFID", 1, "Mail@Mail.nl", "Koekert", AccountType.Beheerder, false);
+            Account = new Account("RFID", 1, "Mail@Mail.nl", "Koekert", AccountType.Groepshoofd, false);
             //Emails = new List<Email>();
             //Hardcoded eventID
             int eventID = 1;
