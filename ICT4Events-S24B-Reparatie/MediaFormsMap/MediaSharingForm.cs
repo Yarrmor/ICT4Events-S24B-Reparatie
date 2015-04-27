@@ -17,6 +17,21 @@ namespace ICT4Events_S24B_Reparatie
         private MenuStrip ms;
         private DatabaseManager dm;
 
+        private List<MediaSharingFormMediaForm> geopendeMedias;
+
+        private ToolStripMenuItem InlogItem  = new ToolStripMenuItem()
+        {
+            Name = "Inloggen",
+            Text = "Inloggen",
+            Alignment = ToolStripItemAlignment.Right
+        };
+
+        private ToolStripMenuItem UitlogItem = new ToolStripMenuItem()
+        {
+            Name = "Uitloggen",
+            Text = "Uitloggen"
+        };
+
         public MediaSharingForm(Algemeen alg, MediaSharingSysteem md)
         {
             this.algemeen = alg;
@@ -29,6 +44,8 @@ namespace ICT4Events_S24B_Reparatie
 
             if (alg.Account.Type != AccountType.Beheerder)
                 btnVerwijderCategorie.Visible = false;
+
+            geopendeMedias = new List<MediaSharingFormMediaForm>();
         }
 
         /// <summary>
@@ -268,6 +285,7 @@ namespace ICT4Events_S24B_Reparatie
                     if (m.ToString() == lbxMedia.SelectedItem.ToString())
                     {
                         MediaSharingFormMediaForm msmf = new MediaSharingFormMediaForm(algemeen, m, md);
+                        geopendeMedias.Add(msmf);
                         msmf.Show();
                         break;
                     }
@@ -276,6 +294,35 @@ namespace ICT4Events_S24B_Reparatie
         }
 
         #region Menustrip
+
+        public bool MaakMenuBalk(Form form, MenuStrip ms)
+        {
+            foreach (Control c in form.Controls)
+            {
+                c.Top += 20;
+            }
+
+            form.Height += 20;
+
+            form.Controls.Add(ms);
+
+            if (algemeen.Account != null)
+            {
+                InlogItem.Text = "Ingelogd als: " + algemeen.Account.Email;
+
+                UitlogItem.Click += algemeen.uitlogItem_Click;
+
+                InlogItem.DropDownItems.Add(UitlogItem);
+            }
+            else
+            {
+                InlogItem.Click += algemeen.inlogItem_Click;
+            }
+
+            ms.Items.Add(InlogItem);
+
+            return (algemeen.Account != null);
+        }
 
         /// <summary>
         /// Maakt een menu balk. 
@@ -307,7 +354,7 @@ namespace ICT4Events_S24B_Reparatie
         private void ms_Profiel(object sender, EventArgs e)
         {
             Profiel p = new Profiel(algemeen, algemeen.Account, md);
-            p.Show();
+            p.ShowDialog();
         }
 
         /// <summary>
@@ -318,7 +365,7 @@ namespace ICT4Events_S24B_Reparatie
         private void ms_AccountLijst(object sender, EventArgs e)
         {
             AccountLijst a = new AccountLijst(algemeen, md);
-            a.Show();
+            a.ShowDialog();
         }
 
         /// <summary>
@@ -330,7 +377,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             md.VerkrijgMeldingenLijst();
             Gerapporteerd g = new Gerapporteerd(algemeen, md);
-            g.Show();
+            g.ShowDialog();
         }
 
         /// <summary>
@@ -449,7 +496,7 @@ namespace ICT4Events_S24B_Reparatie
         public void MaakMenuBalk()
         {
             ms = new MenuStrip();
-            algemeen.MaakMenuBalk(this, ms);
+            MaakMenuBalk(this, ms);
             MenuBalk_MediaSharingForm(ms);
         }
 
@@ -503,6 +550,14 @@ namespace ICT4Events_S24B_Reparatie
                 {
                     VerkrijgMediaGeselecteerdeCategorie();
                 }
+            }
+        }
+
+        private void MediaSharingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (MediaSharingFormMediaForm forms in geopendeMedias)
+            {
+                forms.Close();
             }
         }
     }

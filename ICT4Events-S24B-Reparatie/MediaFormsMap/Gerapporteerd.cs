@@ -56,7 +56,7 @@ namespace ICT4Events_S24B_Reparatie
                         tbxToelichting.Text = m.Toelichting;
                         MediaSharingFormMediaForm msmf = new MediaSharingFormMediaForm(alg, md.VerkrijgMedia(m.MediaID), md);
                         msmf.Location = new Point(this.Location.X + this.Width + 100, this.Location.Y);
-                        msmf.Show();
+                        msmf.ShowDialog();
                     }
                 }
             }

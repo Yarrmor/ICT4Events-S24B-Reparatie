@@ -20,6 +20,19 @@ namespace ICT4Events_S24B_Reparatie
 
         private List<Reactie> reacties;
 
+        private ToolStripMenuItem InlogItem = new ToolStripMenuItem()
+        {
+            Name = "Inloggen",
+            Text = "Inloggen",
+            Alignment = ToolStripItemAlignment.Right
+        };
+
+        private ToolStripMenuItem UitlogItem = new ToolStripMenuItem()
+        {
+            Name = "Uitloggen",
+            Text = "Uitloggen"
+        };
+
         public MediaSharingFormMediaForm(Algemeen alg, Media m, MediaSharingSysteem md)
         {
             InitializeComponent();
@@ -254,7 +267,7 @@ namespace ICT4Events_S24B_Reparatie
         private void lblMediaUploader_Click(object sender, EventArgs e)
         {
             Profiel p = new Profiel(alg, m.Uploader, md);
-            p.Show();
+            p.ShowDialog();
         }
 
         /// <summary>
@@ -477,7 +490,7 @@ namespace ICT4Events_S24B_Reparatie
         private void ms_Rapporteer(object sender, EventArgs e)
         {
             Rapporteer r = new Rapporteer(alg, md.GeselecteerdeMedia, md);
-            r.Show();
+            r.ShowDialog();
         }
 
         //Todo: In mediasharingsysteem download zetten.
@@ -488,10 +501,39 @@ namespace ICT4Events_S24B_Reparatie
 
         #endregion
 
+        public bool MaakMenuBalk(Form form, MenuStrip ms)
+        {
+            foreach (Control c in form.Controls)
+            {
+                c.Top += 20;
+            }
+
+            form.Height += 20;
+
+            form.Controls.Add(ms);
+
+            if (alg.Account != null)
+            {
+                InlogItem.Text = "Ingelogd als: " + alg.Account.Email;
+
+                UitlogItem.Click += alg.uitlogItem_Click;
+
+                InlogItem.DropDownItems.Add(UitlogItem);
+            }
+            else
+            {
+                InlogItem.Click += alg.inlogItem_Click;
+            }
+
+            ms.Items.Add(InlogItem);
+
+            return (alg.Account != null);
+        }
+
         public void MaakMenuBalk()
         {
             MenuStrip ms = new MenuStrip();
-            alg.MaakMenuBalk(this, ms);
+            MaakMenuBalk(this, ms);
             MenuBalk_MediaSharingFormMediaForm(ms);
         }
 

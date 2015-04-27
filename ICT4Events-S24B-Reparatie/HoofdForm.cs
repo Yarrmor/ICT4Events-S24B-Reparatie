@@ -17,6 +17,8 @@ namespace ICT4Events_S24B_Reparatie
 
         MenuStrip ms = new MenuStrip();
 
+        private MediaSharingForm media;
+
         public HoofdForm()
         {
             InitializeComponent();
@@ -71,24 +73,24 @@ namespace ICT4Events_S24B_Reparatie
 
         public void MaakMenuBalk()
         {
-
-
             Algemeen.MaakMenuBalk(this, ms);
-
-
         }
 
         public void UpdateMenuBalk()
         {
             Algemeen.UpdateMenuBalk(this, ms);
+            if (this.media != null)
+            {
+                this.media.Close();
+            }
         }
 
         private void btnMediaApplicatie_Click(object sender, EventArgs e)
         {
             if (Algemeen.Account != null)
             {
-                MediaSharingForm media = new MediaSharingForm(Algemeen, new MediaSharingSysteem(Algemeen.Evenement.ID));
-                media.Show();
+                media = new MediaSharingForm(Algemeen, new MediaSharingSysteem(Algemeen.Evenement.ID));
+                media.ShowDialog();
             }
             else
             {

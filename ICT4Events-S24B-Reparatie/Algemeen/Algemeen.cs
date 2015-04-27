@@ -22,17 +22,8 @@ namespace ICT4Events_S24B_Reparatie
 
         private HoofdForm hoofdForm;
 
-        ToolStripMenuItem inlogItem = new ToolStripMenuItem()
-        {
-            Name = "Inloggen",
-            Text = "Inloggen",
-            Alignment = ToolStripItemAlignment.Right
-        };
-        ToolStripMenuItem uitlogItem = new ToolStripMenuItem()
-        {
-            Name = "Uitloggen",
-            Text = "Uitloggen"
-        };
+        public ToolStripMenuItem InlogItem { get; set; }
+        public ToolStripMenuItem UitlogItem { get; set; }
 
         #endregion
 
@@ -47,6 +38,19 @@ namespace ICT4Events_S24B_Reparatie
 
             DatabaseManager dm = new DatabaseManager();
             Evenement = dm.VerkrijgEvent(eventID);
+
+            InlogItem = new ToolStripMenuItem()
+            {
+                Name = "Inloggen",
+                Text = "Inloggen",
+                Alignment = ToolStripItemAlignment.Right
+            };
+
+            UitlogItem = new ToolStripMenuItem()
+            {
+                Name = "Uitloggen",
+                Text = "Uitloggen"
+            };
         }
         #endregion
 
@@ -212,18 +216,18 @@ namespace ICT4Events_S24B_Reparatie
 
             if (Account != null)
             {
-                inlogItem.Text = "Ingelogd als: " + Account.Email;
+                InlogItem.Text = "Ingelogd als: " + Account.Email;
 
-                uitlogItem.Click += uitlogItem_Click;
+                UitlogItem.Click += uitlogItem_Click;
 
-                inlogItem.DropDownItems.Add(uitlogItem);
+                InlogItem.DropDownItems.Add(UitlogItem);
             }
             else
             {
-                inlogItem.Click += inlogItem_Click;
+                InlogItem.Click += inlogItem_Click;
             }
 
-            ms.Items.Add(inlogItem);
+            ms.Items.Add(InlogItem);
 
             return (Account != null);
         }
@@ -232,26 +236,26 @@ namespace ICT4Events_S24B_Reparatie
         {
             if (Account != null)
             {
-                inlogItem.Text = "Ingelogd als: " + Account.Email;
-                inlogItem.Click -= inlogItem_Click;
-                inlogItem.DropDownItems.Add(uitlogItem);
-                uitlogItem.Click += uitlogItem_Click;
+                InlogItem.Text = "Ingelogd als: " + Account.Email;
+                InlogItem.Click -= inlogItem_Click;
+                InlogItem.DropDownItems.Add(UitlogItem);
+                UitlogItem.Click += uitlogItem_Click;
             }
             else
             {
-                inlogItem.Text = "Inloggen";
-                inlogItem.Click += inlogItem_Click;
-                inlogItem.DropDownItems.Remove(uitlogItem);
-                uitlogItem.Click -= uitlogItem_Click;
+                InlogItem.Text = "Inloggen";
+                InlogItem.Click += inlogItem_Click;
+                InlogItem.DropDownItems.Remove(UitlogItem);
+                UitlogItem.Click -= uitlogItem_Click;
             }
         }
 
-        void inlogItem_Click(object sender, EventArgs e)
+        public void inlogItem_Click(object sender, EventArgs e)
         {
             LogIn();
         }
 
-        private void uitlogItem_Click(object sender, EventArgs e)
+        public void uitlogItem_Click(object sender, EventArgs e)
         {
             LogUit();
         }

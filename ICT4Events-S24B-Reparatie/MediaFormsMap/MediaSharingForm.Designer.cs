@@ -39,6 +39,7 @@
             this.lbxMedia = new System.Windows.Forms.ListBox();
             this.gbxFilters = new System.Windows.Forms.GroupBox();
             this.gbxFilterCategorie = new System.Windows.Forms.GroupBox();
+            this.rbnFilterAlleMedia = new System.Windows.Forms.RadioButton();
             this.cbxFilterCategorie = new System.Windows.Forms.ComboBox();
             this.rbnFilterCategorie = new System.Windows.Forms.RadioButton();
             this.gbxFilter = new System.Windows.Forms.GroupBox();
@@ -50,11 +51,10 @@
             this.rbnSortDesc = new System.Windows.Forms.RadioButton();
             this.rbnSortAsc = new System.Windows.Forms.RadioButton();
             this.gbxZoekWoord = new System.Windows.Forms.GroupBox();
+            this.rbnFilterZoekBeschrijving = new System.Windows.Forms.RadioButton();
+            this.rbnFilterZoekNaam = new System.Windows.Forms.RadioButton();
             this.tbxFilterZoekWoord = new System.Windows.Forms.TextBox();
             this.btnFilter = new System.Windows.Forms.Button();
-            this.rbnFilterZoekNaam = new System.Windows.Forms.RadioButton();
-            this.rbnFilterZoekBeschrijving = new System.Windows.Forms.RadioButton();
-            this.rbnFilterAlleMedia = new System.Windows.Forms.RadioButton();
             this.gbxCategorie.SuspendLayout();
             this.gbxMedia.SuspendLayout();
             this.gbxFilters.SuspendLayout();
@@ -176,6 +176,18 @@
             this.gbxFilterCategorie.TabIndex = 3;
             this.gbxFilterCategorie.TabStop = false;
             this.gbxFilterCategorie.Text = "Categorie";
+            // 
+            // rbnFilterAlleMedia
+            // 
+            this.rbnFilterAlleMedia.AutoSize = true;
+            this.rbnFilterAlleMedia.Checked = true;
+            this.rbnFilterAlleMedia.Location = new System.Drawing.Point(7, 43);
+            this.rbnFilterAlleMedia.Name = "rbnFilterAlleMedia";
+            this.rbnFilterAlleMedia.Size = new System.Drawing.Size(113, 17);
+            this.rbnFilterAlleMedia.TabIndex = 2;
+            this.rbnFilterAlleMedia.TabStop = true;
+            this.rbnFilterAlleMedia.Text = "Filter op alle Media";
+            this.rbnFilterAlleMedia.UseVisualStyleBackColor = true;
             // 
             // cbxFilterCategorie
             // 
@@ -299,6 +311,29 @@
             this.gbxZoekWoord.TabStop = false;
             this.gbxZoekWoord.Text = "ZoekWoord";
             // 
+            // rbnFilterZoekBeschrijving
+            // 
+            this.rbnFilterZoekBeschrijving.AutoSize = true;
+            this.rbnFilterZoekBeschrijving.Location = new System.Drawing.Point(7, 43);
+            this.rbnFilterZoekBeschrijving.Name = "rbnFilterZoekBeschrijving";
+            this.rbnFilterZoekBeschrijving.Size = new System.Drawing.Size(82, 17);
+            this.rbnFilterZoekBeschrijving.TabIndex = 2;
+            this.rbnFilterZoekBeschrijving.TabStop = true;
+            this.rbnFilterZoekBeschrijving.Text = "Beschrijving";
+            this.rbnFilterZoekBeschrijving.UseVisualStyleBackColor = true;
+            // 
+            // rbnFilterZoekNaam
+            // 
+            this.rbnFilterZoekNaam.AutoSize = true;
+            this.rbnFilterZoekNaam.Checked = true;
+            this.rbnFilterZoekNaam.Location = new System.Drawing.Point(7, 20);
+            this.rbnFilterZoekNaam.Name = "rbnFilterZoekNaam";
+            this.rbnFilterZoekNaam.Size = new System.Drawing.Size(53, 17);
+            this.rbnFilterZoekNaam.TabIndex = 1;
+            this.rbnFilterZoekNaam.TabStop = true;
+            this.rbnFilterZoekNaam.Text = "Naam";
+            this.rbnFilterZoekNaam.UseVisualStyleBackColor = true;
+            // 
             // tbxFilterZoekWoord
             // 
             this.tbxFilterZoekWoord.Location = new System.Drawing.Point(6, 67);
@@ -316,41 +351,6 @@
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
-            // rbnFilterZoekNaam
-            // 
-            this.rbnFilterZoekNaam.AutoSize = true;
-            this.rbnFilterZoekNaam.Checked = true;
-            this.rbnFilterZoekNaam.Location = new System.Drawing.Point(7, 20);
-            this.rbnFilterZoekNaam.Name = "rbnFilterZoekNaam";
-            this.rbnFilterZoekNaam.Size = new System.Drawing.Size(53, 17);
-            this.rbnFilterZoekNaam.TabIndex = 1;
-            this.rbnFilterZoekNaam.TabStop = true;
-            this.rbnFilterZoekNaam.Text = "Naam";
-            this.rbnFilterZoekNaam.UseVisualStyleBackColor = true;
-            // 
-            // rbnFilterZoekBeschrijving
-            // 
-            this.rbnFilterZoekBeschrijving.AutoSize = true;
-            this.rbnFilterZoekBeschrijving.Location = new System.Drawing.Point(7, 43);
-            this.rbnFilterZoekBeschrijving.Name = "rbnFilterZoekBeschrijving";
-            this.rbnFilterZoekBeschrijving.Size = new System.Drawing.Size(82, 17);
-            this.rbnFilterZoekBeschrijving.TabIndex = 2;
-            this.rbnFilterZoekBeschrijving.TabStop = true;
-            this.rbnFilterZoekBeschrijving.Text = "Beschrijving";
-            this.rbnFilterZoekBeschrijving.UseVisualStyleBackColor = true;
-            // 
-            // rbnFilterAlleMedia
-            // 
-            this.rbnFilterAlleMedia.AutoSize = true;
-            this.rbnFilterAlleMedia.Checked = true;
-            this.rbnFilterAlleMedia.Location = new System.Drawing.Point(7, 43);
-            this.rbnFilterAlleMedia.Name = "rbnFilterAlleMedia";
-            this.rbnFilterAlleMedia.Size = new System.Drawing.Size(113, 17);
-            this.rbnFilterAlleMedia.TabIndex = 2;
-            this.rbnFilterAlleMedia.TabStop = true;
-            this.rbnFilterAlleMedia.Text = "Filter op alle Media";
-            this.rbnFilterAlleMedia.UseVisualStyleBackColor = true;
-            // 
             // MediaSharingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -362,6 +362,7 @@
             this.Controls.Add(this.gbxCategorie);
             this.Name = "MediaSharingForm";
             this.Text = "Media Applictie Beheer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MediaSharingForm_FormClosing);
             this.gbxCategorie.ResumeLayout(false);
             this.gbxCategorie.PerformLayout();
             this.gbxMedia.ResumeLayout(false);

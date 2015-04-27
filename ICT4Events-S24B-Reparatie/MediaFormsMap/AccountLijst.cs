@@ -46,7 +46,7 @@ namespace ICT4Events_S24B_Reparatie
         private void LaatProfielZien(Account a)
         {
             Profiel p = new Profiel(alg, a, md);
-            p.Show();
+            p.ShowDialog();
         }
 
         /// <summary>
