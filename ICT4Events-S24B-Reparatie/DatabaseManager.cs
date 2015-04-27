@@ -1178,10 +1178,6 @@ namespace ICT4Events_S24B_Reparatie
 
                 OracleDataReader reader = VoerQueryUit(command);
 
-                command = MaakOracleCommand(sql);
-
-                reader = VoerQueryUit(command);
-
                 string type = reader["Rol"].ToString();
 
                 AccountType accountType = AccountTypeStringNaarEnum(type);
