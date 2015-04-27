@@ -1716,6 +1716,7 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
+        #region MediaLikes
         public bool AccountAlGestemd(int accountID, int mediaID)
         {
             try
@@ -1893,6 +1894,8 @@ namespace ICT4Events_S24B_Reparatie
 
         #endregion
 
+        #endregion
+
         #region Reactie
 
         public int NieuwReactieID()
@@ -2051,6 +2054,184 @@ namespace ICT4Events_S24B_Reparatie
                 Verbinding.Close();
             }
         }
+
+        #region RateReactie
+
+        public bool AccountAlGestemdOpReactie(int accountID, int reactieID)
+        {
+            try
+            {
+                string sql = "SELECT Count(AccountID) AS LIKES FROM STEM WHERE ReactieID = :ReactieID AND AccountID = :AccountID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":ReactieID", reactieID);
+                command.Parameters.Add(":AccountID", accountID);
+
+                OracleDataReader reader = VoerQueryUit(command);
+
+                int likes = Convert.ToInt32(reader["LIKES"]);
+
+                if (likes > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
+        public bool AccountAlGelikedOpReactie(int accountID, int reactieID, int score)
+        {
+            try
+            {
+                string sql = "SELECT Count(AccountID) AS LIKES FROM STEM WHERE ReactieID = :ReactieID AND AccountID = :AccountID AND Score = :Score";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":ReactieID", reactieID);
+                command.Parameters.Add(":AccountID", accountID);
+                command.Parameters.Add(":Score", score);
+
+                OracleDataReader reader = VoerQueryUit(command);
+
+                int likes = Convert.ToInt32(reader["LIKES"]);
+
+                if (likes > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
+        public bool RateReactie(int accountID, int reactieID, int score)
+        {
+            try
+            {
+                string sql = "INSERT INTO STEM (AccountID, ReactieID, Score, Datum) VALUES (:AccountID, :ReactieID, :Score, :Datum)";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":AccountID", accountID);
+                command.Parameters.Add(":ReactieID", reactieID);
+                command.Parameters.Add(":Score", score);
+                command.Parameters.Add(":Datum", DateTime.Now);
+
+                return VoerNonQueryUit(command);
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
+        public bool UpdateRateReactie(int accountID, int reactieID, int score)
+        {
+            try
+            {
+                string sql = "UPDATE STEM SET AccountID = :AccountID, ReactieID = :ReactieID, Score = :Score, Datum = :Datum WHERE AccountID = AccountID AND ReactieID = :ReactieID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":AccountID", accountID);
+                command.Parameters.Add(":ReactieID", reactieID);
+                command.Parameters.Add(":Score", score);
+                command.Parameters.Add(":Datum", DateTime.Now);
+
+                return VoerNonQueryUit(command);
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
+        public int VerkrijgLikesReactie(int reactieID)
+        {
+            try
+            {
+                string sql = "SELECT Count(AccountID) AS LIKES FROM STEM WHERE ReactieID = :ReactieID AND Score = 1";
+
+                //string sql = "SELECT Count(AccountID) FROM STEM WHERE MediaID = :MediaID AND Score = 1";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":ReactieID", reactieID);
+
+                OracleDataReader reader = VoerQueryUit(command);
+
+                int likes = Convert.ToInt32(reader["LIKES"]);
+
+                return likes;
+            }
+            catch
+            {
+                return -1;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
+        public int VerkrijgDisLikesReactie(int reactieID)
+        {
+            try
+            {
+                string sql = "SELECT Count(AccountID) AS DISLIKES FROM STEM WHERE ReactieID = :ReactieID AND Score = 0";
+
+                //string sql = "SELECT Count(AccountID) FROM STEM WHERE MediaID = :MediaID AND Score = -1";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":ReactieID", reactieID);
+
+                OracleDataReader reader = VoerQueryUit(command);
+
+                int dislikes = Convert.ToInt32(reader["DISLIKES"]);
+
+                return dislikes;
+            }
+            catch
+            {
+                return -1;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+        #endregion
 
         #endregion
 
