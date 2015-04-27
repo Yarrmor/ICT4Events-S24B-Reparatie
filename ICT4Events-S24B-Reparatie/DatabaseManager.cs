@@ -2588,6 +2588,41 @@ namespace ICT4Events_S24B_Reparatie
 
         #endregion
 
+        #region Toegangscontrole
+        public List<Account> VerkrijgAanwezigen(int eventID)
+        {
+            try
+            {
+                string sql = "SELECT ACCOUNT.RFID, Voornaam, Achternaam FROM ACCOUNT, ROL WHERE EventID = :EventID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":EventID", eventID);
+
+                OracleDataReader reader = VoerMultiQueryUit(command);
+
+                List<Account> aanwezigen = new List<Account>();
+
+                while (reader.Read())
+                {
+                    Account account = new Account(reader["RFID"].ToString(),
+                                                  reader["Voornaam"].ToString(),
+                                                  reader["Achternaam"].ToString());
+
+                    aanwezigen.Add(account);
+                }
+
+                return aanwezigen;
+            }
+
+            catch
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
         #region AndereMethodes
 
         /////////////////////

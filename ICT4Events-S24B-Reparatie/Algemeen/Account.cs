@@ -24,6 +24,13 @@ namespace ICT4Events_S24B_Reparatie
 
         private DatabaseManager dm;
 
+        public Account(string rfid, string voornaam, string achternaam)
+        {
+            this.Rfid = rfid;
+            this.Voornaam = voornaam;
+            this.Achternaam = achternaam;
+        }
+
         public Account(string rfid, int accountID, string email, string roepnaam, AccountType type, bool verbannen)
         {
             this.dm = new DatabaseManager();

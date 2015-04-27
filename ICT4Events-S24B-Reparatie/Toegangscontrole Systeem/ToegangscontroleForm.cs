@@ -131,7 +131,7 @@ namespace ICT4Events_S24B_Reparatie
 
             foreach(Account account in aanwezigen)
             {
-                lbxAanwezigen.Items.Add(account.AccountID.ToString() + " " + account.Voornaam + " " + account.Achternaam);
+                lbxAanwezigen.Items.Add(account.Rfid + " " + account.Voornaam + " " + account.Achternaam);
             }
         }
 
