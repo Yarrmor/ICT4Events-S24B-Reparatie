@@ -63,7 +63,7 @@ namespace ICT4Events_S24B_Reparatie
                     controleerDatum.Value.AddDays(1);
                 }
 
-                return aantalDagen;
+                return aantalDagen * dagPrijs;
             }
             else
                 return 0;

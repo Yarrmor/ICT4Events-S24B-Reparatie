@@ -111,11 +111,11 @@ namespace ICT4Events_S24B_Reparatie
 
                 // Dagprijs van plaats
                 int prijs = reserveringSysteem.HaalPrijsOp(i);
-                lblDagPrijsWaarde.Text = "€" + prijs.ToString("c");
+                lblDagPrijsWaarde.Text = prijs.ToString("c");
 
                 // Totaalprijs van plaats en datums
                 int totaalPrijs = reserveringSysteem.HaalTotaalPrijsOp(prijs, beginDatum, eindDatum);
-                lblTotaalPrijsWaarde.Text = "€" + totaalPrijs.ToString();
+                lblTotaalPrijsWaarde.Text = totaalPrijs.ToString("c");
             }
         }
 
