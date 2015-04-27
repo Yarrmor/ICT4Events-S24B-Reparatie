@@ -39,7 +39,7 @@ namespace ICT4Events_S24B_Reparatie
         }
         public override string ToString()
         {
-            return MateriaalID.ToString();
+            return Naam.ToString();
         }
     }
 }

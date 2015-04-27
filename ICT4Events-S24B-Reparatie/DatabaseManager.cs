@@ -441,15 +441,39 @@ namespace ICT4Events_S24B_Reparatie
         /// </summary>
         /// <param name="mat"></param>
         /// <returns></returns>
+        /// 
+        public int VerkrijgNieuwMateriaalID()
+        {
+            try
+            {
+                string sql = "SELECT MAX(MateriaalID) AS MaxID FROM MATERIAAL";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                string text = command.CommandText;
+
+                OracleDataReader reader = VoerQueryUit(command);
+
+                return Convert.ToInt32(reader["MaxID"].ToString()) + 1;
+            }
+            catch
+            {
+                return -1;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
         public bool VoegMateriaalToe(Materiaal mat)
         {
             try
             {
-                this.NieuwID("MATERIAAL");
+                
                 string sql = "INSERT INTO MATERIAAL(MateriaalID, Naam, Beschrijving, Prijs) VALUES (:MateriaalID, :Naam, :Beschrijving, :Prijs)";
 
                 OracleCommand command = MaakOracleCommand(sql);
-                command.Parameters.Add(":MateriaalID", this.NieuwID("MATERIAAL"));
+                command.Parameters.Add(":MateriaalID", mat.MateriaalID);
                 command.Parameters.Add(":Naam", mat.Naam);
                 command.Parameters.Add(":Beschrijving", mat.Beschrijving);
                 command.Parameters.Add(":Prijs", mat.Prijs);
@@ -494,7 +518,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             try
             {
-                string sql = "SELECT ExemplaarID FROM EXEMPLAAR WHERE MateriaalID = :MateriaalID AND ExemplaarID NOT IN (SELECT DISTINCT ExemplaarID FROM UITLENING WHERE DatumEind >= :Vandaag) AND ROWNUM = 1";
+                string sql = "SELECT EXEMPLAARID FROM EXEMPLAAR WHERE MATERIAALID = :MateriaalID AND EXEMPLAARID NOT IN (SELECT DISTINCT EXEMPLAARID FROM UITLENING WHERE DatumEind >= :Vandaag) AND ROWNUM = 1";
 
                 DateTime Vandaag = DateTime.Today;
                 OracleCommand command = MaakOracleCommand(sql);
@@ -520,7 +544,7 @@ namespace ICT4Events_S24B_Reparatie
             {
                 List<Exemplaar> UitgeleendeExemplaren = new List<Exemplaar>();
                 DateTime Vandaag = DateTime.Today;
-                string sql = "SELECT ExemplaarID FROM EXEMPLAAR WHERE MateriaalID = :MateriaalID AND ExemplaarID IN(SELECT DISTINCT ExemplaarID FROM UITLENING WHERE DatumEind <= :Vandaag)";
+                string sql = "SELECT EXEMPLAARID FROM EXEMPLAAR WHERE MATERIAALID = :MateriaalID AND EXEMPLAARID IN(SELECT DISTINCT EXEMPLAARID FROM UITLENING WHERE DatumEind <= :Vandaag)";
                 OracleCommand command = MaakOracleCommand(sql);
                 command.Parameters.Add(":MateriaalID", MateriaalID);
                 command.Parameters.Add(":Vandaag", Vandaag);
@@ -569,7 +593,7 @@ namespace ICT4Events_S24B_Reparatie
 
             try
             {
-                string sql = "SELECT ExemplaarID, MateriaalID, FROM UITLENING WHERE MateriaalID NOT IN(SELECT MateriaalID FROM EXEMPLAAR WHERE MATERIAALID = :MateriaalID)";
+                string sql = "SELECT EXEMPLAARID, MATERIAALID FROM EXEMPLAAR WHERE MATERIAALID NOT IN(SELECT MATERIAALID FROM UITLENING WHERE MATERIAALID = :MateriaalID)";
                 OracleCommand command = MaakOracleCommand(sql);
 
                 command.Parameters.Add(":MateriaalID", MateriaalID);
@@ -636,20 +660,20 @@ namespace ICT4Events_S24B_Reparatie
             {
 
                 string sql = "SELECT Email FROM ACCOUNT WHERE RFID = :RFID";
-       
+
                 OracleCommand command = MaakOracleCommand(sql);
                 command.Parameters.Add(":RFID", rfid);
-       
+
                 OracleDataReader reader = VoerQueryUit(command);
                 return Convert.ToString(reader["Email"]);
             }
             catch
             {
-              return null;
+                return null;
             }
             finally
             {
-               Verbinding.Close();
+                Verbinding.Close();
             }
         }
 
@@ -904,7 +928,7 @@ namespace ICT4Events_S24B_Reparatie
                         bool verbannen = Convert.ToBoolean(reader["Verbannen"]);
                         string type = reader["Rol"].ToString();
                         AccountType accountType = AccountTypeStringNaarEnum(type);
-                        #endregion
+
 
                         accounts.Add(new Account(rfid, accountID, email, roepnaam, accountType, geslachtType, voornaam, achternaam, geboorteDatum, verbannen));
                     }
@@ -1292,7 +1316,7 @@ namespace ICT4Events_S24B_Reparatie
                         string beschrijving = reader["Beschrijving"].ToString();
 
                         int subCatVan = -1;
-                        if (reader["SubCatVan"] != DBNull.Value) 
+                        if (reader["SubCatVan"] != DBNull.Value)
                         {
                             subCatVan = Convert.ToInt32(reader["SubCatVan"]);
                         }
@@ -1808,7 +1832,7 @@ namespace ICT4Events_S24B_Reparatie
         public bool AccountAlGestemd(int accountID, int mediaID)
         {
             try
-            {    
+            {
                 string sql = "SELECT Count(AccountID) AS LIKES FROM STEM WHERE MediaID = :MediaID AND AccountID = :AccountID";
 
                 OracleCommand command = MaakOracleCommand(sql);
@@ -2023,12 +2047,12 @@ namespace ICT4Events_S24B_Reparatie
             command.Parameters.Add(":ReactieID", reactie.ReactieID);
             command.Parameters.Add(":AccountID", reactie.Account.AccountID);
             command.Parameters.Add(":MediaID", reactie.MediaID);
-            if(reactie.ReactieOp != null)
+            if (reactie.ReactieOp != null)
                 command.Parameters.Add(":ReactieOp", reactie.ReactieOp.ReactieID);
             command.Parameters.Add(":Bericht", reactie.Bericht);
             command.Parameters.Add(":Datum", DateTime.Now);
 
-            if(VoerNonQueryUit(command))
+            if (VoerNonQueryUit(command))
                 return true;
             else
                 return false;
@@ -2446,6 +2470,7 @@ namespace ICT4Events_S24B_Reparatie
         }
 
         #endregion
+ #endregion
 
         #region EmailSimulatie
 
@@ -2687,7 +2712,7 @@ namespace ICT4Events_S24B_Reparatie
 
             OracleDataReader reader = VoerMultiQueryUit(command);
 
-            
+
             while (reader.Read())
             {
                 int id = Convert.ToInt32(reader["MateriaalID"]);

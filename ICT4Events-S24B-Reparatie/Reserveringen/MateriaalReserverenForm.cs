@@ -13,7 +13,8 @@ namespace ICT4Events_S24B_Reparatie
     public partial class MateriaalReserverenForm : Form
     {
         private Algemeen algemeen;
-        private int firsttime = 1;
+        
+        public Materiaal mtest;
 
         public List<Materiaal> mats;
         public MateriaalReserverenForm(Algemeen alg)
@@ -25,14 +26,14 @@ namespace ICT4Events_S24B_Reparatie
             gbxUitgeleendMateriaal.Visible = false;
             gbxMateriaalToevoegen.Visible = false;
             
-            if (alg.Account == null)
-            {
-                if(alg.Account.Type == AccountType.Beheerder)
-                {
+          //  if (alg.Account == null)
+          //  {
+             //   if(alg.Account.Type == AccountType.Beheerder)
+              //  {
                     gbxUitgeleendMateriaal.Visible = true;
                     gbxMateriaalToevoegen.Visible = true;
-                }
-            }
+              //  }
+           // }
             VerversMaterialen();
             
         }
@@ -41,7 +42,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             if(lbxMaterialen.SelectedItem != null)
             {
-                Materiaal m = lbxMaterialen.SelectedItem as Materiaal;
+                Materiaal m = mtest;
                 DatabaseManager dm = new DatabaseManager();
                 
                 
@@ -52,7 +53,7 @@ namespace ICT4Events_S24B_Reparatie
                 }
                 else
                 {
-                    MessageBox.Show("we tried boyz");
+                    MessageBox.Show("kon het amteriaal niet toevoegen.");
                 }
             }
            
@@ -61,7 +62,7 @@ namespace ICT4Events_S24B_Reparatie
         private void btnMateriaalToevoegen_Click(object sender, EventArgs e)
         {
             DatabaseManager dm = new DatabaseManager();
-            dm.VoegMateriaalToe(new Materiaal(dm.NieuwID("Materiaal"),tbxMateriaalNaamToevoegen.Text, tbxMateriaalBeschrijvingToevoegen.Text, Convert.ToInt32(tbxMateriaalPrijsToevoegen.Text)));
+            dm.VoegMateriaalToe(new Materiaal(dm.VerkrijgNieuwMateriaalID(),tbxMateriaalNaamToevoegen.Text, tbxMateriaalBeschrijvingToevoegen.Text, Convert.ToInt32(tbxMateriaalPrijsToevoegen.Text)));
             VerversMaterialen();
         }
 
@@ -69,7 +70,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             lbxMaterialen.Items.Clear();
             DatabaseManager dm = new DatabaseManager();
-           
+            mats = dm.VerkrijgMateriaal(algemeen.Evenement.ID);
             foreach(Materiaal m in mats)
             {
                 lbxMaterialen.Items.Add(m.ToString());
@@ -80,15 +81,20 @@ namespace ICT4Events_S24B_Reparatie
         private void btnVeranderPrijs_Click(object sender, EventArgs e)
         {
             DatabaseManager dm = new DatabaseManager();
-            Materiaal m = lbxMaterialen.SelectedItem as Materiaal;
-            if(lbxMaterialen.SelectedItem is Materiaal)
+            Materiaal m = mtest;
+            if(m != null)
             {
+
                 dm.WijzigMateriaalPrijs(m, Convert.ToInt32(tbxNieuwePrijs.Text));
+                
+                    mtest.Prijs = Convert.ToInt32(tbxNieuwePrijs.Text);
+                
             }
             else
             {
                 MessageBox.Show("geen materiaal geselecteerd");
             }
+            UpdateData(mtest);
             
         }
 
@@ -99,10 +105,11 @@ namespace ICT4Events_S24B_Reparatie
             foreach(Materiaal m in materialen)
             {
             List<Exemplaar> UitgeleendeExemplaren = dm.UitgeleendExemplaren(m.MateriaalID);
-            foreach(Exemplaar ex in UitgeleendeExemplaren)
-            {
-                lbxUitgeleendMateriaal.Items.Add(ex);
-            }
+
+                 foreach(Exemplaar ex in UitgeleendeExemplaren)
+                 {
+                 lbxUitgeleendMateriaal.Items.Add("ExemplaarID :" + ex.ExemplaarID.ToString());
+                 }
             }
             
         }
@@ -116,13 +123,24 @@ namespace ICT4Events_S24B_Reparatie
                 {
                     if (ma.ToString() == lbxMaterialen.SelectedItem.ToString())
                     {
+                        
                         lblNaamData.Text = Convert.ToString(ma.Naam);
                         lblPrijsData.Text = Convert.ToString(ma.Prijs);
                         lblVoorraadData.Text = Convert.ToString(dm.ExemplarenVanMateriaal(ma.MateriaalID).Count);
+                        mtest = ma;
                     }
                 }
             }
             
+
+        }
+        private void UpdateData(Materiaal mat)
+        {
+            DatabaseManager dm = new DatabaseManager();
+            mats = dm.VerkrijgMateriaal(algemeen.Evenement.ID);
+            lblNaamData.Text = Convert.ToString(mat.Naam);
+            lblPrijsData.Text = Convert.ToString(mat.Prijs);
+            lblVoorraadData.Text = Convert.ToString(dm.ExemplarenVanMateriaal(mat.MateriaalID).Count);
 
         }
 
