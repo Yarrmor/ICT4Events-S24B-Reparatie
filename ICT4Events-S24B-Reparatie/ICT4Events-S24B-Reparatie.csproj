@@ -75,6 +75,7 @@
     <Compile Include="Reserveringen\Materiaal.cs" />
     <Compile Include="MediaSharing\Media.cs" />
     <Compile Include="MediaSharing\Melding.cs" />
+    <Compile Include="Reserveringen\ReserveringSysteem.cs" />
     <Compile Include="Toegangscontrole Systeem\ToegangscontroleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,11 +93,11 @@
     <Compile Include="Reserveringen\PlaatsReserveringForm.cs">
       <SubType>Form</SubType>
     </Compile>
-	<Compile Include="Reserveringen\PlaatsReserveringForm.Designer.cs">
+    <Compile Include="Reserveringen\PlaatsReserveringForm.Designer.cs">
       <DependentUpon>PlaatsReserveringForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Reserveringen\MateriaalReserverenForm.cs">
-	  <SubType>Form</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reserveringen\MateriaalReserverenForm.Designer.cs">
       <DependentUpon>MateriaalReserverenForm.cs</DependentUpon>
@@ -191,7 +192,7 @@
     <EmbeddedResource Include="Reserveringen\MateriaalReserverenForm.resx">
       <DependentUpon>MateriaalReserverenForm.cs</DependentUpon>
     </EmbeddedResource>
-	<EmbeddedResource Include="Reserveringen\PlaatsReserveringForm.resx">
+    <EmbeddedResource Include="Reserveringen\PlaatsReserveringForm.resx">
       <DependentUpon>PlaatsReserveringForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

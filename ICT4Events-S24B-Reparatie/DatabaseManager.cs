@@ -264,6 +264,56 @@ namespace ICT4Events_S24B_Reparatie
 
         }
 
+        public bool VoegPlekReserveringToe(ReserveringPlaats reservering)
+        {
+            try
+            {
+                string sql = "INSERT INTO RESERVERING(AccountID, PlekID, EventID, DatumStart, DatumEind, Betaald) VALUES (:AccountID, :PlekID, :EventID, :DatumStart, :DatumEind, :Betaald)";
+
+                DateTime datumStart = reservering.DatumStart;
+                string startDag = datumStart.Day.ToString();
+                string startMaand = datumStart.Month.ToString();
+                string startJaar = datumStart.Year.ToString();
+
+                DateTime datumEind = reservering.DatumEind;
+                string eindDag = datumEind.Day.ToString();
+                string eindMaand = datumEind.Month.ToString();
+                string eindJaar = datumEind.Year.ToString();
+
+                string[] strings = new string[] { startDag, startMaand, eindDag, eindMaand };
+                for (int i = 0; i < strings.Count(); i++)
+                {
+                    if (strings[i].Length == 1)
+                        strings[i] = "0" + strings[i];
+                }
+
+                string datumStartReplace = "TO_DATE('" + strings[0] + "/" + strings[1] + "/" + startJaar + "', 'dd/mm/yyyy')";
+                string datumEindReplace = "TO_DATE('" + strings[2] + "/" + strings[3] + "/" + eindJaar + "', 'dd/mm/yyyy')";
+                int betaald = 0;
+                if (reservering.Betaald)
+                    betaald = 1;
+
+                OracleCommand command = MaakOracleCommand(sql);
+                command.Parameters.Add(":AccountID", reservering.Groepshoofd.AccountID);
+                command.Parameters.Add(":PlekID", reservering.Plek.PlekID);
+                command.Parameters.Add(":EventID", reservering.Event.ID);
+                command.Parameters.Add(":DatumStart", datumStartReplace);
+                command.Parameters.Add(":DatumEind", datumEindReplace);
+                command.Parameters.Add(":Betaald", betaald);
+
+                return VoerNonQueryUit(command);
+
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
         public ReserveringPlaats VerkrijgReserveringPlaats(string rfid)
         {
             try
@@ -2412,26 +2462,99 @@ namespace ICT4Events_S24B_Reparatie
 
         public bool VerkrijgReserveringBetaald(string rfid, int eventID)
         {
-            throw new NotImplementedException();
-            return false;
+            try
+            {
+                string sql = "SELECT Betaald FROM RESERVERING WHERE AccountID = ( SELECT AccountID FROM ACCOUNT WHERE RFID = :RFID ) AND EventID = :EventID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":RFID", rfid);
+                command.Parameters.Add(":EventID", eventID);
+
+                OracleDataReader reader = VoerQueryUit(command);
+
+                return (Convert.ToInt32(reader["Betaald"]) == 1);
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
         }
 
-        public bool VerifieerAccount(string rfid)
+        public bool VerifieerAccount(string rfid, string voornaam, string achternaam, string roepnaam, string wachtwoord)
         {
-            throw new NotImplementedException();
-            return false;
+            try
+            {
+                string sql = "UPDATE ACCOUNT SET Voornaam = :Voornaam, Achternaam = :Achternaam, Roepnaam = :Roepnaam, Wachtwoord = :Wachtwoord, Verifieerd = 1 WHERE RFID = :RFID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":Voornaam", voornaam);
+                command.Parameters.Add(":Achternaam", voornaam);
+                command.Parameters.Add(":Roepnaam", voornaam);
+                command.Parameters.Add(":Wachtwoord", voornaam);
+                command.Parameters.Add(":RFID", rfid);
+
+                return VoerNonQueryUit(command);
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
         }
 
         public bool BetaalReservering(string rfid, int eventID)
         {
-            throw new NotImplementedException();
-            return false;
+            try
+            {
+                string sql = "UPDATE RESERVERING SET Betaald = 1 WHERE AccountID = ( SELECT AccountID FROM ACCOUNT WHERE RFID = :RFID ) AND EventID = :EventID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":RFID", rfid);
+                command.Parameters.Add(":EventID", eventID);
+
+                return VoerNonQueryUit(command);
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
         }
 
-        public List<string> AnnuleerReservering(string rfid, int eventID)
+        public bool AnnuleerReservering(string rfid, int eventID)
         {
-            throw new NotImplementedException();
-            return null;
+            try
+            {
+                string sql = "DELETE FROM RESERVERING WHERE AccountID = ( SELECT AccountID FROM ACCOUNT WHERE RFID = :RFID ) AND EventID = :EventID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":RFID", rfid);
+                command.Parameters.Add(":EventID", eventID);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
         }
 
         #endregion
@@ -2503,25 +2626,33 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
-        public List<int> VerkrijgBeschikbarePlekken(int eventID, string filter)
+        public List<Plek> VerkrijgBeschikbarePlekken(int eventID, Locatie locatie, DateTime? beginDatum, DateTime? eindDatum)
         {
             try
             {
                 // Alle niet gereserveerde plekken // filter en tijd niet door tijdsnood
-                string sql = "SELECT PlekID FROM Plek WHERE PlekID NOT IN ( SELECT PlekID FROM Reservering WHERE EventID = :EventID ) AND PlekID IN ( SELECT PlekID FROM Plek WHERE LocatieID = ( SELECT LocatieID FROM Event WHERE EventID = :EventID )) ORDER BY PlekID ASC";
+                string sql = "SELECT PlekID, Prijs, Beschrijving FROM Plek WHERE PlekID NOT IN ( SELECT DISTINCT PlekID FROM RESERVERING WHERE DatumStart <= :DatumStart AND DatumEind >= :DatumEind ) AND PlekID IN ( SELECT PlekID FROM Plek WHERE LocatieID = ( SELECT LocatieID FROM Event WHERE EventID = :EventID )) ORDER BY PlekID ASC";
 
                 OracleCommand command = MaakOracleCommand(sql);
 
+                throw new NotImplementedException("datum parameters");
+
+                command.Parameters.Add(":DatumStart", beginDatum); //fout
+                command.Parameters.Add(":DatumEind", eindDatum); //fout
                 command.Parameters.Add(":EventID", eventID);
 
                 OracleDataReader reader = VoerMultiQueryUit(command);
 
 
-                List<int> plekken = new List<int>();
+                List<Plek> plekken = new List<Plek>();
 
                 while (reader.Read())
                 {
-                    plekken.Add(Convert.ToInt32(reader["PlekID"]));
+                    int plekID = Convert.ToInt32(reader["PlekID"]);
+                    int prijs = Convert.ToInt32(reader["Prijs"]);
+                    string beschrijving = reader["Beschrijving"].ToString();
+
+                    plekken.Add(new Plek(plekID, locatie, prijs, beschrijving));
                 }
 
                 return plekken;
