@@ -56,6 +56,20 @@
     <Compile Include="Algemeen\Account.cs" />
     <Compile Include="Algemeen\AccountType.cs" />
     <Compile Include="Algemeen\ILoginSysteem.cs" />
+    <Compile Include="Email Simulatie Systeem\Email.cs" />
+    <Compile Include="Email Simulatie Systeem\EmailSimulatie.cs" />
+    <Compile Include="Email Simulatie Systeem\EmailSimulatieForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Email Simulatie Systeem\EmailSimulatieForm.Designer.cs">
+      <DependentUpon>EmailSimulatieForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Email Simulatie Systeem\VerifieerAccountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Email Simulatie Systeem\VerifieerAccountForm.Designer.cs">
+      <DependentUpon>VerifieerAccountForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MediaSharing\MediaSharingSysteem.cs" />
     <Compile Include="MediaSharing\Bestand.cs" />
     <Compile Include="MediaSharing\Categorie.cs" />
@@ -208,9 +222,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Email Simulatie Systeem\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
