@@ -246,8 +246,8 @@ namespace ICT4Events_S24B_Reparatie
                 Categorie cat = md.VerkrijgCategorie(lbxCategorie.SelectedItem.ToString());
                 md.VerwijderCategorie(cat);
                 md.UpdateCatMedia();
+                MediaListBox();
                 WeergeefCategories();
-                //***DatabaseManager gedoe.
             }
         }
 

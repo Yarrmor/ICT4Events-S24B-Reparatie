@@ -110,13 +110,13 @@ namespace ICT4Events_S24B_Reparatie
                 return false;
             }
         }
+
         /// <summary>
         /// Er wordt een categorie toegevoegd indien deze nog niet bestaat
         /// </summary>
         /// <param name="naam"></param>
         /// <param name="categorie"></param>
         /// <returns></returns>
-
         public bool VoegCategorieToe(string naam, Categorie categorie, Account acc)
         {
             if (BestaatCategorieNiet(naam) && naam != "_Main" && naam != "_main")
@@ -138,6 +138,7 @@ namespace ICT4Events_S24B_Reparatie
         public void VerwijderCategorie(Categorie cat)
         {
             VerwijderSubCategories(cat);
+            VerwijderMediaCategorie(cat.ID);
             dm.VerwijderCategorie(cat.ID);
         }
 
@@ -246,6 +247,7 @@ namespace ICT4Events_S24B_Reparatie
                 if (c.Parent == cat)
                 {
                     VerwijderSubCategories(c);
+                    VerwijderMediaCategorie(cat.ID);
                     dm.VerwijderCategorie(c.ID);
                     //***Database connectie voor het verwijderen van categoriën in de database.
                 }
@@ -314,6 +316,24 @@ namespace ICT4Events_S24B_Reparatie
                 }
             }
             return null;
+        }
+
+        public void VerwijderMediaCategorie(int categorieID)
+        {
+            foreach (Media m in MediaLijst.ToList())
+            {
+                if (m.CategorieID == categorieID)
+                {
+                    VerwijderMediaNoUpdate(m);
+                }
+            }
+        }
+
+        public void VerwijderMediaNoUpdate(Media media)
+        {
+            VerwijderMeldingen(media);
+            VerwijderReacties(media);
+            dm.VerwijderMedia(media.MediaID);
         }
 
         public bool VerwijderMedia(Media media)
