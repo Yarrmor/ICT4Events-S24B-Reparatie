@@ -74,6 +74,7 @@ namespace ICT4Events_S24B_Reparatie
             {
                 btnAnnuleerReservering.Enabled = false;
                 btnBetaalReservering.Enabled = false;
+                btnMateriaalReserveren.Enabled = false;
                 btnVerifieerAccount.Enabled = false;
                 btnWijzigWachtwoord.Enabled = true;
             }
@@ -86,6 +87,7 @@ namespace ICT4Events_S24B_Reparatie
                 int accountVerifieerd = dm.VerkrijgAccountVerifieerd(e.Rfid);
 
                 btnVerifieerAccount.Enabled = (accountVerifieerd == 0);
+                btnMateriaalReserveren.Enabled = (accountVerifieerd == 1);
 
                 // Betaal/annuleer knop
                 AccountType? accountType = dm.VerkrijgAccountType(e.Rfid, algemeen.Evenement.ID);
@@ -149,6 +151,11 @@ namespace ICT4Events_S24B_Reparatie
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnWijzigWachtwoord_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnMateriaalReserveren_Click(object sender, EventArgs e)
         {
             
         }

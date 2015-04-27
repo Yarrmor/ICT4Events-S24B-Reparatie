@@ -5,3 +5,15 @@ c:\users\jelle\documents\visual studio 2013\Projects\ICT4Events-S24B-Reparatie\I
 c:\users\jelle\documents\visual studio 2013\Projects\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\bin\Debug\ICT4Events-S24B-Reparatie.pdb
 c:\users\jelle\documents\visual studio 2013\Projects\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.exe
 c:\users\jelle\documents\visual studio 2013\Projects\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.pdb
+C:\Users\Jelle\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\bin\Debug\ICT4Events-S24B-Reparatie.exe.config
+C:\Users\Jelle\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.exe
+C:\Users\Jelle\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.pdb
+D:\Github\repa\ICT4Events-S24B-Reparatie\bin\Debug\ICT4Events-S24B-Reparatie.exe.config
+D:\Github\repa\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.exe
+D:\Github\repa\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.pdb
+D:\Github\repa\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.csprojResolveAssemblyReference.cache
+D:\Github\repa\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events_S24B_Reparatie.Properties.Resources.resources
+D:\Github\repa\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.csproj.GenerateResource.Cache
+D:\Github\repa\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events_S24B_Reparatie.PlaatsReserveringForm.resources
+D:\Github\repa\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events_S24B_Reparatie.EmailSimulatieForm.resources
+D:\Github\repa\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events_S24B_Reparatie.VerifieerAccountForm.resources

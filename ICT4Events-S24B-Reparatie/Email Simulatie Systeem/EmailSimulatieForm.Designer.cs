@@ -38,6 +38,7 @@
             this.lblGeselecteerdeEmailOnderwerp = new System.Windows.Forms.Label();
             this.lblEmailOnderwerp = new System.Windows.Forms.Label();
             this.tbxGeselecteerdeEmailInhoud = new System.Windows.Forms.TextBox();
+            this.btnMateriaalReserveren = new System.Windows.Forms.Button();
             this.gbxGeselecteerdeEmail.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,12 +57,13 @@
             this.cbxEmails.FormattingEnabled = true;
             this.cbxEmails.Location = new System.Drawing.Point(105, 6);
             this.cbxEmails.Name = "cbxEmails";
-            this.cbxEmails.Size = new System.Drawing.Size(417, 21);
+            this.cbxEmails.Size = new System.Drawing.Size(619, 21);
             this.cbxEmails.TabIndex = 1;
             this.cbxEmails.SelectedIndexChanged += new System.EventHandler(this.cbxEmails_SelectedIndexChanged);
             // 
             // gbxGeselecteerdeEmail
             // 
+            this.gbxGeselecteerdeEmail.Controls.Add(this.btnMateriaalReserveren);
             this.gbxGeselecteerdeEmail.Controls.Add(this.btnWijzigWachtwoord);
             this.gbxGeselecteerdeEmail.Controls.Add(this.btnAnnuleerReservering);
             this.gbxGeselecteerdeEmail.Controls.Add(this.btnBetaalReservering);
@@ -71,7 +73,7 @@
             this.gbxGeselecteerdeEmail.Controls.Add(this.tbxGeselecteerdeEmailInhoud);
             this.gbxGeselecteerdeEmail.Location = new System.Drawing.Point(12, 33);
             this.gbxGeselecteerdeEmail.Name = "gbxGeselecteerdeEmail";
-            this.gbxGeselecteerdeEmail.Size = new System.Drawing.Size(510, 380);
+            this.gbxGeselecteerdeEmail.Size = new System.Drawing.Size(712, 380);
             this.gbxGeselecteerdeEmail.TabIndex = 2;
             this.gbxGeselecteerdeEmail.TabStop = false;
             this.gbxGeselecteerdeEmail.Text = "Geselecteerde E-Mail:";
@@ -90,7 +92,7 @@
             // btnAnnuleerReservering
             // 
             this.btnAnnuleerReservering.Enabled = false;
-            this.btnAnnuleerReservering.Location = new System.Drawing.Point(392, 351);
+            this.btnAnnuleerReservering.Location = new System.Drawing.Point(594, 351);
             this.btnAnnuleerReservering.Name = "btnAnnuleerReservering";
             this.btnAnnuleerReservering.Size = new System.Drawing.Size(112, 23);
             this.btnAnnuleerReservering.TabIndex = 7;
@@ -101,7 +103,7 @@
             // btnBetaalReservering
             // 
             this.btnBetaalReservering.Enabled = false;
-            this.btnBetaalReservering.Location = new System.Drawing.Point(274, 351);
+            this.btnBetaalReservering.Location = new System.Drawing.Point(476, 351);
             this.btnBetaalReservering.Name = "btnBetaalReservering";
             this.btnBetaalReservering.Size = new System.Drawing.Size(112, 23);
             this.btnBetaalReservering.TabIndex = 6;
@@ -144,14 +146,25 @@
             this.tbxGeselecteerdeEmailInhoud.Multiline = true;
             this.tbxGeselecteerdeEmailInhoud.Name = "tbxGeselecteerdeEmailInhoud";
             this.tbxGeselecteerdeEmailInhoud.ReadOnly = true;
-            this.tbxGeselecteerdeEmailInhoud.Size = new System.Drawing.Size(498, 308);
+            this.tbxGeselecteerdeEmailInhoud.Size = new System.Drawing.Size(700, 308);
             this.tbxGeselecteerdeEmailInhoud.TabIndex = 0;
+            // 
+            // btnMateriaalReserveren
+            // 
+            this.btnMateriaalReserveren.Enabled = false;
+            this.btnMateriaalReserveren.Location = new System.Drawing.Point(300, 351);
+            this.btnMateriaalReserveren.Name = "btnMateriaalReserveren";
+            this.btnMateriaalReserveren.Size = new System.Drawing.Size(112, 23);
+            this.btnMateriaalReserveren.TabIndex = 9;
+            this.btnMateriaalReserveren.Text = "Materiaal reserveren";
+            this.btnMateriaalReserveren.UseVisualStyleBackColor = true;
+            this.btnMateriaalReserveren.Click += new System.EventHandler(this.btnMateriaalReserveren_Click);
             // 
             // EmailSimulatieForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 424);
+            this.ClientSize = new System.Drawing.Size(739, 424);
             this.Controls.Add(this.gbxGeselecteerdeEmail);
             this.Controls.Add(this.cbxEmails);
             this.Controls.Add(this.lblSelecteerEmail);
@@ -176,5 +189,6 @@
         private System.Windows.Forms.Button btnBetaalReservering;
         private System.Windows.Forms.Button btnVerifieerAccount;
         private System.Windows.Forms.Button btnWijzigWachtwoord;
+        private System.Windows.Forms.Button btnMateriaalReserveren;
     }
 }

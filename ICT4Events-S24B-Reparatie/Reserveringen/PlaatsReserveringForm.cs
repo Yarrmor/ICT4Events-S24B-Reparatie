@@ -176,7 +176,7 @@ namespace ICT4Events_S24B_Reparatie
                     throw new Exception("De reservering kan niet in de database geplaatst worden. Als u niet al een reservering hebt geplaatst, neem contact op met het helpdesk.");
                 else
                 {
-                    Algemeen.MaakEmailAan(groepsHoofd.Rfid, "Reservering ICT4Events", "U heeft reeds een reservering geplaatst voor het ICT4Events Evenement.\n\nU kunt met onderstaande links uw reservering betalen en uw account activeren.\nInloggen ter plekke doet u met uw e-mail adres en wachtwoord ingevuld bij het verifieren.\n\nWilt u alvast materiaal reserveren? Volg onderstaande link om dit direct te doen.");
+                    Algemeen.MaakEmailAan(groepsHoofd.Rfid, "Reservering ICT4Events", "U heeft reeds een reservering geplaatst voor het ICT4Events Evenement.\n\nU kunt met onderstaande links uw reservering betalen en uw account activeren.\nInloggen ter plekke doet u met uw e-mail adres en wachtwoord ingevuld bij het verifieren.\n\nWilt u alvast materiaal reserveren? Volg onderstaande link om dit direct te doen. Hiervoor moet uw account wel eerst geverifieerd zijn.");
                     MessageBox.Show("Uw reservering is geplaatst! U heeft een e-mail ontvangen met verdere informatie.");
                     this.Close();
                 }
