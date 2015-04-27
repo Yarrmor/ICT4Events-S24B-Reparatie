@@ -221,6 +221,9 @@
     <EmbeddedResource Include="Reserveringen\PlaatsReserveringForm.resx">
       <DependentUpon>PlaatsReserveringForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Toegangscontrole Systeem\ToegangscontroleForm.resx">
+      <DependentUpon>ToegangscontroleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

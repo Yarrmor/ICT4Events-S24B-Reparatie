@@ -13,7 +13,7 @@ namespace ICT4Events_S24B_Reparatie
     public partial class MateriaalReserverenForm : Form
     {
         private Algemeen algemeen;
-        
+        private bool uitlogNaSluiten;
         public Materiaal mtest;
 
         public List<Materiaal> mats;
@@ -36,6 +36,27 @@ namespace ICT4Events_S24B_Reparatie
            // }
             VerversMaterialen();
             
+        }
+
+        public MateriaalReserverenForm(Algemeen alg, bool b)
+        {
+            DatabaseManager dm = new DatabaseManager();
+            mats = dm.VerkrijgMateriaal(alg.Evenement.ID);
+            this.algemeen = alg;
+            InitializeComponent();
+            gbxUitgeleendMateriaal.Visible = false;
+            gbxMateriaalToevoegen.Visible = false;
+
+            //  if (alg.Account == null)
+            //  {
+            //   if(alg.Account.Type == AccountType.Beheerder)
+            //  {
+            gbxUitgeleendMateriaal.Visible = true;
+            gbxMateriaalToevoegen.Visible = true;
+            //  }
+            // }
+            VerversMaterialen();
+            uitlogNaSluiten = b;
         }
 
         private void btnMateriaalReserveren_Click(object sender, EventArgs e)
@@ -147,6 +168,14 @@ namespace ICT4Events_S24B_Reparatie
         private void btnKlaarReserveren_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void MateriaalReserverenForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(uitlogNaSluiten)
+            {
+                algemeen.LogUit();
+            }
         }
     }
 }

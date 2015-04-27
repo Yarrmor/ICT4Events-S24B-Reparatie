@@ -330,6 +330,7 @@
             this.Controls.Add(this.lbxMaterialen);
             this.Name = "MateriaalReserverenForm";
             this.Text = "MaterialenReserveringForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MateriaalReserverenForm_FormClosing);
             this.gbxMateriaalReserveren.ResumeLayout(false);
             this.gbxMateriaalReserveren.PerformLayout();
             this.gbxMateriaalToevoegen.ResumeLayout(false);
