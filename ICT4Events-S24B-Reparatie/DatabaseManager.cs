@@ -2503,9 +2503,9 @@ namespace ICT4Events_S24B_Reparatie
                 OracleCommand command = MaakOracleCommand(sql);
 
                 command.Parameters.Add(":Voornaam", voornaam);
-                command.Parameters.Add(":Achternaam", voornaam);
-                command.Parameters.Add(":Roepnaam", voornaam);
-                command.Parameters.Add(":Wachtwoord", voornaam);
+                command.Parameters.Add(":Achternaam", achternaam);
+                command.Parameters.Add(":Roepnaam", roepnaam);
+                command.Parameters.Add(":Wachtwoord", wachtwoord);
                 command.Parameters.Add(":RFID", rfid);
 
                 return VoerNonQueryUit(command);

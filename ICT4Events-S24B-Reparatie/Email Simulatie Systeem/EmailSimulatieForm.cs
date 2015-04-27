@@ -132,6 +132,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             VerifieerAccountForm vaf = new VerifieerAccountForm(emailSimulatie);
             vaf.ShowDialog();
+            VerversKnoppen(emailSimulatie.GeselecteerdeEmail);
         }
 
         /// <summary>
