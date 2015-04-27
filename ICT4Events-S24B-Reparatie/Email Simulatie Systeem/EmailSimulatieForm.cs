@@ -68,36 +68,48 @@ namespace ICT4Events_S24B_Reparatie
         /// <param name="rfid"></param>
         private void VerversKnoppen(Email e)
         {
-            DatabaseManager dm = new DatabaseManager();
-
-            if (e.Onderwerp == "Wachtwoordherstel ICT4Events")
+            if (e == null)
             {
                 btnAnnuleerReservering.Enabled = false;
                 btnBetaalReservering.Enabled = false;
                 btnMateriaalReserveren.Enabled = false;
                 btnVerifieerAccount.Enabled = false;
-                btnWijzigWachtwoord.Enabled = true;
+                btnWijzigWachtwoord.Enabled = false;
             }
             else
             {
-                // Verander ww knop
-                btnWijzigWachtwoord.Enabled = false;
+                DatabaseManager dm = new DatabaseManager();
 
-                // Verifieer knop
-                int accountVerifieerd = dm.VerkrijgAccountVerifieerd(e.Rfid);
+                if (e.Onderwerp == "Wachtwoordherstel ICT4Events")
+                {
+                    btnAnnuleerReservering.Enabled = false;
+                    btnBetaalReservering.Enabled = false;
+                    btnMateriaalReserveren.Enabled = false;
+                    btnVerifieerAccount.Enabled = false;
+                    btnWijzigWachtwoord.Enabled = true;
+                }
+                else
+                {
+                    // Verander ww knop
+                    btnWijzigWachtwoord.Enabled = false;
 
-                btnVerifieerAccount.Enabled = (accountVerifieerd == 0);
-                btnMateriaalReserveren.Enabled = (accountVerifieerd == 1);
+                    // Verifieer knop
+                    int accountVerifieerd = dm.VerkrijgAccountVerifieerd(e.Rfid);
 
-                // Betaal/annuleer knop
-                AccountType? accountType = dm.VerkrijgAccountType(e.Rfid, algemeen.Evenement.ID);
-                bool reserveringBetaald = true;
-                if (accountType == AccountType.Groepshoofd)
-                    reserveringBetaald = dm.VerkrijgReserveringBetaald(e.Rfid, algemeen.Evenement.ID);
+                    btnVerifieerAccount.Enabled = (accountVerifieerd == 0);
+                    btnMateriaalReserveren.Enabled = (accountVerifieerd == 1);
 
-                btnBetaalReservering.Enabled = !reserveringBetaald;
-                btnAnnuleerReservering.Enabled = !reserveringBetaald;
+                    // Betaal/annuleer knop
+                    AccountType? accountType = dm.VerkrijgAccountType(e.Rfid, algemeen.Evenement.ID);
+                    bool reserveringBetaald = true;
+                    if (accountType == AccountType.Groepshoofd)
+                        reserveringBetaald = dm.VerkrijgReserveringBetaald(e.Rfid, algemeen.Evenement.ID);
+
+                    btnBetaalReservering.Enabled = !reserveringBetaald;
+                    btnAnnuleerReservering.Enabled = !reserveringBetaald;
+                }
             }
+           
 
         }
 
@@ -120,6 +132,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             VerifieerAccountForm vaf = new VerifieerAccountForm(emailSimulatie);
             vaf.ShowDialog();
+            VerversKnoppen(emailSimulatie.GeselecteerdeEmail);
         }
 
         /// <summary>
@@ -130,6 +143,7 @@ namespace ICT4Events_S24B_Reparatie
         private void btnBetaalReservering_Click(object sender, EventArgs e)
         {
             emailSimulatie.BetaalReservering();
+            VerversKnoppen(emailSimulatie.GeselecteerdeEmail);
         }
 
         /// <summary>
@@ -143,6 +157,7 @@ namespace ICT4Events_S24B_Reparatie
             if (emailSimulatie.AnnuleerReservering())
                 MessageBox.Show("Uw reservering is geannuleerd!");
             VerversEmails();
+            VerversKnoppen(emailSimulatie.GeselecteerdeEmail);
         }
 
         /// <summary>
