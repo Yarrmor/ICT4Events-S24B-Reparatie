@@ -37,5 +37,9 @@ namespace ICT4Events_S24B_Reparatie
         {
             return this.dm.NietUitgeleendExemplaar(this.MateriaalID);
         }
+        public override string ToString()
+        {
+            return MateriaalID.ToString();
+        }
     }
 }

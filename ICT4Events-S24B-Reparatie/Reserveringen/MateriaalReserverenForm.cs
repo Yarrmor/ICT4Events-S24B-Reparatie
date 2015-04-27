@@ -13,11 +13,18 @@ namespace ICT4Events_S24B_Reparatie
     public partial class MateriaalReserverenForm : Form
     {
         private Algemeen algemeen;
+        private int firsttime = 1;
+
+        public List<Materiaal> mats;
         public MateriaalReserverenForm(Algemeen alg)
         {
+            DatabaseManager dm = new DatabaseManager();
+            mats = dm.VerkrijgMateriaal(alg.Evenement.ID);
+            this.algemeen = alg;
+            InitializeComponent();
             gbxUitgeleendMateriaal.Visible = false;
             gbxMateriaalToevoegen.Visible = false;
-            this.algemeen = alg;
+            
             if (alg.Account == null)
             {
                 if(alg.Account.Type == AccountType.Beheerder)
@@ -27,7 +34,7 @@ namespace ICT4Events_S24B_Reparatie
                 }
             }
             VerversMaterialen();
-            InitializeComponent();
+            
         }
 
         private void btnMateriaalReserveren_Click(object sender, EventArgs e)
@@ -62,16 +69,12 @@ namespace ICT4Events_S24B_Reparatie
         {
             lbxMaterialen.Items.Clear();
             DatabaseManager dm = new DatabaseManager();
-            List<Materiaal> mats =  dm.VerkrijgMateriaal(algemeen.Evenement.ID);
+           
             foreach(Materiaal m in mats)
             {
-                lbxMaterialen.Items.Add(m);
+                lbxMaterialen.Items.Add(m.ToString());
             }
-            Materiaal ma = lbxMaterialen.SelectedItem as Materiaal;
-            lblNaamData.Text = ma.Naam;
-            lblPrijsData.Text = Convert.ToString(ma.Prijs);
-            lblVoorraadData.Text = Convert.ToString(dm.ExemplarenVanMateriaal(ma.MateriaalID).Count);
-
+            
         }
 
         private void btnVeranderPrijs_Click(object sender, EventArgs e)
@@ -106,7 +109,20 @@ namespace ICT4Events_S24B_Reparatie
 
         private void lbxMaterialen_SelectedIndexChanged(object sender, EventArgs e)
         {
-            VerversMaterialen();
+            DatabaseManager dm = new DatabaseManager();
+            if (lbxMaterialen.SelectedItem != null)
+            {
+                foreach (Materiaal ma in mats)
+                {
+                    if (ma.ToString() == lbxMaterialen.SelectedItem.ToString())
+                    {
+                        lblNaamData.Text = Convert.ToString(ma.Naam);
+                        lblPrijsData.Text = Convert.ToString(ma.Prijs);
+                        lblVoorraadData.Text = Convert.ToString(dm.ExemplarenVanMateriaal(ma.MateriaalID).Count);
+                    }
+                }
+            }
+            
 
         }
 

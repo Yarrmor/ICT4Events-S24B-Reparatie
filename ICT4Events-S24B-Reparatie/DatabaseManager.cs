@@ -2694,7 +2694,7 @@ namespace ICT4Events_S24B_Reparatie
 
         public List<Materiaal> VerkrijgMateriaal(int eventID)
         {
-            string sql = "SELECT MateriaalID, Naam, Beschijving, Prijs FROM Materiaal";
+            string sql = "SELECT MATERIAALID, NAAM, BESCHRIJVING, PRIJS FROM MATERIAAL";
 
             OracleCommand command = MaakOracleCommand(sql);
 
@@ -2702,7 +2702,7 @@ namespace ICT4Events_S24B_Reparatie
 
             OracleDataReader reader = VoerMultiQueryUit(command);
 
-            throw new NotImplementedException();
+            
             while (reader.Read())
             {
                 int id = Convert.ToInt32(reader["MateriaalID"]);
