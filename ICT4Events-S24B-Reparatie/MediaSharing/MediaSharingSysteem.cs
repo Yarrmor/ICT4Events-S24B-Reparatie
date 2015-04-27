@@ -319,9 +319,15 @@ namespace ICT4Events_S24B_Reparatie
         public bool VerwijderMedia(Media media)
         {
             VerwijderMeldingen(media);
+            VerwijderReacties(media);
             bool verwijderd = dm.VerwijderMedia(media.MediaID);
             UpdateCatMedia();
             return verwijderd;
+        }
+
+        public bool VerwijderReacties(Media media)
+        {
+            return this.dm.VerwijderReactiesMedia(media.MediaID);
         }
 
         public void DownloadMedia()
@@ -350,9 +356,15 @@ namespace ICT4Events_S24B_Reparatie
             return file;
         }
 
+        public bool VerbergMedia(Media media, bool verberg)
+        {
+            return dm.VerbergMedia(media.MediaID, verberg);
+        }
+
         #endregion Media
 
         #region Filter
+
         /// <summary>
         /// Filtert de huidige lijst met media op een filter string
         /// </summary>
@@ -365,6 +377,10 @@ namespace ICT4Events_S24B_Reparatie
                 FilterMediaBeschrijving(filter);
         }
 
+        /// <summary>
+        /// Filtert de media op basis van naam.
+        /// </summary>
+        /// <param name="filter"></param>
         private void FilterMediaNaam(string filter)
         {
             foreach (Media m in MediaLijstFiltered.ToList())
@@ -376,6 +392,10 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
+        /// <summary>
+        /// Filter de media op basis van beschrijving.
+        /// </summary>
+        /// <param name="filter"></param>
         private void FilterMediaBeschrijving(string filter)
         {
             foreach (Media m in MediaLijstFiltered.ToList())

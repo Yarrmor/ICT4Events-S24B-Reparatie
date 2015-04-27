@@ -1659,6 +1659,63 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
+        public bool VerbergMedia(int mediaID, bool verberg)
+        {
+            try
+            {
+                string sql = "UPDATE MEDIA SET Verborgen = :Verborgen WHERE MediaID = :MediaID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":Verborgen", Convert.ToInt32(verberg));
+                command.Parameters.Add(":MediaID", mediaID);
+
+                return VoerNonQueryUit(command);
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                EnableFKReactie();
+                Verbinding.Close();
+            }
+        }
+
+        public bool MediaVerborgen(int mediaID)
+        {
+            try
+            {
+                string sql = "SELECT Verborgen FROM MEDIA WHERE MediaID = :MediaID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":MediaID", mediaID);
+
+                OracleDataReader reader = VoerQueryUit(command);
+
+                bool verborgen = Convert.ToBoolean(reader["Verborgen"]);
+
+                if (verborgen)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
         public bool AccountAlGestemd(int accountID, int mediaID)
         {
             try
@@ -1944,6 +2001,28 @@ namespace ICT4Events_S24B_Reparatie
             catch
             {
                 return null;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
+        public bool VerwijderReactiesMedia(int mediaID)
+        {
+            try
+            {
+                string sql = "DELETE FROM REACTIE WHERE MediaID = :MediaID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":MediaID", mediaID);
+
+                return VoerNonQueryUit(command);
+            }
+            catch
+            {
+                return false;
             }
             finally
             {

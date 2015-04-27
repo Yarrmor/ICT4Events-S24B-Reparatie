@@ -87,12 +87,24 @@ namespace ICT4Events_S24B_Reparatie
                 lblMediaUploader.ForeColor = DefaultForeColor;
             }
 
-            lblMediaVerborgen.Text = m.Verborgen.ToString();
-            if (m.Verborgen == true) lblMediaVerborgen.ForeColor = Color.Red;
-            else lblMediaVerborgen.ForeColor = Color.Green;
-
+            MediaVerborgen();
             WeergeefAlleReacties();
             VulComboBox();
+        }
+
+        private void MediaVerborgen()
+        {
+            DatabaseManager dm = new DatabaseManager();
+            m.Verborgen = dm.MediaVerborgen(m.MediaID);
+            lblMediaVerborgen.Text = m.Verborgen.ToString();
+            if (m.Verborgen)
+            {
+                lblMediaVerborgen.ForeColor = Color.Red;
+            }
+            else
+            {
+                lblMediaVerborgen.ForeColor = Color.Green;
+            }
         }
 
         /// <summary>
@@ -197,15 +209,12 @@ namespace ICT4Events_S24B_Reparatie
         /// <param name="e"></param>
         private void btnMediaVerberg_Click(object sender, EventArgs e)
         {
-            foreach (Media m in md.MediaLijst)
-            {
-                if (m == this.m)
-                {
-                    m.Verborgen = true;
-                    this.m = m;
-                    VerversInformatie();
-                }
-            }
+            if (m.Verborgen)
+                md.VerbergMedia(m, false);
+            else
+                md.VerbergMedia(m, true);
+
+            VerversInformatie();
         }
 
         //Todo: in mediasharingsysteem zetten.
