@@ -2634,7 +2634,8 @@ namespace ICT4Events_S24B_Reparatie
                 command.Parameters.Add(":RFID", rfid);
                 command.Parameters.Add(":EventID", eventID);
 
-                return true;
+
+                return VoerNonQueryUit(command);
             }
             catch
             {

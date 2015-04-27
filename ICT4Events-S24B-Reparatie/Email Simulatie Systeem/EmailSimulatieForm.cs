@@ -35,6 +35,7 @@ namespace ICT4Events_S24B_Reparatie
         public void VerversEmails()
         {
             cbxEmails.Items.Clear();
+            tbxGeselecteerdeEmailInhoud.Text = "";
 
             foreach (Email e in algemeen.Emails)
             {
