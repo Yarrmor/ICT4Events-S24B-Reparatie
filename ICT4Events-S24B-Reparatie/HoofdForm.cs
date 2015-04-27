@@ -85,8 +85,15 @@ namespace ICT4Events_S24B_Reparatie
 
         private void btnMediaApplicatie_Click(object sender, EventArgs e)
         {
-            MediaSharingForm media = new MediaSharingForm(Algemeen, new MediaSharingSysteem(Algemeen.Evenement.ID));
-            media.Show();
+            if (Algemeen.Account != null)
+            {
+                MediaSharingForm media = new MediaSharingForm(Algemeen, new MediaSharingSysteem(Algemeen.Evenement.ID));
+                media.Show();
+            }
+            else
+            {
+                MessageBox.Show("Om dit gedeelte te kunnen bekijken moet je ingelogd zijn.");
+            }
         }
     }
 }
