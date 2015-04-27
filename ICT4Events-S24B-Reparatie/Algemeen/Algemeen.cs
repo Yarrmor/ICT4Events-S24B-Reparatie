@@ -248,12 +248,12 @@ namespace ICT4Events_S24B_Reparatie
 
         void inlogItem_Click(object sender, EventArgs e)
         {
-            //LogIn();
+            LogIn();
         }
 
         private void uitlogItem_Click(object sender, EventArgs e)
         {
-            //LogUit();
+            LogUit();
         }
         
         #endregion
@@ -280,7 +280,7 @@ namespace ICT4Events_S24B_Reparatie
 
         public void MaakEmailAan(string rfid, string onderwerp, string inhoud)
         {
-            //Emails.Add(new Email(rfid, Evenement.ID, onderwerp, inhoud));
+            Emails.Add(new Email(rfid, Evenement.ID, onderwerp, inhoud));
         }
 
         /*
