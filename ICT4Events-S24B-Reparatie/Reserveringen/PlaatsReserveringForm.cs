@@ -137,10 +137,12 @@ namespace ICT4Events_S24B_Reparatie
         /// <param name="e"></param>
         private void btnReserveren_Click(object sender, EventArgs e)
         {
+            DatabaseManager dm = new DatabaseManager();
             //Hardcoded voor 1 account
-            string rfid = "4a003767a8";
+            Random nieuwRFID = new Random();
+            string rfid = nieuwRFID.Next(1000000).ToString();
             //Hardcoded accID
-            int accountID = 8;
+            int accountID = dm.VerkrijgNieuwAccountID();
 
             string roepnaam = "";
             string voornaam = tbxVoornaam.Text;
