@@ -803,6 +803,38 @@ namespace ICT4Events_S24B_Reparatie
         }
 
         /// <summary>
+        /// Voegt de bijbehorende gegevens voor het groepshoofd van het eerder gemaakte account 
+        /// </summary>
+        /// <param name="groepshoofd"></param>
+        public void VoegGroepshoofdToe(Groepshoofd groepshoofd)
+        {
+            int accID = VerkrijgAccountID(groepshoofd.Email);
+
+            try
+            {
+                string sql = "INSERT INTO GROEPSHOOFD (AccountID, Telefoonnummer, Plaats, Straat, Huisnummer) VALUES (:AccountID, :Telefoonnummer, :Plaats, :Straat, :Huisnummer)";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":AccountID", accID);
+                command.Parameters.Add(":Telefoonnummer", groepshoofd.Telefoonnummer);
+                command.Parameters.Add(":Plaats", groepshoofd.Plaats);
+                command.Parameters.Add(":Straat", groepshoofd.Straat);
+                command.Parameters.Add(":Huisnummer", groepshoofd.Huisnummer);
+
+                command.ExecuteNonQuery();
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+        /// <summary>
         /// Retourneert het accountID van het account met dit email adres.
         /// </summary>
         /// <param name="email"></param>

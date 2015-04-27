@@ -82,6 +82,7 @@ namespace ICT4Events_S24B_Reparatie
             DatabaseManager dm = new DatabaseManager();
 
             dm.VoegAccountToe(reservering.Groepshoofd as Account, Algemeen.Evenement.ID);
+            dm.VoegGroepshoofdToe(reservering.Groepshoofd);
 
             return dm.VoegPlekReserveringToe(reservering);
         }
