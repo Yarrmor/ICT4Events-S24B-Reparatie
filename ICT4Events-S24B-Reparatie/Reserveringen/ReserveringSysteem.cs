@@ -57,17 +57,16 @@ namespace ICT4Events_S24B_Reparatie
                 int aantalDagen = 1;
                 DateTime? controleerDatum = beginDatum;
 
-                while (controleerDatum.Value.DayOfYear != eindDatum.Value.DayOfYear && controleerDatum.Value.Year != eindDatum.Value.Year)
+                while (controleerDatum.Value.DayOfYear != eindDatum.Value.DayOfYear)
                 {
                     aantalDagen++;
-                    controleerDatum.Value.AddDays(1);
+                    controleerDatum = controleerDatum.Value.AddDays(1);
                 }
 
                 return aantalDagen * dagPrijs;
             }
             else
                 return 0;
-
         }
 
         public Plek HaalPlekOp(int plekID)
@@ -81,6 +80,8 @@ namespace ICT4Events_S24B_Reparatie
         {
 
             DatabaseManager dm = new DatabaseManager();
+
+            dm.VoegAccountToe(reservering.Groepshoofd as Account, Algemeen.Evenement.ID);
 
             return dm.VoegPlekReserveringToe(reservering);
         }

@@ -271,24 +271,9 @@ namespace ICT4Events_S24B_Reparatie
                 string sql = "INSERT INTO RESERVERING(AccountID, PlekID, EventID, DatumStart, DatumEind, Betaald) VALUES (:AccountID, :PlekID, :EventID, :DatumStart, :DatumEind, :Betaald)";
 
                 DateTime datumStart = reservering.DatumStart;
-                string startDag = datumStart.Day.ToString();
-                string startMaand = datumStart.Month.ToString();
-                string startJaar = datumStart.Year.ToString();
 
                 DateTime datumEind = reservering.DatumEind;
-                string eindDag = datumEind.Day.ToString();
-                string eindMaand = datumEind.Month.ToString();
-                string eindJaar = datumEind.Year.ToString();
 
-                string[] strings = new string[] { startDag, startMaand, eindDag, eindMaand };
-                for (int i = 0; i < strings.Count(); i++)
-                {
-                    if (strings[i].Length == 1)
-                        strings[i] = "0" + strings[i];
-                }
-
-                string datumStartReplace = "TO_DATE('" + strings[0] + "/" + strings[1] + "/" + startJaar + "', 'dd/mm/yyyy')";
-                string datumEindReplace = "TO_DATE('" + strings[2] + "/" + strings[3] + "/" + eindJaar + "', 'dd/mm/yyyy')";
                 int betaald = 0;
                 if (reservering.Betaald)
                     betaald = 1;
@@ -297,8 +282,8 @@ namespace ICT4Events_S24B_Reparatie
                 command.Parameters.Add(":AccountID", reservering.Groepshoofd.AccountID);
                 command.Parameters.Add(":PlekID", reservering.Plek.PlekID);
                 command.Parameters.Add(":EventID", reservering.Event.ID);
-                command.Parameters.Add(":DatumStart", datumStartReplace);
-                command.Parameters.Add(":DatumEind", datumEindReplace);
+                command.Parameters.Add(":DatumStart", datumStart);
+                command.Parameters.Add(":DatumEind", datumEind);
                 command.Parameters.Add(":Betaald", betaald);
 
                 return VoerNonQueryUit(command);
