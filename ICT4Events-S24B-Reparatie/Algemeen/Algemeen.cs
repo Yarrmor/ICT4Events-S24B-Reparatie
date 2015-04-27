@@ -66,6 +66,17 @@ namespace ICT4Events_S24B_Reparatie
             InlogForm inlogForm = new InlogForm(this);
             inlogForm.ShowDialog();
         }
+
+        /// <summary>
+        /// Bypass login voor email verificatie, en ALLEEN voor emailverificatie.
+        /// </summary>
+        public void LogIn(string rfid)
+        {
+            DatabaseManager dm = new DatabaseManager();
+
+            Account = dm.AccountGegevens(dm.VerkrijgEmail(rfid), Evenement.ID);
+            hoofdForm.UpdateMenuBalk();
+        }
         /// <summary>
         /// Verifieert de ingevulde gegevens met de database.
         /// Indien verificatie succesvol is wordt this.account geüpdate.

@@ -157,7 +157,8 @@ namespace ICT4Events_S24B_Reparatie
 
         private void btnMateriaalReserveren_Click(object sender, EventArgs e)
         {
-
+            algemeen.LogIn(emailSimulatie.GeselecteerdeEmail.Rfid);
+            MateriaalReserverenForm mrf = new MateriaalReserverenForm(algemeen);
         }
     }
 }
