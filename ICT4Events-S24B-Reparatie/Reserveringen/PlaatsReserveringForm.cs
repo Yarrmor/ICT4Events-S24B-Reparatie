@@ -92,7 +92,8 @@ namespace ICT4Events_S24B_Reparatie
         /// <param name="e"></param>
         private void cbxBeschikbarePlaatsen_SelectedIndexChanged(object sender, EventArgs e)
         {
-            VerversPrijs();
+            if (cbxBeschikbarePlaatsen.SelectedIndex != -1)
+                VerversPrijs();
         }
 
         /// <summary>
