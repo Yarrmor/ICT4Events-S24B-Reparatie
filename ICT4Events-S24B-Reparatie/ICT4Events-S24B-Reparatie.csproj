@@ -70,6 +70,12 @@
     <Compile Include="Email Simulatie Systeem\VerifieerAccountForm.Designer.cs">
       <DependentUpon>VerifieerAccountForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InlogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InlogForm.Designer.cs">
+      <DependentUpon>InlogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MediaSharing\MediaSharingSysteem.cs" />
     <Compile Include="MediaSharing\Bestand.cs" />
     <Compile Include="MediaSharing\Categorie.cs" />
@@ -89,6 +95,12 @@
     <Compile Include="Reserveringen\Materiaal.cs" />
     <Compile Include="MediaSharing\Media.cs" />
     <Compile Include="MediaSharing\Melding.cs" />
+    <Compile Include="Reserveringen\ReserveringForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reserveringen\ReserveringForm.Designer.cs">
+      <DependentUpon>ReserveringForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reserveringen\ReserveringSysteem.cs" />
     <Compile Include="Toegangscontrole Systeem\ToegangscontroleForm.cs">
       <SubType>Form</SubType>

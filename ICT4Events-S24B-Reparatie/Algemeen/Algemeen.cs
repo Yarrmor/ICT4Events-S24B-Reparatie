@@ -16,11 +16,7 @@ namespace ICT4Events_S24B_Reparatie
         //list
         public Account Account { get; set; }
 
-        //Deze objecten worden eigenlijk aangemaakt vanuit het hun behorende form maar voor het klassendiagram  hou ik die even zo.
-        //private ReserveringSysteem reserveringen;
-        //private Toegangscontrole toegangscontroleSysteem;
-
-        //public List<Email> Emails { get; set; }
+        public List<Email> Emails { get; set; }
 
         public Event Evenement { get; set; }
 
@@ -57,7 +53,7 @@ namespace ICT4Events_S24B_Reparatie
 
         #region Methodes
 
-        /*
+        
         #region In- en uitloggen
         /// <summary>
         /// Geeft een inlogvenster weer im in te loggen
@@ -117,7 +113,7 @@ namespace ICT4Events_S24B_Reparatie
             Account = null;
             hoofdForm.UpdateMenuBalk();
         }
-        #endregion*/
+        #endregion
 
         #region Accounts beheren
         /// <summary>
