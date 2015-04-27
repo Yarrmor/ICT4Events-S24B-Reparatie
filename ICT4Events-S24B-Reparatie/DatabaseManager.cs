@@ -641,6 +641,34 @@ namespace ICT4Events_S24B_Reparatie
         }
 
         /// <summary>
+        /// Retourneert het email van het account met de meegegeven rfid
+        /// </summary>
+        /// <param name="rfid"></param>
+        /// <returns></returns>
+        public string VerkrijgEmail(string rfid)
+        {
+            try
+            {
+
+                string sql = "SELECT Email FROM ACCOUNT WHERE RFID = :RFID";
+       
+                OracleCommand command = MaakOracleCommand(sql);
+                command.Parameters.Add(":RFID", rfid);
+       
+                OracleDataReader reader = VoerQueryUit(command);
+                return Convert.ToString(reader["Email"]);
+            }
+            catch
+            {
+              return null;
+            }
+            finally
+            {
+               Verbinding.Close();
+            }
+        }
+
+        /// <summary>
         /// Haalt alle weer te geven/gebruikbare account details op van het bijbehorende email.
         /// eventID is noodzakelijk om het juiste accountType op te halen.
         /// </summary>
