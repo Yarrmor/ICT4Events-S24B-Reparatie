@@ -22,12 +22,16 @@ namespace ICT4Events_S24B_Reparatie
 
             this.dm = new DatabaseManager();
         }
+        public Exemplaar(int exemplaarID)
+        {
+            this.ExemplaarID = exemplaarID;
+        }
 
         public bool LeenUit(int accountID, DateTime startDatum, DateTime eindDatum)
         {
             return this.dm.LeenUit(accountID, startDatum, eindDatum);
         }
 
-
+        
     }
 }

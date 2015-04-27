@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using Oracle.DataAccess.Client;
 
@@ -474,6 +472,30 @@ namespace ICT4Events_S24B_Reparatie
                 Verbinding.Close();
             }
         }
+        
+        public Exemplaar NietUitgeleendExemplaar(int materiaalID)
+        {
+            try
+            {
+                string sql = "SELECT ExemplaarID FROM EXEMPLAAR WHERE MateriaalID = :MateriaalID AND ExemplaarID NOT IN (SELECT DISTINCT ExemplaarID FROM UITLENING WHERE DatumEind >= :Vandaag) AND ROWNUM = 1";
+
+                DateTime Vandaag = DateTime.Today;
+                OracleCommand command = MaakOracleCommand(sql);
+                command.Parameters.Add(":MateriaalID", materiaalID);
+                command.Parameters.Add(":Vandaag", Vandaag);
+
+                OracleDataReader reader = VoerQueryUit(command);
+                return new Exemplaar(Convert.ToInt32(reader["ExemplaarID"]));
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
 
         public bool VoegPlekReserveringToe(ReserveringPlaats reservering)
         {
@@ -524,11 +546,85 @@ namespace ICT4Events_S24B_Reparatie
                 Verbinding.Close();
             }
         }
+        public List<Exemplaar> UitgeleendExemplaren(int MateriaalID)
+        {
+            try
+            {
+                List<Exemplaar> UitgeleendeExemplaren = new List<Exemplaar>();
+                DateTime Vandaag = DateTime.Today;
+                string sql = "SELECT ExemplaarID FROM EXEMPLAAR WHERE MateriaalID = :MateriaalID AND ExemplaarID IN(SELECT DISTINCT ExemplaarID FROM UITLENING WHERE DatumEind <= :Vandaag)";
+                OracleCommand command = MaakOracleCommand(sql);
+                command.Parameters.Add(":MateriaalID", MateriaalID);
+                command.Parameters.Add(":Vandaag", Vandaag);
+                OracleDataReader reader = VoerMultiQueryUit(command);
+                while(reader.Read())
+                {
+                    UitgeleendeExemplaren.Add(new Exemplaar(Convert.ToInt32(reader["ExemplaarID"])));
+                }
+                return UitgeleendeExemplaren;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+      
+        public void WijzigMateriaalPrijs(Materiaal materiaal, int prijs)
+        {
+            try
+            {
+                string sql = "UPDATE MATERIAAL SET PRIJS = :Prijs WHERE MateriaalID = :MateriaalID";
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":Prijs", prijs);
+                command.Parameters.Add(":MateriaalID", materiaal.MateriaalID);
+
+                VoerNonQueryUit(command);
+            }
+            catch
+            {
+                throw new NullReferenceException();
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
 
         public List<Exemplaar> ExemplarenVanMateriaal(int MateriaalID)
         {
-            throw new NotImplementedException();
-            return null;
+           
+            
+            try
+            {
+                string sql = "SELECT ExemplaarID, MateriaalID, FROM UITLENING WHERE MateriaalID NOT IN(SELECT MateriaalID FROM EXEMPLAAR WHERE MATERIAALID = :MateriaalID)";
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":MateriaalID", MateriaalID);
+                OracleDataReader reader = VoerMultiQueryUit(command);
+                List<Exemplaar> exemplarenlijst = new List<Exemplaar>();
+                while(reader.Read())
+                {
+                    exemplarenlijst.Add(new Exemplaar(Convert.ToInt32(reader["ExemplaarID"])));
+                }
+                return exemplarenlijst;
+               
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+
+         
+           
         }
 
         #endregion
@@ -1225,7 +1321,7 @@ namespace ICT4Events_S24B_Reparatie
 
                 OracleCommand command = MaakOracleCommand(sql);
 
-                command.Parameters.Add(":EventID", ID);
+                command.Parameters.Add(":EventID", eventID);
 
                 OracleDataReader reader = VoerMultiQueryUit(command);
                 throw new NotImplementedException();
@@ -1243,16 +1339,16 @@ namespace ICT4Events_S24B_Reparatie
                         DateTime uploadDate = reader.GetDateTime(6);
                         bool verborgen = Convert.ToBoolean(reader["Verborgen"]);
 
-                        Account acc = VerkrijgAccount(accountID, ID);
+                        Account acc = VerkrijgAccount(accountID, eventID);
 
 
                         if (pad != null)
                         {
-                            MediaEvent.Add(new Media(mediaID, naam, new Bestand(pad.Substring(pad.LastIndexOf(".")), pad), categorieID, beschrijving, acc, uploadDate, ID, verborgen));
+                            MediaEvent.Add(new Media(mediaID, naam, new Bestand(pad.Substring(pad.LastIndexOf(".")), pad), categorieID, beschrijving, acc, uploadDate, eventID, verborgen));
                         }
                         else
                         {
-                            MediaEvent.Add(new Media(mediaID, naam, categorieID, beschrijving, acc, uploadDate, ID, verborgen));
+                            MediaEvent.Add(new Media(mediaID, naam, categorieID, beschrijving, acc, uploadDate, eventID, verborgen));
                         }
 
                     }
@@ -1434,7 +1530,7 @@ namespace ICT4Events_S24B_Reparatie
 
             OracleCommand command = MaakOracleCommand(sql);
 
-            command.Parameters.Add(":ReactieID", NieuwID("REACTIE");
+            command.Parameters.Add(":ReactieID", NieuwID("REACTIE"));
             command.Parameters.Add(":AccountID", reactie.Account.AccountID);
             command.Parameters.Add(":MediaID", reactie.Media.MediaID);
             if(reactie.ReactieOp != null)
@@ -1613,7 +1709,6 @@ namespace ICT4Events_S24B_Reparatie
 
             OracleDataReader reader = VoerMultiQueryUit(command);
 
-            throw new NotImplementedException();
             while (reader.Read())
             {
                 int id = Convert.ToInt32(reader["MateriaalID"]);

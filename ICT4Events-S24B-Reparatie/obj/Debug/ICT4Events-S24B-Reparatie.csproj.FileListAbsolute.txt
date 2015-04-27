@@ -11,3 +11,8 @@ C:\Users\Jelle\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Repara
 C:\Users\mark\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\bin\Debug\ICT4Events-S24B-Reparatie.exe.config
 C:\Users\mark\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.exe
 C:\Users\mark\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.pdb
+C:\Users\mark\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.csprojResolveAssemblyReference.cache
+C:\Users\mark\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events_S24B_Reparatie.Properties.Resources.resources
+C:\Users\mark\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events_S24B_Reparatie.MateriaalReserverenForm.resources
+C:\Users\mark\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.csproj.GenerateResource.Cache
+C:\Users\mark\Documents\GitHub\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events_S24B_Reparatie.PlekReserveringForm.resources

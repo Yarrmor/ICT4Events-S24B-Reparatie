@@ -51,6 +51,18 @@
     <Compile Include="Algemeen\Algemeen.cs" />
     <Compile Include="Algemeen\Account.cs" />
     <Compile Include="Algemeen\AccountType.cs" />
+    <Compile Include="Reserveringen\PlekReserveringForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reserveringen\PlekReserveringForm.Designer.cs">
+      <DependentUpon>PlekReserveringForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reserveringen\MateriaalReserverenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reserveringen\MateriaalReserverenForm.Designer.cs">
+      <DependentUpon>MateriaalReserverenForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MediaSharingSysteem.cs" />
     <Compile Include="MediaSharing\Bestand.cs" />
     <Compile Include="MediaSharing\Categorie.cs" />
@@ -85,6 +97,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Reserveringen\MateriaalReserverenForm.resx">
+      <DependentUpon>MateriaalReserverenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reserveringen\PlekReserveringForm.resx">
+      <DependentUpon>PlekReserveringForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
