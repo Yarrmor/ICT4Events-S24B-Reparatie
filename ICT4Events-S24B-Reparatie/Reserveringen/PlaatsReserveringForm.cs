@@ -60,7 +60,7 @@ namespace ICT4Events_S24B_Reparatie
                     filters.Add(filter.ToString());
                 }
 
-                List<Plek> plekList = reserveringSysteem.VerkrijgBeschikbarePlekken(filters, beginDatum, eindDatum);
+                List<Plek> plekList = reserveringSysteem.VerkrijgBeschikbarePlekken(filters);
 
                 foreach (Plek p in plekList)
                     cbxBeschikbarePlaatsen.Items.Add(p.PlekID);

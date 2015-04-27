@@ -15,11 +15,11 @@ namespace ICT4Events_S24B_Reparatie
             this.Algemeen = algemeen;
         }
 
-        public List<Plek> VerkrijgBeschikbarePlekken(List<string> filters, DateTime? beginDatum, DateTime? eindDatum)
+        public List<Plek> VerkrijgBeschikbarePlekken(List<string> filters)
         {
             DatabaseManager dm = new DatabaseManager();
 
-            List<Plek> plekken = dm.VerkrijgBeschikbarePlekken(Algemeen.Evenement.ID, Algemeen.Evenement.Locatie, beginDatum, eindDatum);
+            List<Plek> plekken = dm.VerkrijgBeschikbarePlekken(Algemeen.Evenement.ID, Algemeen.Evenement.Locatie);
 
             List<Plek> gefilterdePlekken = new List<Plek>();
 

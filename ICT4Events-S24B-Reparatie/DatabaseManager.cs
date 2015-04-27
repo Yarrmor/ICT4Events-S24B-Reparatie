@@ -2654,19 +2654,15 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
-        public List<Plek> VerkrijgBeschikbarePlekken(int eventID, Locatie locatie, DateTime? beginDatum, DateTime? eindDatum)
+        public List<Plek> VerkrijgBeschikbarePlekken(int eventID, Locatie locatie)
         {
             try
             {
                 // Alle niet gereserveerde plekken // filter en tijd niet door tijdsnood
-                string sql = "SELECT PlekID, Prijs, Beschrijving FROM Plek WHERE PlekID NOT IN ( SELECT DISTINCT PlekID FROM RESERVERING WHERE DatumStart <= :DatumStart AND DatumEind >= :DatumEind ) AND PlekID IN ( SELECT PlekID FROM Plek WHERE LocatieID = ( SELECT LocatieID FROM Event WHERE EventID = :EventID )) ORDER BY PlekID ASC";
+                string sql = "SELECT PlekID, Prijs, Beschrijving FROM Plek WHERE PlekID NOT IN ( SELECT DISTINCT PlekID FROM RESERVERING ) AND PlekID IN ( SELECT PlekID FROM Plek WHERE LocatieID = ( SELECT LocatieID FROM Event WHERE EventID = :EventID )) ORDER BY PlekID ASC";
 
                 OracleCommand command = MaakOracleCommand(sql);
 
-                throw new NotImplementedException("datum parameters");
-
-                command.Parameters.Add(":DatumStart", beginDatum); //fout
-                command.Parameters.Add(":DatumEind", eindDatum); //fout
                 command.Parameters.Add(":EventID", eventID);
 
                 OracleDataReader reader = VoerMultiQueryUit(command);
