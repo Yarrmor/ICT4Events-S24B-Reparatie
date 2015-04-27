@@ -235,6 +235,7 @@
             this.btnWijzig.TabIndex = 1;
             this.btnWijzig.Text = "Wijzig";
             this.btnWijzig.UseVisualStyleBackColor = true;
+            this.btnWijzig.Click += new System.EventHandler(this.btnWijzig_Click);
             // 
             // btnBan
             // 

@@ -197,5 +197,10 @@ namespace ICT4Events_S24B_Reparatie
                 }
             }
         }
+
+        private void btnWijzig_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
