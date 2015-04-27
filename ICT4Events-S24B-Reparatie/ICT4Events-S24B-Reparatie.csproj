@@ -52,12 +52,6 @@
     <Compile Include="Algemeen\Account.cs" />
     <Compile Include="Algemeen\AccountType.cs" />
     <Compile Include="Algemeen\ILoginSysteem.cs" />
-    <Compile Include="MediaFormsMap\ReactieDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MediaFormsMap\ReactieDialog.Designer.cs">
-      <DependentUpon>ReactieDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="MediaSharing\MediaSharingSysteem.cs" />
     <Compile Include="MediaSharing\Bestand.cs" />
     <Compile Include="MediaSharing\Categorie.cs" />
@@ -77,6 +71,13 @@
     <Compile Include="Reserveringen\Materiaal.cs" />
     <Compile Include="MediaSharing\Media.cs" />
     <Compile Include="MediaSharing\Melding.cs" />
+    <Compile Include="Toegangscontrole Systeem\ToegangscontroleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Toegangscontrole Systeem\ToegangscontroleForm.Designer.cs">
+      <DependentUpon>ToegangscontroleForm.cs</DependentUpon>
+    </Compile>
+	<Compile Include="Toegangscontrole Systeem\Toeganscontrole.cs" />
     <Compile Include="Reserveringen\Plek.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,6 +143,12 @@
     </Compile>
     <Compile Include="MediaFormsMap\Rapporteer.Designer.cs">
       <DependentUpon>Rapporteer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MediaFormsMap\ReactieDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MediaFormsMap\ReactieDialog.Designer.cs">
+      <DependentUpon>ReactieDialog.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="HoofdForm.resx">
       <DependentUpon>HoofdForm.cs</DependentUpon>
