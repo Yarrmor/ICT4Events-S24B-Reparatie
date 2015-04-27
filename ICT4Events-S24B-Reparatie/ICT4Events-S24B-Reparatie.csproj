@@ -83,6 +83,12 @@
     <Compile Include="MediaSharing\Reactie.cs" />
     <Compile Include="Reserveringen\ReserveringMateriaal.cs" />
     <Compile Include="Reserveringen\ReserveringPlaats.cs" />
+    <Compile Include="Reserveringen\MateriaalReserverenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reserveringen\MateriaalReserverenForm.Designer.cs">
+      <DependentUpon>MateriaalReserverenForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MediaFormsMap\Gerapporteerd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +170,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Reserveringen\MateriaalReserverenForm.resx">
+      <DependentUpon>MateriaalReserverenForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

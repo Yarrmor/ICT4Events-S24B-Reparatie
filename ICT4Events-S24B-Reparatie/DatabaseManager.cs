@@ -431,30 +431,6 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
-        public bool VoegPlekToe(Plek plek)
-        {
-            try
-            {
-                string sql = "INSERT INTO PLEK(PlekID, LocatieID, Prijs, Beschrijving) VALUES (:PlekID, :LocatieID, :Prijs, :Beschrijving)";
-
-                OracleCommand command = MaakOracleCommand(sql);
-                command.Parameters.Add(":PlekID", plek.PlekID);
-                command.Parameters.Add(":LocatieID", plek.Locatie);
-                command.Parameters.Add(":Prijs", plek.Prijs);
-                command.Parameters.Add(":Beschrijving", plek.Beschrijving);
-
-                return VoerNonQueryUit(command);
-            }
-            catch
-            {
-                return false;
-            }
-            finally
-            {
-                Verbinding.Close();
-            }
-        }
-
         public bool VoegMateriaalReserveringToe(ReserveringMateriaal reservering)
         {
             try
@@ -479,49 +455,72 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
-        public bool VoegPlekReserveringToe(ReserveringPlaats reservering)
+        public Exemplaar NietUitgeleendExemplaar(int materiaalID)
         {
             try
             {
-                string sql = "INSERT INTO RESERVERING(AccountID, PlekID, EventID, DatumStart, DatumEind, Betaald) VALUES (:AccountID, :PlekID, :EventID, :DatumStart, :DatumEind, :Betaald)";
+                string sql = "SELECT ExemplaarID FROM EXEMPLAAR WHERE MateriaalID = :MateriaalID AND ExemplaarID NOT IN (SELECT DISTINCT ExemplaarID FROM UITLENING WHERE DatumEind >= :Vandaag) AND ROWNUM = 1";
 
-                DateTime datumStart = reservering.DatumStart;
-                string startDag = datumStart.Day.ToString();
-                string startMaand = datumStart.Month.ToString();
-                string startJaar = datumStart.Year.ToString();
-
-                DateTime datumEind = reservering.DatumEind;
-                string eindDag = datumEind.Day.ToString();
-                string eindMaand = datumEind.Month.ToString();
-                string eindJaar = datumEind.Year.ToString();
-
-                string[] strings = new string[] { startDag, startMaand, eindDag, eindMaand };
-                for (int i = 0; i < strings.Count(); i++)
-                {
-                    if (strings[i].Length == 1)
-                        strings[i] = "0" + strings[i];
-                }
-
-                string datumStartReplace = "TO_DATE('" + strings[0] + "/" + strings[1] + "/" + startJaar + "', 'dd/mm/yyyy')";
-                string datumEindReplace = "TO_DATE('" + strings[2] + "/" + strings[3] + "/" + eindJaar + "', 'dd/mm/yyyy')";
-                int betaald = 0;
-                if (reservering.Betaald)
-                    betaald = 1;
-
+                DateTime Vandaag = DateTime.Today;
                 OracleCommand command = MaakOracleCommand(sql);
-                command.Parameters.Add(":AccountID", reservering.Groepshoofd.AccountID);
-                command.Parameters.Add(":PlekID", reservering.Plek.PlekID);
-                command.Parameters.Add(":EventID", reservering.Event.ID);
-                command.Parameters.Add(":DatumStart", datumStartReplace);
-                command.Parameters.Add(":DatumEind", datumEindReplace);
-                command.Parameters.Add(":Betaald", betaald);
+                command.Parameters.Add(":MateriaalID", materiaalID);
+                command.Parameters.Add(":Vandaag", Vandaag);
 
-                return VoerNonQueryUit(command);
-
+                OracleDataReader reader = VoerQueryUit(command);
+                return new Exemplaar(Convert.ToInt32(reader["ExemplaarID"]));
             }
             catch
             {
-                return false;
+                return null;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
+        public List<Exemplaar> UitgeleendExemplaren(int MateriaalID)
+        {
+            try
+            {
+                List<Exemplaar> UitgeleendeExemplaren = new List<Exemplaar>();
+                DateTime Vandaag = DateTime.Today;
+                string sql = "SELECT ExemplaarID FROM EXEMPLAAR WHERE MateriaalID = :MateriaalID AND ExemplaarID IN(SELECT DISTINCT ExemplaarID FROM UITLENING WHERE DatumEind <= :Vandaag)";
+                OracleCommand command = MaakOracleCommand(sql);
+                command.Parameters.Add(":MateriaalID", MateriaalID);
+                command.Parameters.Add(":Vandaag", Vandaag);
+                OracleDataReader reader = VoerMultiQueryUit(command);
+                while (reader.Read())
+                {
+                    UitgeleendeExemplaren.Add(new Exemplaar(Convert.ToInt32(reader["ExemplaarID"])));
+                }
+                return UitgeleendeExemplaren;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
+        public void WijzigMateriaalPrijs(Materiaal materiaal, int prijs)
+        {
+            try
+            {
+                string sql = "UPDATE MATERIAAL SET PRIJS = :Prijs WHERE MateriaalID = :MateriaalID";
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":Prijs", prijs);
+                command.Parameters.Add(":MateriaalID", materiaal.MateriaalID);
+
+                VoerNonQueryUit(command);
+            }
+            catch
+            {
+                throw new NullReferenceException();
             }
             finally
             {
@@ -531,8 +530,34 @@ namespace ICT4Events_S24B_Reparatie
 
         public List<Exemplaar> ExemplarenVanMateriaal(int MateriaalID)
         {
-            throw new NotImplementedException();
-            return null;
+
+
+            try
+            {
+                string sql = "SELECT ExemplaarID, MateriaalID, FROM UITLENING WHERE MateriaalID NOT IN(SELECT MateriaalID FROM EXEMPLAAR WHERE MATERIAALID = :MateriaalID)";
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":MateriaalID", MateriaalID);
+                OracleDataReader reader = VoerMultiQueryUit(command);
+                List<Exemplaar> exemplarenlijst = new List<Exemplaar>();
+                while (reader.Read())
+                {
+                    exemplarenlijst.Add(new Exemplaar(Convert.ToInt32(reader["ExemplaarID"])));
+                }
+                return exemplarenlijst;
+
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+
+
+
         }
 
         #endregion

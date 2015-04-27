@@ -33,5 +33,9 @@ namespace ICT4Events_S24B_Reparatie
         {
             return this.dm.ExemplarenVanMateriaal(this.MateriaalID);
         }
+        public Exemplaar NietUitgeleendExemplaar()
+        {
+            return this.dm.NietUitgeleendExemplaar(this.MateriaalID);
+        }
     }
 }

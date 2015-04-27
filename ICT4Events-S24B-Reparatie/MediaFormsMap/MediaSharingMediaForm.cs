@@ -38,15 +38,15 @@ namespace ICT4Events_S24B_Reparatie
 
         private void Visibility()
         {
-            if (alg.Account.Type != AccountType.Beheerder)
-            {
-                BeheerButtons();
-            }
-            else if (alg.Account != m.Uploader && alg.Account.Type != AccountType.Beheerder)
+            if (alg.Account != m.Uploader && alg.Account.Type != AccountType.Beheerder)
             {
                 BeheerButtons();
                 gbxBeheer.Enabled = false;
                 gbxBeheer.Visible = false;
+            }
+            else if (alg.Account.Type != AccountType.Beheerder)
+            {
+                BeheerButtons();
             }
         }
 
