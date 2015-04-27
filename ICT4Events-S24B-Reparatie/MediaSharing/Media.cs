@@ -60,9 +60,14 @@ namespace ICT4Events_S24B_Reparatie
             return Naam + " L:" + dm.VerkrijgLikes(this.MediaID) + " D:" + dm.VerkrijgDisLikes(this.MediaID);
         }
 
-        public bool Stem(int score)
+        public bool Stem(int accountID, int score)
         {
-            return this.dm.Stem(this.MediaID, score);
+            return this.dm.Stem(accountID, this.MediaID, score);
+        }
+
+        public bool Upload()
+        {
+            return this.dm.VoegMediaToe(this);
         }
     }
 }

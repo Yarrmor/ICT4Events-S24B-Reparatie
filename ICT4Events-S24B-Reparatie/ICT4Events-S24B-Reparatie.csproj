@@ -51,7 +51,27 @@
     <Compile Include="Algemeen\Algemeen.cs" />
     <Compile Include="Algemeen\Account.cs" />
     <Compile Include="Algemeen\AccountType.cs" />
-    <Compile Include="MediaSharingSysteem.cs" />
+    <Compile Include="Email Simulatie Systeem\Email.cs" />
+    <Compile Include="Email Simulatie Systeem\EmailSimulatie.cs" />
+    <Compile Include="Email Simulatie Systeem\EmailSimulatieForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Email Simulatie Systeem\EmailSimulatieForm.Designer.cs">
+      <DependentUpon>EmailSimulatieForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Email Simulatie Systeem\VerifieerAccountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Email Simulatie Systeem\VerifieerAccountForm.Designer.cs">
+      <DependentUpon>VerifieerAccountForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Email Simulatie Systeem\WijzigWachtwoordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Email Simulatie Systeem\WijzigWachtwoordForm.Designer.cs">
+      <DependentUpon>WijzigWachtwoordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MediaSharing\MediaSharingSysteem.cs" />
     <Compile Include="MediaSharing\Bestand.cs" />
     <Compile Include="MediaSharing\Categorie.cs" />
     <Compile Include="DatabaseManager.cs" />
@@ -70,12 +90,25 @@
     <Compile Include="Reserveringen\Materiaal.cs" />
     <Compile Include="MediaSharing\Media.cs" />
     <Compile Include="MediaSharing\Melding.cs" />
+    <Compile Include="Reserveringen\PlaatsReserveringForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reserveringen\PlaatsReserveringForm.Designer.cs">
+      <DependentUpon>PlaatsReserveringForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reserveringen\Plek.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MediaSharing\Reactie.cs" />
     <Compile Include="Reserveringen\ReserveringMateriaal.cs" />
     <Compile Include="Reserveringen\ReserveringPlaats.cs" />
+    <Compile Include="Reserveringen\ReserveringSysteem.cs" />
+    <EmbeddedResource Include="Email Simulatie Systeem\EmailSimulatieForm.resx">
+      <DependentUpon>EmailSimulatieForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Email Simulatie Systeem\VerifieerAccountForm.resx">
+      <DependentUpon>VerifieerAccountForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -85,6 +118,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Reserveringen\PlaatsReserveringForm.resx">
+      <DependentUpon>PlaatsReserveringForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -99,7 +135,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Email Simulatie Systeem\" />
     <Folder Include="MediaFormsMap\" />
     <Folder Include="Toegangscontrole Systeem\" />
   </ItemGroup>
