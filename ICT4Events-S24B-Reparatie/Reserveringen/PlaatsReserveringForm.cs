@@ -170,7 +170,7 @@ namespace ICT4Events_S24B_Reparatie
             string email = tbxEmail.Text;
 
             // Controleer ingevulde waarden
-            string[] check = new string[] { roepnaam, voornaam, achternaam, telefoonnummer, plaats, straat, huisnummer, email };
+            string[] check = new string[] { voornaam, achternaam, telefoonnummer, plaats, straat, huisnummer, email };
             
             foreach (string s in check)
             {
