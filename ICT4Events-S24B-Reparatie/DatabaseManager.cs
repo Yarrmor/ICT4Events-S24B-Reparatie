@@ -410,6 +410,29 @@ namespace ICT4Events_S24B_Reparatie
             }
         }
 
+        public bool ZetAanwezig(string rfid, int eventID)
+        {
+            try
+            {
+                string sql = "UPDATE RESERVERING SET Aanwezig = 1 WHERE ACCOUNT.RFID = :RFID AND ACCOUNT.AccountID = RESERVERING.AccountID AND RESERVERING.EventID = :EventID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":RFID", rfid);
+                command.Parameters.Add(":EventID", eventID);
+
+                return VoerNonQueryUit(command);
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
         public bool AnnuleringReservering(string rfid, int eventID)
         {
             try

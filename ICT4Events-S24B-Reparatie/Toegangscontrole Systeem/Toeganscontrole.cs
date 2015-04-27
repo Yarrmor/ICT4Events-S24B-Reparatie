@@ -64,6 +64,11 @@ namespace ICT4Events_S24B_Reparatie
             return dm.ZetBetaald(rfid, algemeen.Evenement.ID);
         }
 
+        public bool ZetAanwezig(string rfid)
+        {
+            return dm.ZetAanwezig(rfid, algemeen.Evenement.ID);
+        }
+
         /// <summary>
         /// Geeft het rfid mee waarvan de reservering moet worden geannuleerd
         /// </summary>

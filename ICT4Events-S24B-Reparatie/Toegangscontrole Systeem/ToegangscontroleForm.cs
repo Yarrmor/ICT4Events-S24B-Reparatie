@@ -40,6 +40,11 @@ namespace ICT4Events_S24B_Reparatie
             btnScanRFID.Enabled = true;
             Scannen = false;
 
+            if(!toegangscontrole.ZetAanwezig(rfid))
+            {
+                MessageBox.Show("Actie mislukt.");
+            }
+
             ReserveringPlaats rp = toegangscontrole.VerkrijgReserveringPlaats(tbxScanRFID.Text);
 
             UpdateLabels(rp);
