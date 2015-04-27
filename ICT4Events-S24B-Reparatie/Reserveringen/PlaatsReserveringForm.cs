@@ -23,6 +23,8 @@ namespace ICT4Events_S24B_Reparatie
 
         ReserveringSysteem reserveringSysteem;
 
+        bool meerderePersonen = false;
+
         /// <summary>
         /// Haalt de beschikbare datums op en maakt plekfilters beschikbaar
         /// </summary>
@@ -119,15 +121,22 @@ namespace ICT4Events_S24B_Reparatie
         /// <param name="e"></param>
         private void nudAantalPersonen_ValueChanged(object sender, EventArgs e)
         {
-            TextBox[] tbxEmails = new TextBox[] { tbxEmailGroepslid1, tbxEmailGroepslid2, tbxEmailGroepslid3, tbxEmailGroepslid4 };
-
-            for (int i = 1; i <= 4; i++)
-                tbxEmails[i - 1].Enabled = (i <= (int)nudAantalPersonen.Value - 1 );
-
-            foreach (TextBox tbx in tbxEmails)
+            if (!meerderePersonen)
             {
-                if (!tbx.Enabled)
-                    tbx.Text = "";
+                MessageBox.Show("Huidig kunt u geen reservering plaatsen voor meerdere personen, dit zal later geimplementeerd worden.");
+            }
+            else
+            {
+                TextBox[] tbxEmails = new TextBox[] { tbxEmailGroepslid1, tbxEmailGroepslid2, tbxEmailGroepslid3, tbxEmailGroepslid4 };
+
+                for (int i = 1; i <= 4; i++)
+                    tbxEmails[i - 1].Enabled = (i <= (int)nudAantalPersonen.Value - 1);
+
+                foreach (TextBox tbx in tbxEmails)
+                {
+                    if (!tbx.Enabled)
+                        tbx.Text = "";
+                }
             }
         }
 
