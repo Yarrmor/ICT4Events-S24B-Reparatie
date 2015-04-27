@@ -35,7 +35,22 @@ namespace ICT4Events_S24B_Reparatie
         /// <param name="e"></param>
         private void btnInloggen_Click(object sender, EventArgs e)
         {
-            Algemeen.LogIn();
+            if(Algemeen.Account == null)
+            {
+                Algemeen.LogIn();
+                if(Algemeen.Account != null)
+                {
+                    btnInloggen.Text = "Uitloggen";
+                }
+            }
+            else if(Algemeen.Account != null)
+            {
+                Algemeen.LogUit();
+                if(Algemeen.Account == null)
+                {
+                    btnInloggen.Text = "Inloggen";
+                }
+            }
         }
 
         /// <summary>
