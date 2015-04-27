@@ -278,7 +278,7 @@
             this.gbxAanwezigen.Size = new System.Drawing.Size(362, 185);
             this.gbxAanwezigen.TabIndex = 6;
             this.gbxAanwezigen.TabStop = false;
-            this.gbxAanwezigen.Text = "groupBox1";
+            this.gbxAanwezigen.Text = "Aanwezigen";
             // 
             // ToegangscontroleForm
             // 

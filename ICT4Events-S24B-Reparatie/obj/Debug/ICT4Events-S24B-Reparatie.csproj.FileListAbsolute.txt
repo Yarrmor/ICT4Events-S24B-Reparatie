@@ -57,3 +57,4 @@ C:\Users\mark\Documents\GitHub\testrep\ICT4Events-S24B-Reparatie\ICT4Events-S24B
 C:\Users\mark\Documents\GitHub\testrep\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.csproj.GenerateResource.Cache
 C:\Users\mark\Documents\GitHub\testrep\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.exe
 C:\Users\mark\Documents\GitHub\testrep\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events-S24B-Reparatie.pdb
+C:\Users\mark\Documents\GitHub\testrep\ICT4Events-S24B-Reparatie\ICT4Events-S24B-Reparatie\obj\Debug\ICT4Events_S24B_Reparatie.ToegangscontroleForm.resources

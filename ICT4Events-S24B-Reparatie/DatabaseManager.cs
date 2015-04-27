@@ -2754,7 +2754,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             try
             {
-                string sql = "SELECT ACCOUNT.RFID, Voornaam, Achternaam FROM ACCOUNT, ROL WHERE EventID = :EventID";
+                string sql = "SELECT ACCOUNT.RFID, Voornaam, Achternaam FROM ACCOUNT, RESERVERING WHERE EventID = 1 AND ACCOUNT.AccountID = RESERVERING.AccountID AND Aanwezig = 1";
 
                 OracleCommand command = MaakOracleCommand(sql);
 
