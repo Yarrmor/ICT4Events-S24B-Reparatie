@@ -97,17 +97,17 @@ namespace ICT4Events_S24B_Reparatie
 
         private void BanUnBan(bool verban)
         {
-            this.dm.Verban(this.Email, verban);
+            this.dm.Verban(this.AccountID, verban);
         }
 
-        public bool VoegToe()
+        public bool Verwijder(int EventID)
         {
-            return this.dm.VoegAccountToe(this);
+            return this.dm.VerwijderAccount(AccountID, EventID);
         }
 
-        public bool Verwijder()
+        public override string ToString()
         {
-            return this.dm.VerwijderAccount(this.Rfid);
+            return AccountID + ", " + Roepnaam + "| Verbannen:" + Verbannen.ToString();
         }
     }
 }

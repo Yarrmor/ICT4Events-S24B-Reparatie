@@ -62,12 +62,36 @@ namespace ICT4Events_S24B_Reparatie
 
         public bool Stem(int accountID, int score)
         {
-            return this.dm.Stem(accountID, this.MediaID, score);
+            if (!dm.AccountAlGestemd(accountID, MediaID))
+            {
+                return dm.RateMedia(accountID, MediaID, score);
+            }
+            else
+            {
+                if (!dm.AccountAlGeliked(accountID, MediaID, score)) //0 staat voor dislike.
+                {
+                    return dm.UpdateRateMedia(accountID, MediaID, score);
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         public bool Upload()
         {
             return this.dm.VoegMediaToe(this);
+        }
+
+        public List<Reactie> VerkrijgReacties()
+        {
+            return dm.VerkrijgReacties(MediaID, EventID);
+        }
+
+        public bool VoegReactieToe(Reactie r)
+        {
+            return dm.VoegReactieToe(r);
         }
     }
 }

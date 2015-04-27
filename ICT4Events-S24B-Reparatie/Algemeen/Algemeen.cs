@@ -17,10 +17,10 @@ namespace ICT4Events_S24B_Reparatie
         public Account Account { get; set; }
 
         //Deze objecten worden eigenlijk aangemaakt vanuit het hun behorende form maar voor het klassendiagram  hou ik die even zo.
-        private ReserveringSysteem reserveringen;
-        private Toegangscontrole toegangscontroleSysteem;
+        //private ReserveringSysteem reserveringen;
+        //private Toegangscontrole toegangscontroleSysteem;
 
-        public List<Email> Emails { get; set; }
+        //public List<Email> Emails { get; set; }
 
         public Event Evenement { get; set; }
 
@@ -45,8 +45,8 @@ namespace ICT4Events_S24B_Reparatie
         {
             this.hoofdForm = hoofdForm;
 
-            Account = null;
-            Emails = new List<Email>();
+            Account = new Account("RFID", 1, "Mail@Mail.nl", "Koekert", AccountType.Beheerder, false);
+            //Emails = new List<Email>();
             //Hardcoded eventID
             int eventID = 1;
 
@@ -57,6 +57,7 @@ namespace ICT4Events_S24B_Reparatie
 
         #region Methodes
 
+        /*
         #region In- en uitloggen
         /// <summary>
         /// Geeft een inlogvenster weer im in te loggen
@@ -116,7 +117,7 @@ namespace ICT4Events_S24B_Reparatie
             Account = null;
             hoofdForm.UpdateMenuBalk();
         }
-        #endregion
+        #endregion*/
 
         #region Accounts beheren
         /// <summary>
@@ -143,14 +144,14 @@ namespace ICT4Events_S24B_Reparatie
         /// <returns></returns>
         public bool VerwijderAccount(Account acc)
         {
-            return VerwijderAccount(acc.Rfid);
+            return VerwijderAccount(acc.AccountID, Evenement.ID);
         }
 
-        public bool VerwijderAccount(string rfid)
+        public bool VerwijderAccount(int AccountID, int EventID)
         {
             DatabaseManager dm = new DatabaseManager();
 
-            return dm.VerwijderAccount(rfid);
+            return dm.VerwijderAccount(AccountID, EventID);
         }
 
         /// <summary>
@@ -195,6 +196,8 @@ namespace ICT4Events_S24B_Reparatie
         }
         #endregion
 
+        #region menubalk 
+        
         /// <summary>
         /// Er wordt automatisch een menu balk gemaakt in de meegegeven form.
         /// Return waarde of is ingelogd of niet.
@@ -250,13 +253,15 @@ namespace ICT4Events_S24B_Reparatie
 
         void inlogItem_Click(object sender, EventArgs e)
         {
-            LogIn();
+            //LogIn();
         }
 
         private void uitlogItem_Click(object sender, EventArgs e)
         {
-            LogUit();
+            //LogUit();
         }
+        
+        #endregion
 
         public bool WachtwoordVergeten(string email)
         {
@@ -280,17 +285,18 @@ namespace ICT4Events_S24B_Reparatie
 
         public void MaakEmailAan(string rfid, string onderwerp, string inhoud)
         {
-            Emails.Add(new Email(rfid, Evenement.ID, onderwerp, inhoud));
+            //Emails.Add(new Email(rfid, Evenement.ID, onderwerp, inhoud));
         }
 
+        /*
         /// <summary>
         /// De meegegeven email wordt verwijderd
         /// </summary>
         /// <param name="i"></param>
         public void VerwijderEmail(Email e)
         {
-            Emails.Remove(e);
-        }
+            //Emails.Remove(e);
+        }*/
         #endregion
     }
 }

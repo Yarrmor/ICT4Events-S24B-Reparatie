@@ -1,6 +1,6 @@
 ﻿namespace ICT4Events_S24B_Reparatie
 {
-    partial class Form1
+    partial class TaalFiltersForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,10 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.Text = "TaalFiltersForm";
         }
 
         #endregion
     }
 }
-

@@ -15,12 +15,15 @@ namespace ICT4Events_S24B_Reparatie
         private Algemeen algemeen;
         public MateriaalReserverenForm(Algemeen alg)
         {
+            gbxUitgeleendMateriaal.Visible = false;
+            gbxMateriaalToevoegen.Visible = false;
             this.algemeen = alg;
             if (alg.Account == null)
             {
                 if(alg.Account.Type == AccountType.Beheerder)
                 {
-
+                    gbxUitgeleendMateriaal.Visible = true;
+                    gbxMateriaalToevoegen.Visible = true;
                 }
             }
             VerversMaterialen();

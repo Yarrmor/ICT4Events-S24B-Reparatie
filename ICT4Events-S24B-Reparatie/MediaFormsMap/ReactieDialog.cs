@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace ICT4Events_S24B_Reparatie
 {
-    public partial class Form1 : Form
+    public partial class ReactieDialog : Form
     {
-        public Form1()
+        public ReactieDialog()
         {
             InitializeComponent();
+        }
+
+        private void btnPlaatsReactie_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
         }
     }
 }
