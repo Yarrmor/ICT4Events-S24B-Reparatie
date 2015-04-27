@@ -103,15 +103,20 @@ namespace ICT4Events_S24B_Reparatie
         /// </summary>
         private void VerversPrijs()
         {
-            int i = reserveringSysteem.HaalPrijsOp(Convert.ToInt32(cbxBeschikbarePlaatsen.Items[cbxBeschikbarePlaatsen.SelectedIndex]));
+            int index = cbxBeschikbarePlaatsen.SelectedIndex;
 
-            // Dagprijs van plaats
-            int prijs = reserveringSysteem.HaalPrijsOp(i);
-            lblDagPrijsWaarde.Text = "€" + prijs.ToString("c");
+            if (index != -1)
+            {
+                int i = reserveringSysteem.HaalPrijsOp(Convert.ToInt32(cbxBeschikbarePlaatsen.Items[index]));
 
-            // Totaalprijs van plaats en datums
-            int totaalPrijs = reserveringSysteem.HaalTotaalPrijsOp(prijs, beginDatum, eindDatum);
-            lblTotaalPrijsWaarde.Text = "€" + totaalPrijs.ToString();
+                // Dagprijs van plaats
+                int prijs = reserveringSysteem.HaalPrijsOp(i);
+                lblDagPrijsWaarde.Text = "€" + prijs.ToString("c");
+
+                // Totaalprijs van plaats en datums
+                int totaalPrijs = reserveringSysteem.HaalTotaalPrijsOp(prijs, beginDatum, eindDatum);
+                lblTotaalPrijsWaarde.Text = "€" + totaalPrijs.ToString();
+            }
         }
 
         /// <summary>
@@ -253,7 +258,7 @@ namespace ICT4Events_S24B_Reparatie
             if (cbxEindPeriode.SelectedIndex != -1)
             {
                 eindDatum = cbxEindPeriode.Items[cbxEindPeriode.SelectedIndex] as DateTime?;
-
+                VerkrijgBeschikbarePlekken();
                 VerversPrijs();
             }
             else
