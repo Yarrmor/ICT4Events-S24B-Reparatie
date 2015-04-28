@@ -596,5 +596,15 @@ namespace ICT4Events_S24B_Reparatie
                 }
             }
         }
+
+        private void btnReactieLike_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Nog niet geimplementeerd in de database.");
+        }
+
+        private void btnReactieDislike_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Nog niet geimplementeerd in de database.");
+        }
     }
 }

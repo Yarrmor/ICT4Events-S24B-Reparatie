@@ -1880,6 +1880,29 @@ namespace ICT4Events_S24B_Reparatie
         }
 
         #region MediaLikes
+
+        public bool VerwijderLikesMedia(int mediaID)
+        {
+            try
+            {
+                string sql = "DELETE FROM STEM WHERE MediaID = :MediaID";
+
+                OracleCommand command = MaakOracleCommand(sql);
+
+                command.Parameters.Add(":MediaID", mediaID);
+
+                return VoerNonQueryUit(command);
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Verbinding.Close();
+            }
+        }
+
         public bool AccountAlGestemd(int accountID, int mediaID)
         {
             try
