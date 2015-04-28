@@ -31,6 +31,7 @@
             this.lblSelecteerEmail = new System.Windows.Forms.Label();
             this.cbxEmails = new System.Windows.Forms.ComboBox();
             this.gbxGeselecteerdeEmail = new System.Windows.Forms.GroupBox();
+            this.btnMateriaalReserveren = new System.Windows.Forms.Button();
             this.btnWijzigWachtwoord = new System.Windows.Forms.Button();
             this.btnAnnuleerReservering = new System.Windows.Forms.Button();
             this.btnBetaalReservering = new System.Windows.Forms.Button();
@@ -38,7 +39,6 @@
             this.lblGeselecteerdeEmailOnderwerp = new System.Windows.Forms.Label();
             this.lblEmailOnderwerp = new System.Windows.Forms.Label();
             this.tbxGeselecteerdeEmailInhoud = new System.Windows.Forms.TextBox();
-            this.btnMateriaalReserveren = new System.Windows.Forms.Button();
             this.gbxGeselecteerdeEmail.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,13 +78,24 @@
             this.gbxGeselecteerdeEmail.TabStop = false;
             this.gbxGeselecteerdeEmail.Text = "Geselecteerde E-Mail:";
             // 
+            // btnMateriaalReserveren
+            // 
+            this.btnMateriaalReserveren.Enabled = false;
+            this.btnMateriaalReserveren.Location = new System.Drawing.Point(300, 351);
+            this.btnMateriaalReserveren.Name = "btnMateriaalReserveren";
+            this.btnMateriaalReserveren.Size = new System.Drawing.Size(112, 23);
+            this.btnMateriaalReserveren.TabIndex = 5;
+            this.btnMateriaalReserveren.Text = "Materiaal reserveren";
+            this.btnMateriaalReserveren.UseVisualStyleBackColor = true;
+            this.btnMateriaalReserveren.Click += new System.EventHandler(this.btnMateriaalReserveren_Click);
+            // 
             // btnWijzigWachtwoord
             // 
             this.btnWijzigWachtwoord.Enabled = false;
             this.btnWijzigWachtwoord.Location = new System.Drawing.Point(124, 351);
             this.btnWijzigWachtwoord.Name = "btnWijzigWachtwoord";
             this.btnWijzigWachtwoord.Size = new System.Drawing.Size(112, 23);
-            this.btnWijzigWachtwoord.TabIndex = 8;
+            this.btnWijzigWachtwoord.TabIndex = 4;
             this.btnWijzigWachtwoord.Text = "Wijzig Wachtwoord";
             this.btnWijzigWachtwoord.UseVisualStyleBackColor = true;
             this.btnWijzigWachtwoord.Click += new System.EventHandler(this.btnWijzigWachtwoord_Click);
@@ -117,7 +128,7 @@
             this.btnVerifieerAccount.Location = new System.Drawing.Point(6, 351);
             this.btnVerifieerAccount.Name = "btnVerifieerAccount";
             this.btnVerifieerAccount.Size = new System.Drawing.Size(112, 23);
-            this.btnVerifieerAccount.TabIndex = 5;
+            this.btnVerifieerAccount.TabIndex = 3;
             this.btnVerifieerAccount.Text = "Verifieer Account";
             this.btnVerifieerAccount.UseVisualStyleBackColor = true;
             this.btnVerifieerAccount.Click += new System.EventHandler(this.btnVerifieerAccount_Click);
@@ -147,18 +158,7 @@
             this.tbxGeselecteerdeEmailInhoud.Name = "tbxGeselecteerdeEmailInhoud";
             this.tbxGeselecteerdeEmailInhoud.ReadOnly = true;
             this.tbxGeselecteerdeEmailInhoud.Size = new System.Drawing.Size(700, 308);
-            this.tbxGeselecteerdeEmailInhoud.TabIndex = 0;
-            // 
-            // btnMateriaalReserveren
-            // 
-            this.btnMateriaalReserveren.Enabled = false;
-            this.btnMateriaalReserveren.Location = new System.Drawing.Point(300, 351);
-            this.btnMateriaalReserveren.Name = "btnMateriaalReserveren";
-            this.btnMateriaalReserveren.Size = new System.Drawing.Size(112, 23);
-            this.btnMateriaalReserveren.TabIndex = 9;
-            this.btnMateriaalReserveren.Text = "Materiaal reserveren";
-            this.btnMateriaalReserveren.UseVisualStyleBackColor = true;
-            this.btnMateriaalReserveren.Click += new System.EventHandler(this.btnMateriaalReserveren_Click);
+            this.tbxGeselecteerdeEmailInhoud.TabIndex = 2;
             // 
             // EmailSimulatieForm
             // 

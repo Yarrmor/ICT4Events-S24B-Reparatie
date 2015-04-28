@@ -188,6 +188,9 @@
     <Compile Include="MediaFormsMap\ReactieDialog.Designer.cs">
       <DependentUpon>ReactieDialog.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Email Simulatie Systeem\EmailSimulatieForm.resx">
+      <DependentUpon>EmailSimulatieForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HoofdForm.resx">
       <DependentUpon>HoofdForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -221,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reserveringen\PlaatsReserveringForm.resx">
       <DependentUpon>PlaatsReserveringForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reserveringen\ReserveringForm.resx">
+      <DependentUpon>ReserveringForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Toegangscontrole Systeem\ToegangscontroleForm.resx">
       <DependentUpon>ToegangscontroleForm.cs</DependentUpon>

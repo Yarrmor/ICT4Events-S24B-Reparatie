@@ -66,7 +66,7 @@
             this.lbxMaterialen.Location = new System.Drawing.Point(27, 31);
             this.lbxMaterialen.Name = "lbxMaterialen";
             this.lbxMaterialen.Size = new System.Drawing.Size(563, 524);
-            this.lbxMaterialen.TabIndex = 11;
+            this.lbxMaterialen.TabIndex = 1;
             this.lbxMaterialen.SelectedIndexChanged += new System.EventHandler(this.lbxMaterialen_SelectedIndexChanged);
             // 
             // lblNaam
@@ -137,7 +137,7 @@
             this.dtpBeginDatum.Location = new System.Drawing.Point(67, 89);
             this.dtpBeginDatum.Name = "dtpBeginDatum";
             this.dtpBeginDatum.Size = new System.Drawing.Size(200, 20);
-            this.dtpBeginDatum.TabIndex = 38;
+            this.dtpBeginDatum.TabIndex = 3;
             // 
             // lblDatumEind
             // 
@@ -153,14 +153,14 @@
             this.dtpEindDatum.Location = new System.Drawing.Point(67, 115);
             this.dtpEindDatum.Name = "dtpEindDatum";
             this.dtpEindDatum.Size = new System.Drawing.Size(200, 20);
-            this.dtpEindDatum.TabIndex = 40;
+            this.dtpEindDatum.TabIndex = 4;
             // 
             // btnMateriaalReserveren
             // 
             this.btnMateriaalReserveren.Location = new System.Drawing.Point(67, 167);
             this.btnMateriaalReserveren.Name = "btnMateriaalReserveren";
             this.btnMateriaalReserveren.Size = new System.Drawing.Size(137, 34);
-            this.btnMateriaalReserveren.TabIndex = 41;
+            this.btnMateriaalReserveren.TabIndex = 5;
             this.btnMateriaalReserveren.Text = "Materiaal reserveren";
             this.btnMateriaalReserveren.UseVisualStyleBackColor = true;
             this.btnMateriaalReserveren.Click += new System.EventHandler(this.btnMateriaalReserveren_Click);
@@ -170,7 +170,7 @@
             this.btnKlaarReserveren.Location = new System.Drawing.Point(236, 167);
             this.btnKlaarReserveren.Name = "btnKlaarReserveren";
             this.btnKlaarReserveren.Size = new System.Drawing.Size(137, 34);
-            this.btnKlaarReserveren.TabIndex = 42;
+            this.btnKlaarReserveren.TabIndex = 6;
             this.btnKlaarReserveren.Text = "Klaar Reserveren";
             this.btnKlaarReserveren.UseVisualStyleBackColor = true;
             this.btnKlaarReserveren.Click += new System.EventHandler(this.btnKlaarReserveren_Click);
@@ -180,7 +180,7 @@
             this.btnVeranderPrijs.Location = new System.Drawing.Point(190, 57);
             this.btnVeranderPrijs.Name = "btnVeranderPrijs";
             this.btnVeranderPrijs.Size = new System.Drawing.Size(117, 26);
-            this.btnVeranderPrijs.TabIndex = 43;
+            this.btnVeranderPrijs.TabIndex = 2;
             this.btnVeranderPrijs.Text = "Prijs Wijzigen";
             this.btnVeranderPrijs.UseVisualStyleBackColor = true;
             this.btnVeranderPrijs.Click += new System.EventHandler(this.btnVeranderPrijs_Click);
@@ -191,7 +191,7 @@
             this.btnMateriaalToevoegen.Location = new System.Drawing.Point(130, 175);
             this.btnMateriaalToevoegen.Name = "btnMateriaalToevoegen";
             this.btnMateriaalToevoegen.Size = new System.Drawing.Size(137, 41);
-            this.btnMateriaalToevoegen.TabIndex = 44;
+            this.btnMateriaalToevoegen.TabIndex = 4;
             this.btnMateriaalToevoegen.Text = "Materiaal Toevoegen";
             this.btnMateriaalToevoegen.UseVisualStyleBackColor = true;
             this.btnMateriaalToevoegen.Click += new System.EventHandler(this.btnMateriaalToevoegen_Click);
@@ -215,7 +215,7 @@
             this.gbxMateriaalReserveren.Location = new System.Drawing.Point(624, 31);
             this.gbxMateriaalReserveren.Name = "gbxMateriaalReserveren";
             this.gbxMateriaalReserveren.Size = new System.Drawing.Size(462, 226);
-            this.gbxMateriaalReserveren.TabIndex = 45;
+            this.gbxMateriaalReserveren.TabIndex = 2;
             this.gbxMateriaalReserveren.TabStop = false;
             this.gbxMateriaalReserveren.Text = "Materiaal Reserveren";
             // 
@@ -224,7 +224,7 @@
             this.tbxNieuwePrijs.Location = new System.Drawing.Point(313, 61);
             this.tbxNieuwePrijs.Name = "tbxNieuwePrijs";
             this.tbxNieuwePrijs.Size = new System.Drawing.Size(100, 20);
-            this.tbxNieuwePrijs.TabIndex = 47;
+            this.tbxNieuwePrijs.TabIndex = 1;
             // 
             // gbxMateriaalToevoegen
             // 
@@ -238,7 +238,7 @@
             this.gbxMateriaalToevoegen.Location = new System.Drawing.Point(624, 285);
             this.gbxMateriaalToevoegen.Name = "gbxMateriaalToevoegen";
             this.gbxMateriaalToevoegen.Size = new System.Drawing.Size(402, 222);
-            this.gbxMateriaalToevoegen.TabIndex = 46;
+            this.gbxMateriaalToevoegen.TabIndex = 3;
             this.gbxMateriaalToevoegen.TabStop = false;
             this.gbxMateriaalToevoegen.Text = "Materiaal Toevoegen";
             // 
@@ -247,7 +247,7 @@
             this.tbxMateriaalBeschrijvingToevoegen.Location = new System.Drawing.Point(104, 127);
             this.tbxMateriaalBeschrijvingToevoegen.Name = "tbxMateriaalBeschrijvingToevoegen";
             this.tbxMateriaalBeschrijvingToevoegen.Size = new System.Drawing.Size(100, 20);
-            this.tbxMateriaalBeschrijvingToevoegen.TabIndex = 50;
+            this.tbxMateriaalBeschrijvingToevoegen.TabIndex = 3;
             // 
             // lblMateriaalBeschrijvingToevoegen
             // 
@@ -272,14 +272,14 @@
             this.tbxMateriaalPrijsToevoegen.Location = new System.Drawing.Point(104, 87);
             this.tbxMateriaalPrijsToevoegen.Name = "tbxMateriaalPrijsToevoegen";
             this.tbxMateriaalPrijsToevoegen.Size = new System.Drawing.Size(100, 20);
-            this.tbxMateriaalPrijsToevoegen.TabIndex = 47;
+            this.tbxMateriaalPrijsToevoegen.TabIndex = 2;
             // 
             // tbxMateriaalNaamToevoegen
             // 
             this.tbxMateriaalNaamToevoegen.Location = new System.Drawing.Point(104, 46);
             this.tbxMateriaalNaamToevoegen.Name = "tbxMateriaalNaamToevoegen";
             this.tbxMateriaalNaamToevoegen.Size = new System.Drawing.Size(100, 20);
-            this.tbxMateriaalNaamToevoegen.TabIndex = 46;
+            this.tbxMateriaalNaamToevoegen.TabIndex = 1;
             // 
             // lblMateriaalNaamToevoegen
             // 
@@ -304,7 +304,7 @@
             this.btnVerversUitgeleendMateriaal.Name = "btnVerversUitgeleendMateriaal";
             this.btnVerversUitgeleendMateriaal.Size = new System.Drawing.Size(137, 34);
             this.btnVerversUitgeleendMateriaal.TabIndex = 48;
-            this.btnVerversUitgeleendMateriaal.Text = "Ververs";
+            this.btnVerversUitgeleendMateriaal.Text = "2";
             this.btnVerversUitgeleendMateriaal.UseVisualStyleBackColor = true;
             this.btnVerversUitgeleendMateriaal.Click += new System.EventHandler(this.btnVerversUitgeleendMateriaal_Click);
             // 
@@ -315,7 +315,7 @@
             this.gbxUitgeleendMateriaal.Location = new System.Drawing.Point(1109, 39);
             this.gbxUitgeleendMateriaal.Name = "gbxUitgeleendMateriaal";
             this.gbxUitgeleendMateriaal.Size = new System.Drawing.Size(324, 424);
-            this.gbxUitgeleendMateriaal.TabIndex = 49;
+            this.gbxUitgeleendMateriaal.TabIndex = 4;
             this.gbxUitgeleendMateriaal.TabStop = false;
             this.gbxUitgeleendMateriaal.Text = "UitgeleendMateriaal";
             // 

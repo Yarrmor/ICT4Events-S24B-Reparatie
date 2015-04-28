@@ -38,7 +38,7 @@
             this.btnMateriaalReserveren.Location = new System.Drawing.Point(218, 12);
             this.btnMateriaalReserveren.Name = "btnMateriaalReserveren";
             this.btnMateriaalReserveren.Size = new System.Drawing.Size(200, 200);
-            this.btnMateriaalReserveren.TabIndex = 5;
+            this.btnMateriaalReserveren.TabIndex = 2;
             this.btnMateriaalReserveren.Text = "Materiaal\r\nreserveren";
             this.btnMateriaalReserveren.UseVisualStyleBackColor = true;
             this.btnMateriaalReserveren.Click += new System.EventHandler(this.btnMateriaalReserveren_Click);
@@ -49,7 +49,7 @@
             this.btnPlaatsReserveren.Location = new System.Drawing.Point(12, 12);
             this.btnPlaatsReserveren.Name = "btnPlaatsReserveren";
             this.btnPlaatsReserveren.Size = new System.Drawing.Size(200, 200);
-            this.btnPlaatsReserveren.TabIndex = 4;
+            this.btnPlaatsReserveren.TabIndex = 1;
             this.btnPlaatsReserveren.Text = "Plaats\r\nreserveren";
             this.btnPlaatsReserveren.UseVisualStyleBackColor = true;
             this.btnPlaatsReserveren.Click += new System.EventHandler(this.btnPlaatsReserveren_Click);
