@@ -247,7 +247,7 @@ namespace ICT4Events_S24B_Reparatie
                 if (c.Parent == cat)
                 {
                     VerwijderSubCategories(c);
-                    VerwijderMediaCategorie(cat.ID);
+                    VerwijderMediaCategorie(c.ID);
                     dm.VerwijderCategorie(c.ID);
                     //***Database connectie voor het verwijderen van categoriën in de database.
                 }
@@ -320,6 +320,7 @@ namespace ICT4Events_S24B_Reparatie
 
         public void VerwijderMediaCategorie(int categorieID)
         {
+            VerkrijgMediaLijst();
             foreach (Media m in MediaLijst.ToList())
             {
                 if (m.CategorieID == categorieID)
@@ -340,6 +341,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             VerwijderMeldingen(media);
             VerwijderReacties(media);
+            VerwijderLikes(media);
             bool verwijderd = dm.VerwijderMedia(media.MediaID);
             UpdateCatMedia();
             return verwijderd;
@@ -348,6 +350,11 @@ namespace ICT4Events_S24B_Reparatie
         public bool VerwijderReacties(Media media)
         {
             return this.dm.VerwijderReactiesMedia(media.MediaID);
+        }
+
+        public bool VerwijderLikes(Media media)
+        {
+            return this.dm.VerwijderLikesMedia(media.MediaID);
         }
 
         public void DownloadMedia()

@@ -399,6 +399,7 @@
             this.btnReactieDislike.TabIndex = 6;
             this.btnReactieDislike.Text = "D";
             this.btnReactieDislike.UseVisualStyleBackColor = true;
+            this.btnReactieDislike.Click += new System.EventHandler(this.btnReactieDislike_Click);
             // 
             // btnReactieLike
             // 
@@ -408,6 +409,7 @@
             this.btnReactieLike.TabIndex = 5;
             this.btnReactieLike.Text = "L";
             this.btnReactieLike.UseVisualStyleBackColor = true;
+            this.btnReactieLike.Click += new System.EventHandler(this.btnReactieLike_Click);
             // 
             // btnVerwijder
             // 

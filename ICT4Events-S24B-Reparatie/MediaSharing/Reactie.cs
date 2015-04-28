@@ -54,6 +54,32 @@ namespace ICT4Events_S24B_Reparatie
         }
 
         /// <summary>
+        /// Stemmen op reactie funcionaliteit
+        /// </summary>
+        /// <param name="accountID"></param>
+        /// <param name="score"></param>
+        /// <returns></returns>
+        public bool Stem(int accountID, int score)
+        {
+            if (!dm.AccountAlGestemdOpReactie(accountID, ReactieID))
+            {
+                return dm.RateReactie(accountID, ReactieID, score);
+            }
+            else
+            {
+                if (!dm.AccountAlGelikedOpReactie(accountID, ReactieID, score)) //0 staat voor dislike.
+                {
+                    //dm.UpdateRateMedia(accountID, MediaID, score);
+                    return dm.UpdateRateReactie(accountID, ReactieID, score);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
         /// Verkrijgt de string weergave voor de listbox reactie.
         /// </summary>
         /// <returns></returns>
