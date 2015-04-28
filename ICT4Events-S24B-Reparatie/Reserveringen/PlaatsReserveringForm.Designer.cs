@@ -84,6 +84,7 @@
             // 
             // pbxPlattegrond
             // 
+            this.pbxPlattegrond.Image = global::ICT4Events_S24B_Reparatie.Properties.Resources.Event1_Map;
             this.pbxPlattegrond.Location = new System.Drawing.Point(14, 10);
             this.pbxPlattegrond.Name = "pbxPlattegrond";
             this.pbxPlattegrond.Size = new System.Drawing.Size(512, 512);
@@ -96,7 +97,7 @@
             this.btnReserveren.Location = new System.Drawing.Point(930, 479);
             this.btnReserveren.Name = "btnReserveren";
             this.btnReserveren.Size = new System.Drawing.Size(244, 43);
-            this.btnReserveren.TabIndex = 1;
+            this.btnReserveren.TabIndex = 3;
             this.btnReserveren.Text = "Reservering plaatsen";
             this.btnReserveren.UseVisualStyleBackColor = true;
             this.btnReserveren.Click += new System.EventHandler(this.btnReserveren_Click);
@@ -176,7 +177,7 @@
             this.cbxBeschikbarePlaatsen.Location = new System.Drawing.Point(100, 109);
             this.cbxBeschikbarePlaatsen.Name = "cbxBeschikbarePlaatsen";
             this.cbxBeschikbarePlaatsen.Size = new System.Drawing.Size(121, 26);
-            this.cbxBeschikbarePlaatsen.TabIndex = 14;
+            this.cbxBeschikbarePlaatsen.TabIndex = 2;
             this.cbxBeschikbarePlaatsen.SelectedIndexChanged += new System.EventHandler(this.cbxBeschikbarePlaatsen_SelectedIndexChanged);
             // 
             // lblAchternaam
@@ -244,7 +245,7 @@
             0});
             this.nudAantalPersonen.Name = "nudAantalPersonen";
             this.nudAantalPersonen.Size = new System.Drawing.Size(106, 24);
-            this.nudAantalPersonen.TabIndex = 16;
+            this.nudAantalPersonen.TabIndex = 8;
             this.nudAantalPersonen.Value = new decimal(new int[] {
             1,
             0,
@@ -256,21 +257,21 @@
             this.tbxVoornaam.Location = new System.Drawing.Point(132, 24);
             this.tbxVoornaam.Name = "tbxVoornaam";
             this.tbxVoornaam.Size = new System.Drawing.Size(243, 24);
-            this.tbxVoornaam.TabIndex = 17;
+            this.tbxVoornaam.TabIndex = 1;
             // 
             // tbxTelefoonnummer
             // 
             this.tbxTelefoonnummer.Location = new System.Drawing.Point(132, 84);
             this.tbxTelefoonnummer.Name = "tbxTelefoonnummer";
             this.tbxTelefoonnummer.Size = new System.Drawing.Size(243, 24);
-            this.tbxTelefoonnummer.TabIndex = 18;
+            this.tbxTelefoonnummer.TabIndex = 3;
             // 
             // tbxWoonplaats
             // 
             this.tbxWoonplaats.Location = new System.Drawing.Point(132, 114);
             this.tbxWoonplaats.Name = "tbxWoonplaats";
             this.tbxWoonplaats.Size = new System.Drawing.Size(243, 24);
-            this.tbxWoonplaats.TabIndex = 19;
+            this.tbxWoonplaats.TabIndex = 4;
             // 
             // tbxEmailGroepslid1
             // 
@@ -278,7 +279,7 @@
             this.tbxEmailGroepslid1.Location = new System.Drawing.Point(26, 75);
             this.tbxEmailGroepslid1.Name = "tbxEmailGroepslid1";
             this.tbxEmailGroepslid1.Size = new System.Drawing.Size(159, 24);
-            this.tbxEmailGroepslid1.TabIndex = 20;
+            this.tbxEmailGroepslid1.TabIndex = 9;
             // 
             // lblEmailGroepslid1
             // 
@@ -332,7 +333,7 @@
             this.tbxEmailGroepslid2.Location = new System.Drawing.Point(210, 75);
             this.tbxEmailGroepslid2.Name = "tbxEmailGroepslid2";
             this.tbxEmailGroepslid2.Size = new System.Drawing.Size(159, 24);
-            this.tbxEmailGroepslid2.TabIndex = 29;
+            this.tbxEmailGroepslid2.TabIndex = 10;
             // 
             // tbxEmailGroepslid3
             // 
@@ -340,14 +341,14 @@
             this.tbxEmailGroepslid3.Location = new System.Drawing.Point(26, 100);
             this.tbxEmailGroepslid3.Name = "tbxEmailGroepslid3";
             this.tbxEmailGroepslid3.Size = new System.Drawing.Size(159, 24);
-            this.tbxEmailGroepslid3.TabIndex = 30;
+            this.tbxEmailGroepslid3.TabIndex = 11;
             // 
             // tbxEmail
             // 
             this.tbxEmail.Location = new System.Drawing.Point(132, 204);
             this.tbxEmail.Name = "tbxEmail";
             this.tbxEmail.Size = new System.Drawing.Size(243, 24);
-            this.tbxEmail.TabIndex = 31;
+            this.tbxEmail.TabIndex = 7;
             // 
             // tbxEmailGroepslid4
             // 
@@ -355,7 +356,7 @@
             this.tbxEmailGroepslid4.Location = new System.Drawing.Point(210, 100);
             this.tbxEmailGroepslid4.Name = "tbxEmailGroepslid4";
             this.tbxEmailGroepslid4.Size = new System.Drawing.Size(159, 24);
-            this.tbxEmailGroepslid4.TabIndex = 32;
+            this.tbxEmailGroepslid4.TabIndex = 12;
             // 
             // clbFilters
             // 
@@ -363,7 +364,7 @@
             this.clbFilters.Location = new System.Drawing.Point(100, 23);
             this.clbFilters.Name = "clbFilters";
             this.clbFilters.Size = new System.Drawing.Size(121, 80);
-            this.clbFilters.TabIndex = 33;
+            this.clbFilters.TabIndex = 1;
             this.clbFilters.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbFilters_ItemCheck);
             // 
             // cbxStartPeriode
@@ -372,7 +373,7 @@
             this.cbxStartPeriode.Location = new System.Drawing.Point(100, 23);
             this.cbxStartPeriode.Name = "cbxStartPeriode";
             this.cbxStartPeriode.Size = new System.Drawing.Size(121, 26);
-            this.cbxStartPeriode.TabIndex = 34;
+            this.cbxStartPeriode.TabIndex = 1;
             this.cbxStartPeriode.SelectedIndexChanged += new System.EventHandler(this.cbxStartPeriode_SelectedIndexChanged);
             // 
             // lblEindPeriode
@@ -392,7 +393,7 @@
             this.cbxEindPeriode.Location = new System.Drawing.Point(100, 55);
             this.cbxEindPeriode.Name = "cbxEindPeriode";
             this.cbxEindPeriode.Size = new System.Drawing.Size(121, 26);
-            this.cbxEindPeriode.TabIndex = 36;
+            this.cbxEindPeriode.TabIndex = 2;
             this.cbxEindPeriode.SelectedIndexChanged += new System.EventHandler(this.cbxEindPeriode_SelectedIndexChanged);
             // 
             // tbxStraatnaam
@@ -400,21 +401,21 @@
             this.tbxStraatnaam.Location = new System.Drawing.Point(132, 144);
             this.tbxStraatnaam.Name = "tbxStraatnaam";
             this.tbxStraatnaam.Size = new System.Drawing.Size(243, 24);
-            this.tbxStraatnaam.TabIndex = 37;
+            this.tbxStraatnaam.TabIndex = 5;
             // 
             // tbxHuisnummer
             // 
             this.tbxHuisnummer.Location = new System.Drawing.Point(132, 174);
             this.tbxHuisnummer.Name = "tbxHuisnummer";
             this.tbxHuisnummer.Size = new System.Drawing.Size(243, 24);
-            this.tbxHuisnummer.TabIndex = 38;
+            this.tbxHuisnummer.TabIndex = 6;
             // 
             // tbxAchternaam
             // 
             this.tbxAchternaam.Location = new System.Drawing.Point(132, 54);
             this.tbxAchternaam.Name = "tbxAchternaam";
             this.tbxAchternaam.Size = new System.Drawing.Size(243, 24);
-            this.tbxAchternaam.TabIndex = 39;
+            this.tbxAchternaam.TabIndex = 2;
             // 
             // gbxPlaatsDetails
             // 
@@ -424,7 +425,7 @@
             this.gbxPlaatsDetails.Location = new System.Drawing.Point(532, 10);
             this.gbxPlaatsDetails.Name = "gbxPlaatsDetails";
             this.gbxPlaatsDetails.Size = new System.Drawing.Size(244, 329);
-            this.gbxPlaatsDetails.TabIndex = 40;
+            this.gbxPlaatsDetails.TabIndex = 1;
             this.gbxPlaatsDetails.TabStop = false;
             this.gbxPlaatsDetails.Text = "Plaats en datum selecteren";
             // 
@@ -443,7 +444,7 @@
             this.gbxPlaats.Location = new System.Drawing.Point(6, 120);
             this.gbxPlaats.Name = "gbxPlaats";
             this.gbxPlaats.Size = new System.Drawing.Size(231, 202);
-            this.gbxPlaats.TabIndex = 42;
+            this.gbxPlaats.TabIndex = 2;
             this.gbxPlaats.TabStop = false;
             this.gbxPlaats.Text = "Plaats";
             // 
@@ -485,7 +486,7 @@
             this.btDagPrijsAanpassen.Name = "btDagPrijsAanpassen";
             this.btDagPrijsAanpassen.Size = new System.Drawing.Size(38, 21);
             this.btDagPrijsAanpassen.TabIndex = 12;
-            this.btDagPrijsAanpassen.Text = "...";
+            this.btDagPrijsAanpassen.Text = "3";
             this.btDagPrijsAanpassen.UseVisualStyleBackColor = false;
             this.btDagPrijsAanpassen.Visible = false;
             // 
@@ -499,7 +500,7 @@
             this.gbxPeriode.Location = new System.Drawing.Point(6, 23);
             this.gbxPeriode.Name = "gbxPeriode";
             this.gbxPeriode.Size = new System.Drawing.Size(231, 91);
-            this.gbxPeriode.TabIndex = 41;
+            this.gbxPeriode.TabIndex = 1;
             this.gbxPeriode.TabStop = false;
             this.gbxPeriode.Text = "Periode";
             // 
@@ -524,7 +525,7 @@
             this.gbxEigenGegevens.Location = new System.Drawing.Point(782, 12);
             this.gbxEigenGegevens.Name = "gbxEigenGegevens";
             this.gbxEigenGegevens.Size = new System.Drawing.Size(390, 368);
-            this.gbxEigenGegevens.TabIndex = 41;
+            this.gbxEigenGegevens.TabIndex = 2;
             this.gbxEigenGegevens.TabStop = false;
             this.gbxEigenGegevens.Text = "Eigen gegevens";
             // 
