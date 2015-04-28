@@ -52,6 +52,7 @@ namespace ICT4Events_S24B_Reparatie
         {
             if (beginDatum.HasValue && eindDatum.HasValue)
             {
+                cbxBeschikbarePlaatsen.SelectedIndex = -1;
                 cbxBeschikbarePlaatsen.Items.Clear();
 
                 List<string> filters = new List<string>();
@@ -103,9 +104,16 @@ namespace ICT4Events_S24B_Reparatie
         /// </summary>
         private void VerversPrijs()
         {
-            int index = cbxBeschikbarePlaatsen.SelectedIndex;
+            cbxBeschikbarePlaatsen.Refresh();
 
-            if (index != -1)
+            int index = cbxBeschikbarePlaatsen.SelectedIndex;
+            
+            if (index == -1)
+            {
+                lblDagPrijsWaarde.Text = "€";
+                lblTotaalPrijsWaarde.Text = "€";
+            }
+            else
             {
                 int i = reserveringSysteem.HaalPrijsOp(Convert.ToInt32(cbxBeschikbarePlaatsen.Items[index]));
 
